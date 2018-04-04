@@ -15,6 +15,16 @@ def get_index():
     return tmp
 
 
+def convert(data):
+    if isinstance(data, basestring):
+        return str(data)
+    elif isinstance(data, collections.Mapping):
+        return dict(map(convert, data.iteritems()))
+    elif isinstance(data, collections.Iterable):
+        return type(data)(map(convert, data))
+    else:
+        return data
+
 output_file = open("citation_network_input/largevis_input_file.txt", "w")
 # output_file = open()
 # input_dir = "/scratch/si699w18_fluxm/gaole"
@@ -37,10 +47,12 @@ for input_dir in input_dir_list:
     for filename in os.listdir(input_dir):
         file = open(os.path.join(input_dir, filename))
         for line in file:
-            paper_json = yaml.safe_load(json.loads(line))
+            paper_json = convert(json.loads(line))
             id_to_json[paper_json["id"]] = paper_json
             if paper_json["venue"] not in conf_dict:
                 conf_dict[paper_json["venue"]] = []
+            if index_count == 0:
+                print(paper_json)
             conf_dict[paper_json["venue"]].append(paper_json["id"])
             index_count += 1
             sys.stdout.write("\r" + str(index_count))
