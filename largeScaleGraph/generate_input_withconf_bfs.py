@@ -6,6 +6,7 @@ import sys
 import collections
 import os
 import json
+import yaml
 
 def get_index():
     global index_count
@@ -36,7 +37,7 @@ for input_dir in input_dir_list:
     for filename in os.listdir(input_dir):
         file = open(os.path.join(input_dir, filename))
         for line in file:
-            paper_json = json.loads(line)
+            paper_json = yaml.safe_load(json.loads(line))
             id_to_json[paper_json["id"]] = paper_json
             if paper_json["venue"] not in conf_dict:
                 conf_dict[paper_json["venue"]] = []
