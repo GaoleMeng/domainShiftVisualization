@@ -49,12 +49,13 @@ for input_dir in input_dir_list:
         for line in file:
             paper_json = yaml.load(json.dumps(json.loads(line)))
             id_to_json[paper_json["id"]] = paper_json
-            if paper_json["venue"] not in conf_dict:
-                conf_dict[paper_json["venue"]] = []
+            print(paper_json)
+            if paper_json['venue'] not in conf_dict:
+                conf_dict[paper_json['venue']] = []
             if index_count == 0:
                 print(paper_json)
                 print(paper_json['venue'])
-            conf_dict[paper_json["venue"]].append(paper_json["id"])
+            conf_dict[paper_json['venue']].append(paper_json["id"])
             index_count += 1
             sys.stdout.write("\r" + str(index_count))
         file.close()
