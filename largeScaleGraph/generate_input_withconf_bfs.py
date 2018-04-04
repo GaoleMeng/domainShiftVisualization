@@ -40,6 +40,7 @@ for input_dir in input_dir_list:
             id_to_json[paper_json["id"]] = paper_json
             if paper_json["venue"] not in conf_dict:
                 conf_dict = []
+            print(paper_json)
             conf_dict[paper_json["venue"]].append(paper_json["id"])
             index_count += 1
             sys.stdout.write("\r" + str(index_count))
