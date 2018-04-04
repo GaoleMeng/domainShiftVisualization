@@ -49,7 +49,8 @@ for input_dir in input_dir_list:
         for line in file:
             paper_json = yaml.load(json.dumps(json.loads(line)))
             id_to_json[paper_json["id"]] = paper_json
-            print(paper_json)
+            if 'venue' not in paper_json:
+                continue
             if paper_json['venue'] not in conf_dict:
                 conf_dict[paper_json['venue']] = []
             if index_count == 0:
