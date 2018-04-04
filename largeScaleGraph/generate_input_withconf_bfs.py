@@ -1,78 +1,49 @@
-# generate the input edges to the large vis
-# link generated between same conf/ citation
-# output all the node with reference recorded
+# generate the citation graph of the conf
+# only consider the conf that SIGIR can reach within
+# four citationd
 
-#*Real-Time and Embedded Systems.
-#@John A. Stankovic
-#t1997
-#cThe Computer Science and Engineering Handbook
-#index395
-#%808022
-#%1071742
-#%3003326
-#!
 import sys
 import collections
+import os
+import json
 
-output_file = open("citation_network_input/citation_conf_edge_bfs_v7.txt", "w")
-f = open("publications.txt")
+def get_index():
+    global index_count
+    tmp = index_count
+    index_count += 1
+    return tmp
+
+
+output_file = open("largeScaleGraph/citation_network_input", "w")
+# output_file = open()
+# input_dir = "/scratch/si699w18_fluxm/gaole"
+input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0"
+input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1"
+input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2"
+input_dir_list = [input_dir1, input_dir2, input_dir3]
+
+
 
 conf_dict = {}
 block_list = {}  # hold all the blocks data
 possible_index = {}
+id_to_json = {}
 bfs_depth = 4
+index_count = 0
 
 
-class Block(object):
-    def __init__(self, index, conf, citelist):
-        self.index = index
-        self.conf = conf
-        self.citation = citelist
+for input_dir in input_dir_list:
+    for filename in os.listdir(input_dir):
+        file = open(os.path.join(input_dir, filename))
+        for line in file:
+            paper_json = json.dump(line)
+            id_to_json[paper_json["id"]] = paper_json
+            if paper_json["venue"] not in conf_dict:
+                conf_dict = []
+            conf_dict[paper_json["venue"]].append(paper_json["id"])
+        file.close()
 
-iii = 0
-max_index = 0
 
-while(True):
-    index = -1
-    conf = ""
-    year = ""
-    # print(i)
-    line = f.readline().strip()
-    # print(iii)
-    if line == "":
-        break
-    flag = True
-    citation = []
-    sys.stdout.write("\r" + str(iii))
-    while(True):
-        if len(line) >= 6 and line[0:6] == "#index":
-            line = line[6:]
-            index = int(line)
-            possible_index[index] = 1
-            conf_dict[conf].append(index)
-            block_list[index] = Block(index, conf, citation)
-            max_index = max(int(index), max_index)
-        elif len(line) == 0:
-            iii += 1
-            conflist = []
-            break
-        elif len(line) >= 3 and line[0:2] == "#c":
-            line = line[2:].strip()
-            conf = line
-            if conf not in conf_dict:
-                conf_dict[conf] = []
-        elif len(line) >= 3 and line[0:2] == "#%":
-            line = line[2:].strip()
-            citation.append(int(line))
-            max_index = max(max_index, int(line))
-        # elif len(line) >= 3 and line[0:2] == "#t":
-        #     line = line[2:].strip()
-        #     year = line
-        #     if year not in possible_year_map:
-        #         possible_year_map[year] = []
-        line = f.readline().strip()
-
-f.close()
 print("finish")
 print("SIGIR paper number: %s" % len(conf_dict["SIGIR"]))
 
@@ -82,31 +53,48 @@ for k, v in conf_dict.items():
 print("average number of paper per conf: %s" % str(float(conf_paper_counter) / len(conf_dict)))
 
 deque = collections.deque(conf_dict["SIGIR"])
+
+visited_conf = {}
 visited = {}
 for ele in deque:
     visited[ele] = 1
+
+visited_conf["SIGIR"] = 1
 
 for i in range(bfs_depth):
     next_deque = collections.deque([])
     while len(deque):
         next_paper = deque.pop()
-        if next_paper not in block_list:
+        if next_paper not in id_to_json:
             continue
-        citation_list = block_list[next_paper].citation
+        citation_list = id_to_json[next_paper]["references"]
         for ele in citation_list:
-            output_file.write(str(next_paper) + " " + str(ele) + " " + "1\n")
+            # output_file.write(str(next_paper) + " " + str(ele) + " " + "1\n")
             if ele in visited:
                 continue
             next_deque.append(ele)
             visited[ele] = 1
+            visited_conf[id_to_json[ele]["venue"]] = 1
+
     deque = next_deque
 
-conf_point_num = len(visited) + 1
+
+all_points_inconf = {}
+for conf, v in visited_conf.items():
+    for ele in conf_dict[conf]:
+        all_points_inconf[ele] = 1
+
+for conf, v in visited_conf.items():
+    for ele in conf_dict[conf]:
+        for v in id_to_json[ele]:
+            if v in all_points_inconf:
+                output_file.write(str(ele) + " " + str(v) + " 1\n")
+
+
+conf_point_num = len(all_points_inconf) + 1
 print("total vertices", len(visited))
 for k, v in conf_dict.items():
     for index in v:
-        if index not in visited:
-            continue
         output_file.write(str(conf_point_num) + " " + str(index) + " 1\n")
     conf_point_num += 1
 
