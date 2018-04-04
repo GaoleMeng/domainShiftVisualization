@@ -60,6 +60,8 @@ for input_dir in input_dir_list:
             index_count += 1
             sys.stdout.write("\r" + str(index_count))
         file.close()
+        break
+    break
 
 
 print("finish")
