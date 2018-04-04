@@ -53,7 +53,7 @@ for input_dir in input_dir_list:
                 conf_dict[paper_json["venue"]] = []
             if index_count == 0:
                 print(paper_json)
-                print(paper_json["id"])
+                print(paper_json['venue'])
             conf_dict[paper_json["venue"]].append(paper_json["id"])
             index_count += 1
             sys.stdout.write("\r" + str(index_count))
