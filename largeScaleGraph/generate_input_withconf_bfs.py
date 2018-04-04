@@ -14,7 +14,7 @@ def get_index():
     return tmp
 
 
-output_file = open("largeScaleGraph/citation_network_input", "w")
+output_file = open("citation_network_input/largevis_input_file.txt", "w")
 # output_file = open()
 # input_dir = "/scratch/si699w18_fluxm/gaole"
 input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0"
