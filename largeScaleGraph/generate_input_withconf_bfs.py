@@ -20,7 +20,7 @@ output_file = open("citation_network_input/largevis_input_file.txt", "w")
 input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0"
 input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1"
 input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2"
-input_dir_list = [input_dir1, input_dir2, input_dir3]
+input_dir_list = [input_dir_1, input_dir_2, input_dir_3]
 
 
 
