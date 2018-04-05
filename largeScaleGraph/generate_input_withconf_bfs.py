@@ -52,9 +52,18 @@ for input_dir in input_dir_list:
         for line in file:
             paper_json = yaml.load(json.dumps(json.loads(line)))
             block = {}
-            block["id"] = paper_json["id"]
-            block["references"] = paper_json["references"]
-            block["venue"] = paper_json["venue"]
+            if "id" in paper_json:
+                block["id"] = paper_json["id"]
+            else:
+                block["id"] = ""
+            if "references" in paper_json:
+                block["references"] = paper_json["references"]
+            else:
+                block["references"] = []
+            if "venue" in paper_json:
+                block["venue"] = paper_json["venue"]
+            else:
+                block["venue"] = ""
 
             id_to_json[paper_json["id"]] = block
             if paper_json["id"] not in id_to_index:
