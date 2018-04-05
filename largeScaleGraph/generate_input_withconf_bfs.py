@@ -53,13 +53,12 @@ for input_dir in input_dir_list:
                 continue
             if paper_json['venue'] not in conf_dict:
                 conf_dict[paper_json['venue']] = []
-            if index_count == 0:
-                print(paper_json)
-                print(paper_json['venue'])
             conf_dict[paper_json['venue']].append(paper_json["id"])
             index_count += 1
             sys.stdout.write("\r" + str(index_count))
         file.close()
+        if index_count >= 10000:
+            break
         break
     break
 
@@ -95,7 +94,6 @@ for i in range(bfs_depth):
             next_deque.append(ele)
             visited[ele] = 1
             visited_conf[id_to_json[ele]["venue"]] = 1
-
     deque = next_deque
 
 
