@@ -56,9 +56,9 @@ for input_dir in input_dir_list:
             conf_dict[paper_json['venue']].append(paper_json["id"])
             index_count += 1
             sys.stdout.write("\r" + str(index_count))
+            if index_count >= 10000:
+                break
         file.close()
-        if index_count >= 10000:
-            break
         break
     break
 
