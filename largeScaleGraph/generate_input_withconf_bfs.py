@@ -7,6 +7,7 @@ import collections
 import os
 import json
 import yaml
+import gc
 
 def get_index():
     global index_count
@@ -39,6 +40,8 @@ conf_dict = {}
 block_list = {}  # hold all the blocks data
 possible_index = {}
 id_to_json = {}
+id_to_index = {}
+
 bfs_depth = 4
 index_count = 0
 
@@ -48,7 +51,14 @@ for input_dir in input_dir_list:
         file = open(os.path.join(input_dir, filename))
         for line in file:
             paper_json = yaml.load(json.dumps(json.loads(line)))
-            id_to_json[paper_json["id"]] = paper_json
+            block = {}
+            block["id"] = paper_json["id"]
+            block["references"] = paper_json["references"]
+            block["venue"] = paper_json["venue"]
+
+            id_to_json[paper_json["id"]] = block
+            if paper_json["id"] not in id_to_index:
+                id_to_index[paper_json["id"]] = get_index()
             if 'venue' not in paper_json:
                 continue
             if paper_json['venue'] not in conf_dict:
@@ -101,14 +111,14 @@ for conf, v in visited_conf.items():
     for ele in conf_dict[conf]:
         for v in id_to_json[ele]:
             if v in all_points_inconf:
-                output_file.write(str(ele) + " " + str(v) + " 1\n")
+                output_file.write(str(id_to_index[ele]) + " " + str(id_to_index[v]) + " 1\n")
 
 
 conf_point_num = len(all_points_inconf) + 1
 print("total vertices", len(visited))
 for k, v in conf_dict.items():
     for index in v:
-        output_file.write(str(conf_point_num) + " " + str(index) + " 1\n")
+        output_file.write(str(conf_point_num) + " " + str(id_to_index[index]) + " 1\n")
     conf_point_num += 1
 
 # # for other in conf_dict[block.conf]:
