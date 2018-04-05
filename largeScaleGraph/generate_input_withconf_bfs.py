@@ -25,7 +25,7 @@ def convert(data):
     else:
         return data
 
-output_file = open("citation_network_input/largevis_input_file.txt", "w")
+output_file = open("/scratch/si699w18_fluxm/gaole/largevis_input_file.txt", "w")
 # output_file = open()
 # input_dir = "/scratch/si699w18_fluxm/gaole"
 input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0"
