@@ -35,17 +35,13 @@ index_count = 0
 for input_dir in input_dir_list:
     for filename in os.listdir(input_dir):
         file = open(os.path.join(input_dir, filename))
+        print(filename)
         for line in file:
             paper_json = yaml.load(json.dumps(json.loads(line)))
-            if index_count == 0:
-                print(paper_json)
-                print(paper_json["venue"])
             if "venue" not in paper_json:
                 continue
             if paper_json["venue"] != "SIGIR":
                 continue
-                print("ddd")
-            print("ddd")
             conf_str = ""
             for paper in paper_json["references"]:
                 conf_str += paper
