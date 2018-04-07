@@ -42,6 +42,7 @@ for input_dir in input_dir_list:
             if paper_json["venue"] != "SIGIR":
                 continue
                 print("ddd")
+            print("ddd")
             conf_str = ""
             for paper in paper_json["references"]:
                 conf_str += paper
