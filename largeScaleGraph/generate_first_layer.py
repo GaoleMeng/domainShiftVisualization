@@ -39,10 +39,9 @@ for input_dir in input_dir_list:
             paper_json = yaml.load(json.dumps(json.loads(line)))
             if "venue" not in paper_json:
                 continue
-                print("ddd")
             if paper_json["venue"] != "SIGIR":
                 continue
-
+                print("ddd")
             conf_str = ""
             for paper in paper_json["references"]:
                 conf_str += paper
