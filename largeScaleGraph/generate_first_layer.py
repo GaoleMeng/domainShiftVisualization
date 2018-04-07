@@ -37,9 +37,6 @@ for input_dir in input_dir_list:
         file = open(os.path.join(input_dir, filename))
         print(filename)
         for line in file:
-            index_count += 1
-            print(index_count)
-
             paper_json = yaml.load(json.dumps(json.loads(line)))
             if "venue" not in paper_json:
                 continue
