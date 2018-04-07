@@ -37,6 +37,7 @@ for input_dir in input_dir_list:
         file = open(os.path.join(input_dir, filename))
         for line in file:
             paper_json = yaml.load(json.dumps(json.loads(line)))
+            print("ffff")
             if "venue" not in paper_json:
                 continue
             if paper_json["venue"] != "SIGIR":
