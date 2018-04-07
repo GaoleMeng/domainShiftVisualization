@@ -50,6 +50,7 @@ for input_dir in input_dir_list:
                 conf_str += paper
                 conf_str += " "
             output_file.write("%s %s %s\n" % (paper_json["id"], "SIGIR", conf_str))
+            break
         file.close()
         break
     break
