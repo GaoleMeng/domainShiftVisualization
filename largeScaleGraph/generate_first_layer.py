@@ -43,9 +43,10 @@ for input_dir in input_dir_list:
             if paper_json["venue"] != "SIGIR":
                 continue
             conf_str = ""
-            for paper in paper_json["references"]:
-                conf_str += paper
-                conf_str += " "
+            if "references" in paper_json:
+                for paper in paper_json["references"]:
+                    conf_str += paper
+                    conf_str += " "
             output_file.write("%s %s %s\n" % (paper_json["id"], "SIGIR", conf_str))
         file.close()
 print("finish")
