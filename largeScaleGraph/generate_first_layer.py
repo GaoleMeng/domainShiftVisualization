@@ -37,6 +37,9 @@ for input_dir in input_dir_list:
         file = open(os.path.join(input_dir, filename))
         print(filename)
         for line in file:
+            index_count += 1
+            sys.stdout.write("\r" + str(index_count))
+
             paper_json = yaml.load(json.dumps(json.loads(line)))
             if "venue" not in paper_json:
                 continue
@@ -47,12 +50,9 @@ for input_dir in input_dir_list:
                 conf_str += paper
                 conf_str += " "
             output_file.write("%s %s %s\n" % (paper_json["id"], "SIGIR", conf_str))
-
-            index_count += 1
-            sys.stdout.write("\r" + str(index_count))
-
         file.close()
-
+        break
+    break
 print("finish")
 output_file.close()
 
