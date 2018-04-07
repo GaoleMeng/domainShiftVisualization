@@ -39,6 +39,7 @@ for input_dir in input_dir_list:
             paper_json = yaml.load(json.dumps(json.loads(line)))
             if "venue" not in paper_json:
                 continue
+                print("ddd")
             if paper_json["venue"] != "SIGIR":
                 continue
 
@@ -50,6 +51,7 @@ for input_dir in input_dir_list:
 
             index_count += 1
             sys.stdout.write("\r" + str(index_count))
+
         file.close()
 
 print("finish")

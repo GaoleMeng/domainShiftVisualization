@@ -52,6 +52,9 @@ for input_dir in input_dir_list:
         for line in file:
             paper_json = yaml.load(json.dumps(json.loads(line)))
             block = {}
+
+            index_count += 1
+            sys.stdout.write("\r" + str(index_count))
             if "id" in paper_json:
                 block["id"] = paper_json["id"]
             else:
@@ -73,8 +76,7 @@ for input_dir in input_dir_list:
             if paper_json['venue'] not in conf_dict:
                 conf_dict[paper_json['venue']] = []
             conf_dict[paper_json['venue']].append(paper_json["id"])
-            index_count += 1
-            sys.stdout.write("\r" + str(index_count))
+            
         file.close()
 
 print("finish")
