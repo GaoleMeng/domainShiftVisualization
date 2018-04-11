@@ -33,7 +33,7 @@ void read_and_parse(const char* filename) {
     // cout << filename << "\n";
     output_lock.lock();
     cout << filename << "\n";
-    ifstream input(filename);
+    // ifstream input(filename);
     string line = "";
     
     while(getline(input, line)) {
