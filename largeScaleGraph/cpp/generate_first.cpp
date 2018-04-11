@@ -27,12 +27,13 @@ string lastfix = ".txt";
 static mutex output_lock;
 mutex parselock;
 ofstream output;
-
+string tmp = "";
 
 void read_and_parse(const char* filename) {
     // cout << filename << "\n";
     output_lock.lock();
-    cout << filename << "\n";
+    // cout << filename << "\n";
+    tmp += string(filename);
     output_lock.unlock();
     // ifstream input(filename);
     // string line = "";
@@ -85,6 +86,7 @@ int main() {
     }
     // cout << thread_list.size() << endl;
     for (auto& th: thread_list) th.join();
+    cout << tmp;
     output.close();
 }
 
