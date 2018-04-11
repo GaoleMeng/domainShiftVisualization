@@ -1,5 +1,5 @@
 // compiler with 
-// g++ -std=c++17  generate_first.cpp -o generate_first -lstdc++fs
+// g++ -std=c++17  generate_first.cpp -o generate_first -lstdc++fs -pthread
 // the first round of the multithread version of the processing file
 
 #include <iostream>
@@ -33,7 +33,7 @@ int main() {
         }
     }
 
-    // for (auto& th: thread_list) th.join();
+    for (auto& th: thread_list) th.join();
 }
 
 
