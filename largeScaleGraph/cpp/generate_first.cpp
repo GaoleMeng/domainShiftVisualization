@@ -41,13 +41,14 @@ void read_and_parse(const char* filename) {
         string reference_string = "";
         if (d.HasMember("references")) {
             Value& a = d["references"];
-            for (auto& v : a.GetArray())
-                reference_string.append(v.GetString() + " ");
+            for (auto& v : a.GetArray()) {
+                reference_string.append(string(v.GetString()) + " ");
+            }
         }
 
 
         output_lock.lock();
-        cout << d["id"].GetString() + " " + reference_string << "\n";
+        cout << string(d["id"].GetString()) + " " + reference_string << "\n";
         output_lock.unlock();
         break;
     }
