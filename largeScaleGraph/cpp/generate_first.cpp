@@ -31,9 +31,9 @@ ofstream output;
 void read_and_parse(const char* filename) {
     ifstream input(filename);
     string line = "";
-    output_lock.lock();
+    // output_lock.lock();
     cout << filename << "\n";
-    output_lock.unlock();
+    // output_lock.unlock();
     while(getline(input, line)) {
 
         Document d;
@@ -65,9 +65,9 @@ int main() {
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
-                cout << p.path().filename() << endl;
-                // thread_list.push_back(thread(read_and_parse, 
-                //     p.path().c_str()));
+                // cout << p.path().filename() << endl;
+                thread_list.push_back(thread(read_and_parse, 
+                    p.path().c_str()));
             }
         }
     }
