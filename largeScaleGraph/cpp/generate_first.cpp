@@ -34,13 +34,17 @@ void read_and_parse(const char* filename) {
     string line = "";
 
     while(getline(input, line)) {
-        output_lock.lock();
-        cout << "ddd" << "\n";
-        output_lock.unlock();
+
         Document d;
         d.Parse(line.c_str());
-        if (!d.HasMember("id")) continue;
-        if (!d.HasMember("venue")) continue;
+        if (!d.HasMember("id")) {
+            cout << "ddd" << endl;
+            continue
+        }
+        if (!d.HasMember("venue")) {
+            cout << "????" << endl;
+            continue;
+        }
         Value& s = d["venue"];
         // if (s.GetString() != "SIGIR") continue;
         string reference_string = "";
@@ -51,9 +55,9 @@ void read_and_parse(const char* filename) {
             }
         }
 
-        // output_lock.lock();
-        // cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
-        // output_lock.unlock();
+        output_lock.lock();
+        cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
+        output_lock.unlock();
         break;
     }
 }
