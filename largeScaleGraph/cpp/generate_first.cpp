@@ -32,7 +32,7 @@ ofstream output;
 void read_and_parse(const char* filename) {
     // cout << filename << "\n";
     output_lock.lock();
-    cout << filename << "\n";
+    // cout << filename << "\n";
     ifstream input(filename);
     string line = "";
     
