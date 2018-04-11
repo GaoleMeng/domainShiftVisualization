@@ -39,7 +39,7 @@ void read_and_parse(const char* filename) {
         d.Parse(line.c_str());
         if (!d.HasMember("id")) {
             cout << "ddd" << endl;
-            continue
+            continue;
         }
         if (!d.HasMember("venue")) {
             cout << "????" << endl;
