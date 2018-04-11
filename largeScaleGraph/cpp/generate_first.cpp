@@ -27,7 +27,7 @@ void read_and_parse(const char* filename) {
     ifstream file_c(string(filename));
     // cout << "f" << endl;
     string line = "";
-    while(getline(ifstream, line)) {
+    while(getline(file_c, line)) {
         cout << line << endl;
         break;
     }
