@@ -61,7 +61,7 @@ void read_and_parse(const char* filename) {
 int main() {
     vector<thread> thread_list;
     output.open(output_file);
-    cout << "ddd" << endl;
+    // cout << "ddd" << endl;
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
@@ -70,7 +70,7 @@ int main() {
             }
         }
     }
-    cout << thread_list.size() << endl;
+    // cout << thread_list.size() << endl;
     for (auto& th: thread_list) th.join();
     output.close();
 }
