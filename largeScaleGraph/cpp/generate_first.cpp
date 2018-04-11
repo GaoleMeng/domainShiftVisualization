@@ -31,7 +31,7 @@ ofstream output;
 
 void read_and_parse(const char* filename) {
     // cout << filename << "\n";
-    // output_lock.lock();
+    output_lock.lock();
     // cout << filename << "\n";
     ifstream input(filename);
     string line = "";
@@ -65,7 +65,7 @@ void read_and_parse(const char* filename) {
         cout << line << endl;
         break;
     }
-    // output_lock.unlock();
+    output_lock.unlock();
 }
 
 
