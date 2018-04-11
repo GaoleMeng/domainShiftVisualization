@@ -34,7 +34,7 @@ vector<string> filedir_list;
 void read_and_parse(int indices) {
     // cout << filename << "\n";
     
-    filename = filedir_list[indices];
+    string filename = filedir_list[indices];
     
     ifstream input(filename.c_str());
     string line = "";
