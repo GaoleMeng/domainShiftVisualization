@@ -20,7 +20,7 @@ int main() {
 
         directory_iterator end_itr;
 
-        for (directory_iterator itr(dir); it != end_itr; ++it)
+        for (directory_iterator itr(dir); itr != end_itr; ++itr)
         {
             string current_file = itr->path().string();
             cout << current_file << endl;
