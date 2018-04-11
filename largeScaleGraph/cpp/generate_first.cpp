@@ -23,8 +23,8 @@ string lastfix = ".txt";
 
 
 void read_and_parse(const char* filename) {
-    // cout << filename << endl;
-    ifstream file_c(string(filename));
+    // cout << string(filename) << endl;
+    ifstream file_c(filename);
     // cout << "f" << endl;
     string line = "";
     while(getline(file_c, line)) {
