@@ -38,7 +38,7 @@ void read_and_parse(const char* filename) {
         if (!d.HasMember("venue")) continue;
         Value& s = d["venue"];
         // if (s.GetString() != "SIGIR") continue;
-        reference_string = "";
+        string reference_string = "";
         if (d.HasMember("references")) {
             Value& a = d["references"];
             for (auto& v : a.GetArray())
