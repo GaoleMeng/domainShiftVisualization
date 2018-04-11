@@ -24,7 +24,7 @@ string lastfix = ".txt";
 
 void read_and_parse(const char* filename) {
     // cout << string(filename) << endl;
-    ifstream file_c(filename);
+    ifstream file_c("file.txt");
     // cout << "f" << endl;
     string line = "";
     while(getline(file_c, line)) {
