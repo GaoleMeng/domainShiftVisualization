@@ -72,7 +72,7 @@ void read_and_parse(int indices) {
                     }
                 }
                 output_lock.lock();
-                cout << id_string + "\t" + reference_string + "\t" + refer_string << "\n";
+                output << id_string + "\t" + reference_string + "\t" + refer_string << "\n";
                 output_lock.unlock();
             }
         }
