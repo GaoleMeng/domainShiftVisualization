@@ -99,6 +99,7 @@ void create_stringpool() {
             string_pool.erase(elem);
         }
     }
+    cout << string_pool.size() << endl;
 }
 
 
