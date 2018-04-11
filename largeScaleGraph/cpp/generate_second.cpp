@@ -56,10 +56,11 @@ void read_and_parse(int indices) {
         if (regex_search(line, id_extract, id)){
             smatch venue_extract;
             if (regex_search(line, venue_extract, venue)) {
-                string reference_string = "";
-                if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
-
                 string id_string = string(id_extract[0]).substr(7, 24);
+                // if (!string_pool.count(id_string)) continue;
+
+                string reference_string =  venue_extract[0].substr(10, venue_extract[0].length() - 11);
+                
                 string refer_string = "";
                 smatch references_extract;
                 if (regex_search(line, references_extract, references)) {
@@ -71,10 +72,12 @@ void read_and_parse(int indices) {
                     }
                 }
                 output_lock.lock();
-                output << id_string + " SIGIR " + refer_string << "\n";
+                cout << id_string + " " + reference_string + " " + refer_string << "\n";
                 output_lock.unlock();
             }
         }
+
+        break;
     }
 }
 
@@ -108,9 +111,7 @@ int main() {
     vector<thread> thread_list;
     output.open(output_file);
     string_pool_stream.open(input_lastlayer);
-
-
-
+    create_stringpool();
 
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
@@ -120,12 +121,12 @@ int main() {
         }
     }
 
-    // for (int i = 0; i < filedir_list.size(); i++) {
-    //     thread_list.push_back(thread(read_and_parse, i));
-    //     // read_and_parse(i);
-    // }
+    for (int i = 0; i < filedir_list.size(); i++) {
+        thread_list.push_back(thread(read_and_parse, i));
+        // read_and_parse(i);
+    }
 
-    // for (auto& th: thread_list) th.join();
+    for (auto& th: thread_list) th.join();
     output.close();
 }
 
