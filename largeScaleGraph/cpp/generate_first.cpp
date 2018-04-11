@@ -40,9 +40,10 @@ void read_and_parse(int indices) {
     string line = "";
     
     while(getline(input, line)) {
-        
+        parselock.lock();
         Document d;
         d.Parse(line.c_str());
+        parselock.unlock();
         if (!d.HasMember("id")) {
             output_lock.unlock();
             continue;
