@@ -32,9 +32,9 @@ ofstream output;
 void read_and_parse(const char* filename) {
     // cout << filename << "\n";
     std::lock_guard<std::mutex> lock(output_lock);
-    // cout << filename << "\n";
+    cout << filename << "\n";
     // ifstream input(filename);
-    string line = "";
+    // string line = "";
     
     // while(getline(input, line)) {
         
@@ -75,7 +75,7 @@ int main() {
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
-                cout << p.path().filename() << endl;
+                // cout << p.path().filename() << endl;
                 thread_list.push_back(thread(read_and_parse, 
                     p.path().c_str()));
             }
