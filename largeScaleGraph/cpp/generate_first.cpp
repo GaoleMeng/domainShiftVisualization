@@ -37,7 +37,7 @@ void read_and_parse(const char* filename) {
         if (!d.HasMember("id")) continue;
         if (!d.HasMember("venue")) continue;
         Value& s = d["venue"];
-        // if (s.GetString() != "SIGIR") continue;
+        if (s.GetString() != "SIGIR") continue;
         string reference_string = "";
         if (d.HasMember("references")) {
             Value& a = d["references"];
@@ -48,7 +48,7 @@ void read_and_parse(const char* filename) {
 
 
         output_lock.lock();
-        cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
+        ofstream << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
         output_lock.unlock();
         break;
     }
