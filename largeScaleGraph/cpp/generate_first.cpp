@@ -7,6 +7,9 @@
 #include <string>
 #include <thread>
 #include <experimental/filesystem>
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
 // #include <boost/range/iterator_range.hpp>
 namespace fs = std::experimental::filesystem;
 using namespace std;
@@ -20,7 +23,9 @@ string lastfix = ".txt";
 
 
 void read_and_parse(const char* filename) {
-    cout << filename << endl;
+    // cout << filename << endl;
+    ifstream filestr(filename);
+    for 
 }
 
 
@@ -29,7 +34,6 @@ int main() {
 
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
-            // ifstream ifs(p);
             if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
                 thread_list.push_back(thread(read_and_parse, 
                     p.path().c_str()));
