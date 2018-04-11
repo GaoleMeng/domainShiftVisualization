@@ -16,9 +16,10 @@ vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 int main() {
 
     // for (string dir: dir_list) {
-        for (auto& p: fs::directory_iterator(input_dir_1)) {
-            cout << p << endl;
-        }
+    cout << input_dir_1 << endl;
+        // for (auto& p: fs::directory_iterator(input_dir_1)) {
+        //     cout << p << endl;
+        // }
     // }
 }
 
