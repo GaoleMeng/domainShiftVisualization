@@ -33,42 +33,41 @@ vector<string> filedir_list;
 
 void read_and_parse(int indices) {
     // cout << filename << "\n";
-    output_lock.lock();
-    cout << filedir_list[indices] << "\n";
     
-    output_lock.unlock();
-    // ifstream input(filename);
-    // string line = "";
+    filename = filedir_list[indices];
     
-    // while(getline(input, line)) {
+    ifstream input(filename.c_str());
+    string line = "";
+    
+    while(getline(input, line)) {
         
-    //     // Document d;
-    //     // // parselock.lock();
-    //     // d.Parse(line.c_str());
-    //     // // parselock.unlock();
-    //     // if (!d.HasMember("id")) {
-    //     //     output_lock.unlock();
-    //     //     continue;
-    //     // }
-    //     // if (!d.HasMember("venue")) {
-    //     //     output_lock.unlock();
-    //     //     continue;
-    //     // }
-    //     // Value& s = d["venue"];
-    //     // // if (s.GetString() != "SIGIR") continue;
-    //     // string reference_string = "";
-    //     // if (d.HasMember("references")) {
-    //     //     Value& a = d["references"];
-    //     //     for (auto& v : a.GetArray()) {
-    //     //         reference_string.append(string(v.GetString()) + " ");
-    //     //     }
-    //     // }
+        Document d;
+        d.Parse(line.c_str());
+        if (!d.HasMember("id")) {
+            output_lock.unlock();
+            continue;
+        }
+        if (!d.HasMember("venue")) {
+            output_lock.unlock();
+            continue;
+        }
+        Value& s = d["venue"];
+        // if (s.GetString() != "SIGIR") continue;
+        string reference_string = "";
+        if (d.HasMember("references")) {
+            Value& a = d["references"];
+            for (auto& v : a.GetArray()) {
+                reference_string.append(string(v.GetString()) + " ");
+            }
+        }
+        output_lock.lock();
+        
+        // cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
+        cout << line << endl;
+        output_lock.unlock();
 
-        
-    //     // cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
-    //     cout << line << endl;
-    //     break;
-    // }
+        break;
+    }
 }
 
 
