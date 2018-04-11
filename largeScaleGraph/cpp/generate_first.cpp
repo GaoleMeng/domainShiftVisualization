@@ -31,7 +31,11 @@ ofstream output;
 void read_and_parse(const char* filename) {
     ifstream input(filename);
     string line = "";
+    output_lock.lock();
+    cout << filename << "\n";
+    output_lock.unlock();
     while(getline(input, line)) {
+
         Document d;
         d.Parse(line.c_str());
         if (!d.HasMember("id")) continue;
@@ -46,9 +50,9 @@ void read_and_parse(const char* filename) {
             }
         }
 
-        output_lock.lock();
-        cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
-        output_lock.unlock();
+        // output_lock.lock();
+        // cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
+        // output_lock.unlock();
         break;
     }
 }
