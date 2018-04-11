@@ -40,31 +40,36 @@ void read_and_parse(int indices) {
     string line = "";
     
     while(getline(input, line)) {
-        // parselock.lock();
         Document d;
+        parselock.lock();
         d.Parse(line.c_str());
         if (!d.HasMember("id")) {
             // parselock.unlock();
             continue;
         }
         if (!d.HasMember("venue")) {
-            // parselock.unlock();
             continue;
         }
-        Value& s = d["venue"];
+        if (d["venue"].GetString() != "SIGIR") {
+            continue;
+        }
 
         string reference_string = "";
         if (d.HasMember("references")) {
-            Value& a = d["references"];
-            for (auto& v : a.GetArray()) {
+            auto a = d["references"].GetArray();
+            parselock.unlock();
+            for (auto& v : a) {
                 reference_string.append(string(v.GetString()) + " ");
             }
         }
+        else {
+            parselock.unlock();
+        }
 
         // parselock.unlock();
-        // output_lock.lock();
+        output_lock.lock();
         output << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
-        // output_lock.unlock();
+        output_lock.unlock();
         break;
     }
 }
