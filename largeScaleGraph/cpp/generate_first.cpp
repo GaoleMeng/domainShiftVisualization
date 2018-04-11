@@ -35,11 +35,11 @@ void read_and_parse(const char* filename) {
     string line = "";
 
     while(getline(input, line)) {
-
+        output_lock.lock();
         Document d;
-        parselock.lock();
+        // parselock.lock();
         d.Parse(line.c_str());
-        parselock.unlock();
+        // parselock.unlock();
         if (!d.HasMember("id")) {
             continue;
         }
@@ -56,7 +56,7 @@ void read_and_parse(const char* filename) {
             }
         }
 
-        output_lock.lock();
+        
         cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
         output_lock.unlock();
         break;
