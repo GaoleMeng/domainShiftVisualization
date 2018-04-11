@@ -48,7 +48,7 @@ void read_and_parse(const char* filename) {
 
 
         output_lock.lock();
-        cout << string(d["id"].GetString()) + " " + reference_string << "\n";
+        cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
         output_lock.unlock();
         break;
     }
