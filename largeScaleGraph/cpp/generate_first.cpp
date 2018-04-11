@@ -24,12 +24,12 @@ void read_and_parse(string filename) {
 
 
 int main() {
-    vector<thread> thread_list;
+    vector<thread*> thread_list;
 
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             // ifstream ifs(p);
-            thread t1(read_and_parse(), p);
+            thread t1(read_and_parse, p);
             thread_list.push_back(t1);
         }
     }
