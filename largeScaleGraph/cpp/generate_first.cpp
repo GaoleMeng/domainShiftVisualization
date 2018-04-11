@@ -60,7 +60,6 @@ void read_and_parse(int indices) {
         //     continue;
         // }
         smatch id_extract;
-        cout << "d" << endl;
         if (regex_search(line, id_extract, id)){
             smatch venue_extract;
             cout << "d" << endl;
