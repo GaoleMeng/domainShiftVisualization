@@ -36,35 +36,35 @@ void read_and_parse(const char* filename) {
     // ifstream input(filename);
     string line = "";
     
-    while(getline(input, line)) {
+    // while(getline(input, line)) {
         
-        // Document d;
-        // // parselock.lock();
-        // d.Parse(line.c_str());
-        // // parselock.unlock();
-        // if (!d.HasMember("id")) {
-        //     output_lock.unlock();
-        //     continue;
-        // }
-        // if (!d.HasMember("venue")) {
-        //     output_lock.unlock();
-        //     continue;
-        // }
-        // Value& s = d["venue"];
-        // // if (s.GetString() != "SIGIR") continue;
-        // string reference_string = "";
-        // if (d.HasMember("references")) {
-        //     Value& a = d["references"];
-        //     for (auto& v : a.GetArray()) {
-        //         reference_string.append(string(v.GetString()) + " ");
-        //     }
-        // }
+    //     // Document d;
+    //     // // parselock.lock();
+    //     // d.Parse(line.c_str());
+    //     // // parselock.unlock();
+    //     // if (!d.HasMember("id")) {
+    //     //     output_lock.unlock();
+    //     //     continue;
+    //     // }
+    //     // if (!d.HasMember("venue")) {
+    //     //     output_lock.unlock();
+    //     //     continue;
+    //     // }
+    //     // Value& s = d["venue"];
+    //     // // if (s.GetString() != "SIGIR") continue;
+    //     // string reference_string = "";
+    //     // if (d.HasMember("references")) {
+    //     //     Value& a = d["references"];
+    //     //     for (auto& v : a.GetArray()) {
+    //     //         reference_string.append(string(v.GetString()) + " ");
+    //     //     }
+    //     // }
 
         
-        // cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
-        cout << line << endl;
-        break;
-    }
+    //     // cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
+    //     cout << line << endl;
+    //     break;
+    // }
     output_lock.unlock();
 }
 
