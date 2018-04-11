@@ -7,7 +7,7 @@
 #include <boost/range/iterator_range.hpp>
 
 using namespace std;
-namespace fs = boost::filesystem;
+using namespace boost::filesystem;
 
 path input_dir_1("/scratch/si699w18_fluxm/gaole/aminer_papers_0");
 path input_dir_2("/scratch/si699w18_fluxm/gaole/aminer_papers_1");
