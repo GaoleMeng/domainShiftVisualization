@@ -53,7 +53,7 @@ void read_and_parse(int indices) {
             continue;
         }
         Value& s = d["venue"];
-        // if (s.GetString() != "SIGIR") continue;
+
         string reference_string = "";
         if (d.HasMember("references")) {
             Value& a = d["references"];
@@ -72,15 +72,11 @@ void read_and_parse(int indices) {
 int main() {
     vector<thread> thread_list;
     output.open(output_file);
-    // cout << "ddd" << endl;
+
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
-                // cout << p.path().filename() << endl;
-                // read_and_parse(p.path().c_str());
-                filedir_list.push_back(p.path());
-
-                
+                filedir_list.push_back(p.path());                
             }
         }
     }
@@ -89,7 +85,6 @@ int main() {
         thread_list.push_back(thread(read_and_parse, i));
     }
 
-    // cout << thread_list.size() << endl;
     for (auto& th: thread_list) th.join();
     cout << tmp;
     output.close();
