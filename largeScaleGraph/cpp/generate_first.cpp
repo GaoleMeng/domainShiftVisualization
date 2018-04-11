@@ -32,7 +32,8 @@ string tmp = "";
 vector<string> filedir_list;
 regex id("\"id\": \".*?\"");
 regex venue("\"venue\": \".*?\"");
-regex references("\"references\": \[.*?\]")
+regex references("\"references\": \[.*?\]");
+regex single_id("\".{24}\"");
 
 void read_and_parse(int indices) {
     // cout << filename << "\n";
@@ -58,23 +59,30 @@ void read_and_parse(int indices) {
         //     parselock.unlock();
         //     continue;
         // }
+        smatch id_extract;
+        if (regex_search(line, id_extract, id)){
+            smatch venue_extract; 
+            if (regex_search(line, venue_extract, venue)) {
+                string reference_string = "";
+                if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue
 
-        // string reference_string = "";
-        // if (d.HasMember("references")) {
-        //     auto a = d["references"].GetArray();
-        //     parselock.unlock();
-        //     for (auto& v : a) {
-        //         reference_string.append(string(v.GetString()) + " ");
-        //     }
-        // }
-        // else {
-        //     parselock.unlock();
-        // }
 
-        // parselock.unlock();
-        // output_lock.lock();
-        // output << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
-        // output_lock.unlock();
+                string id_string = id_extract[0].substr(7, 24);
+                string refer_string = "";
+                smatch references_extract;
+                if (regex_search(line, references_extract, references)) {
+                    string whole_string = references_extract[0];
+                    int start = 16;
+                    while (start < whole_string.length()) {
+                        refer_string.append(whole_string.substr(start, 24) + " ");
+                        start += 28;
+                    }
+                }
+                output_lock.lock();
+                cout << id_string + " SIGIR " + refer_string << "\n";
+                output_lock.unlock();
+            }
+        }
         break;
     }
 }
