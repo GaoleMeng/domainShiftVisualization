@@ -65,7 +65,7 @@ void read_and_parse(int indices) {
             cout << "d" << endl;
             if (regex_search(line, venue_extract, venue)) {
                 string reference_string = "";
-                if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
+                // if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
 
 
                 string id_string = string(id_extract[0]).substr(7, 24);
