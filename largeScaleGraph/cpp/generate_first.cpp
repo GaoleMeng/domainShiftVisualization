@@ -45,12 +45,15 @@ void read_and_parse(int indices) {
         d.Parse(line.c_str());
         if (!d.HasMember("id")) {
             // parselock.unlock();
+            parselock.unlock();
             continue;
         }
         if (!d.HasMember("venue")) {
+            parselock.unlock();
             continue;
         }
         if (d["venue"].GetString() != "SIGIR") {
+            parselock.unlock();
             continue;
         }
 
@@ -88,8 +91,8 @@ int main() {
     }
 
     for (int i = 0; i < filedir_list.size(); i++) {
-        // thread_list.push_back(thread(read_and_parse, i));
-        read_and_parse(i);
+        thread_list.push_back(thread(read_and_parse, i));
+        // read_and_parse(i);
     }
 
     for (auto& th: thread_list) th.join();
