@@ -41,9 +41,11 @@ void read_and_parse(const char* filename) {
         d.Parse(line.c_str());
         // parselock.unlock();
         if (!d.HasMember("id")) {
+            output_lock.unlock();
             continue;
         }
         if (!d.HasMember("venue")) {
+            output_lock.unlock();
             continue;
         }
         Value& s = d["venue"];
