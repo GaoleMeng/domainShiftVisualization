@@ -22,13 +22,15 @@ void read_and_parse(const char* filename) {
 }
 
 
-
 int main() {
     vector<thread> thread_list;
 
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             // ifstream ifs(p);
+            if (p.path().filename().length() == 0) {
+                cout << "ff" << endl;
+            }
             thread_list.push_back(thread(read_and_parse, 
                 p.path().c_str()));
         }
