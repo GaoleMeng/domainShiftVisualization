@@ -81,8 +81,12 @@ void read_and_parse(int indices) {
                 output_lock.lock();
                 cout << id_string + " SIGIR " + refer_string << "\n";
                 output_lock.unlock();
+                break;
             }
         }
+        output_lock.lock();
+        cout << line << endl;
+        output_lock.unlock();
         break;
     }
 }
