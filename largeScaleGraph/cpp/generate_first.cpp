@@ -28,12 +28,14 @@ static mutex output_lock;
 mutex parselock;
 ofstream output;
 string tmp = "";
+vector<string> filedir_list;
 
-void read_and_parse(const char* filename) {
+
+void read_and_parse(int indices) {
     // cout << filename << "\n";
     output_lock.lock();
-    // cout << filename << "\n";
-    tmp += "abcde\n";
+    cout << filedir_list[indices] << "\n";
+    
     output_lock.unlock();
     // ifstream input(filename);
     // string line = "";
@@ -79,11 +81,17 @@ int main() {
             if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
                 // cout << p.path().filename() << endl;
                 // read_and_parse(p.path().c_str());
-                thread_list.push_back(thread(read_and_parse, 
-                    p.path().c_str()));
+                filedir_list.push_back(p.path());
+
+                
             }
         }
     }
+
+    for (int i = 0; i < filedir_list.size(); i++) {
+        thread_list.push_back(thread(read_and_parse, i));
+    }
+
     // cout << thread_list.size() << endl;
     for (auto& th: thread_list) th.join();
     cout << tmp;
