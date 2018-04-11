@@ -19,8 +19,10 @@ int main() {
     for (string dir: dir_list) {
 
         std::vector<directory_entry> v;
-        for(auto& entry : boost::make_iterator_range(directory_iterator(dir), {})) {
-            std::cout << entry << "\n";
+        copy(directory_iterator(p), directory_iterator(), back_inserter(v));
+        for ( std::vector<directory_entry>::const_iterator it = v.begin(); it != v.end();  ++ it )
+        {
+            std::cout<< (*it).path().string()<<endl;
         }
     }
 }
