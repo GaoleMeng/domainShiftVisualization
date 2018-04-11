@@ -24,14 +24,14 @@ string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 string lastfix = ".txt";
 
-static mutex output_lock;
+mutex output_lock;
 mutex parselock;
 ofstream output;
 
 
 void read_and_parse(const char* filename) {
     // cout << filename << "\n";
-    output_lock.lock();
+    std::lock_guard<std::mutex> lock(output_lock);
     cout << filename << "\n";
     // ifstream input(filename);
     string line = "";
@@ -65,7 +65,6 @@ void read_and_parse(const char* filename) {
     //     cout << line << endl;
     //     break;
     // }
-    output_lock.unlock();
 }
 
 
