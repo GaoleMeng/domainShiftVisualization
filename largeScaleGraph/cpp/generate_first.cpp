@@ -16,6 +16,8 @@ string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
 string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
 string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
+string lastfix = ".txt";
+
 
 void read_and_parse(const char* filename) {
     cout << filename << endl;
@@ -28,11 +30,10 @@ int main() {
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             // ifstream ifs(p);
-            if (p.path().filename().length() == 0) {
-                cout << "ff" << endl;
+            if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
+                thread_list.push_back(thread(read_and_parse, 
+                    p.path().c_str()));
             }
-            thread_list.push_back(thread(read_and_parse, 
-                p.path().c_str()));
         }
     }
 
