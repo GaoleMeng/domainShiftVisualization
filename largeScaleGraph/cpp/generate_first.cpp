@@ -15,12 +15,13 @@ vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 
 int main() {
 
-    // for (string dir: dir_list) {
-    cout << input_dir_1 << endl;
-        // for (auto& p: fs::directory_iterator(input_dir_1)) {
-        //     cout << p << endl;
-        // }
-    // }
+    for (string dir: dir_list) {
+
+        std::vector<directory_entry> v;
+        for(auto& entry : boost::make_iterator_range(directory_iterator(dir), {})) {
+            std::cout << entry << "\n";
+        }
+    }
 }
 
 
