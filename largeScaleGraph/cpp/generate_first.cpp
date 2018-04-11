@@ -46,9 +46,8 @@ void read_and_parse(const char* filename) {
             }
         }
 
-
         output_lock.lock();
-        output << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
+        // output << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
         output_lock.unlock();
         break;
     }
@@ -57,6 +56,7 @@ void read_and_parse(const char* filename) {
 
 int main() {
     vector<thread> thread_list;
+    output << "dddd" << endl;
 
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
