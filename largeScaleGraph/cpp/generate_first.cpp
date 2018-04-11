@@ -61,11 +61,8 @@ void read_and_parse(int indices) {
             }
         }
         output_lock.lock();
-        
-        cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
-        // cout << line << endl;
+        output << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
         output_lock.unlock();
-
         break;
     }
 }
