@@ -67,7 +67,7 @@ void read_and_parse(int indices) {
                 if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
 
 
-                string id_string = id_extract[0].substr(7, 24);
+                string id_string = string(id_extract[0]).substr(7, 24);
                 string refer_string = "";
                 smatch references_extract;
                 if (regex_search(line, references_extract, references)) {
