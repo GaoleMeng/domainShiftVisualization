@@ -19,8 +19,8 @@ int main() {
     for (string dir: dir_list) {
 
         std::vector<directory_entry> v;
-        copy(directory_iterator(p), directory_iterator(), back_inserter(v));
-        for ( std::vector<directory_entry>::const_iterator it = v.begin(); it != v.end();  ++ it )
+        copy(directory_iterator(dir), directory_iterator(), back_inserter(v));
+        for ( auto it = v.begin(); it != v.end(); ++it)
         {
             std::cout<< (*it).path().string()<<endl;
         }
