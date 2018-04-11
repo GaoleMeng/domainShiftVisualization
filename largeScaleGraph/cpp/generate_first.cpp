@@ -24,7 +24,7 @@ string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 string lastfix = ".txt";
 
-mutex output_lock;
+static mutex output_lock;
 mutex parselock;
 ofstream output;
 
