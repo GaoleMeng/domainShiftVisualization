@@ -14,7 +14,7 @@
 // #include <boost/range/iterator_range.hpp>
 namespace fs = std::experimental::filesystem;
 using namespace std;
-
+using namespace rapidjson;
 
 string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
 string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
@@ -24,13 +24,17 @@ string lastfix = ".txt";
 
 
 void read_and_parse(const char* filename) {
-    // cout << string(filename) << endl;
     ifstream input(filename);
-    // cout << "f" << endl;
     string line = "";
     while(getline(input, line)) {
-        cout << line << endl;
+        Document d;
+        d.Parse(line.c_str());
+        Value& s = d["id"];
+        cout << s.GetString() << endl;
+
         break;
+
+
     }
 }
 
