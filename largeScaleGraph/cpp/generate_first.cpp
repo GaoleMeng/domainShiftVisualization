@@ -20,10 +20,12 @@ using namespace rapidjson;
 string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
 string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
 string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
+string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 string lastfix = ".txt";
 
 mutex output_lock;
+ofstream output(output_file.c_str());
 
 
 void read_and_parse(const char* filename) {
@@ -32,14 +34,20 @@ void read_and_parse(const char* filename) {
     while(getline(input, line)) {
         Document d;
         d.Parse(line.c_str());
-        Value& s = d["id"];
-
-
-
+        if (!d.HasMember("id")) continue;
+        if (!d.HasMember("venue")) continue;
+        Value& s = d["venue"];
+        // if (s.GetString() != "SIGIR") continue;
+        reference_string = "";
+        if (d.HasMember("references")) {
+            Value& a = d["references"];
+            for (auto& v : a.GetArray())
+                reference_string.append(v.GetString() + " ");
+        }
 
 
         output_lock.lock();
-        cout << s.GetString() << endl;
+        cout << d["id"].GetString() + " " + reference_string << "\n";
         output_lock.unlock();
         break;
     }
