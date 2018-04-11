@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <boost/filesystem.hpp>
+#include <boost/range/iterator_range.hpp>
 
 using namespace std;
 namespace fs = boost::filesystem;
