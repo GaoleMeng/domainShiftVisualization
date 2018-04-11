@@ -36,31 +36,31 @@ void read_and_parse(const char* filename) {
     output_lock.lock();
     while(getline(input, line)) {
         
-        Document d;
-        // parselock.lock();
-        d.Parse(line.c_str());
-        // parselock.unlock();
-        if (!d.HasMember("id")) {
-            output_lock.unlock();
-            continue;
-        }
-        if (!d.HasMember("venue")) {
-            output_lock.unlock();
-            continue;
-        }
-        Value& s = d["venue"];
-        // if (s.GetString() != "SIGIR") continue;
-        string reference_string = "";
-        if (d.HasMember("references")) {
-            Value& a = d["references"];
-            for (auto& v : a.GetArray()) {
-                reference_string.append(string(v.GetString()) + " ");
-            }
-        }
+        // Document d;
+        // // parselock.lock();
+        // d.Parse(line.c_str());
+        // // parselock.unlock();
+        // if (!d.HasMember("id")) {
+        //     output_lock.unlock();
+        //     continue;
+        // }
+        // if (!d.HasMember("venue")) {
+        //     output_lock.unlock();
+        //     continue;
+        // }
+        // Value& s = d["venue"];
+        // // if (s.GetString() != "SIGIR") continue;
+        // string reference_string = "";
+        // if (d.HasMember("references")) {
+        //     Value& a = d["references"];
+        //     for (auto& v : a.GetArray()) {
+        //         reference_string.append(string(v.GetString()) + " ");
+        //     }
+        // }
 
         
-        cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
-        
+        // cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
+        cout << "ddd" << endl;
         break;
     }
     output_lock.unlock();
