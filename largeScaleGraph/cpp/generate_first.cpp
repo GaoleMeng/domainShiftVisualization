@@ -25,6 +25,7 @@ vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 string lastfix = ".txt";
 
 mutex output_lock;
+mutex parselock;
 ofstream output;
 
 
@@ -36,13 +37,13 @@ void read_and_parse(const char* filename) {
     while(getline(input, line)) {
 
         Document d;
+        parselock.lock();
         d.Parse(line.c_str());
+        parselock.unlock();
         if (!d.HasMember("id")) {
-            cout << "ddd" << endl;
             continue;
         }
         if (!d.HasMember("venue")) {
-            cout << "????" << endl;
             continue;
         }
         Value& s = d["venue"];
