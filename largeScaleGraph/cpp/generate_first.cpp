@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <thread>
+#include <mutex>
 #include <experimental/filesystem>
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
@@ -22,6 +23,8 @@ string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 string lastfix = ".txt";
 
+mutex output_lock;
+
 
 void read_and_parse(const char* filename) {
     ifstream input(filename);
@@ -29,10 +32,15 @@ void read_and_parse(const char* filename) {
     while(getline(input, line)) {
         Document d;
         d.Parse(line.c_str());
-        Value& s = d["kkk"];
+        Value& s = d["id"];
+
+
+
+
+
+        output_lock.lock();
         cout << s.GetString() << endl;
-
-
+        output_lock.unlock();
         break;
     }
 }
