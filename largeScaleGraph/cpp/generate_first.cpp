@@ -3,6 +3,7 @@
 // the first round of the multithread version of the processing file
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
 #include <thread>
@@ -24,7 +25,7 @@ string lastfix = ".txt";
 
 void read_and_parse(const char* filename) {
     // cout << string(filename) << endl;
-    ifstream file_c("file.txt");
+    ifstream input("file.txt");
     // cout << "f" << endl;
     string line = "";
     while(getline(file_c, line)) {
