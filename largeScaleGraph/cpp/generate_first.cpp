@@ -1,24 +1,40 @@
 // compiler with 
-// g++ -std=c++11 -pedantic -lboost_system -lboost_filesystem  generate_first.cpp -o generate_first
+// g++ -std=c++17  generate_first.cpp -o generate_first -lstdc++fs
+// the first round of the multithread version of the processing file
 
 #include <iostream>
 #include <vector>
 #include <string>
+#include <thread>
 #include <experimental/filesystem>
 // #include <boost/range/iterator_range.hpp>
 namespace fs = std::experimental::filesystem;
 using namespace std;
-// using namespace boost::filesystem;
+
 
 string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
 string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
 string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 
-int main() {
+void read_and_parse(string filename) {
+    cout << filename << endl;
+}
 
-    for (auto & p : fs::directory_iterator(input_dir_1))
-        std::cout << p << std::endl;
+
+
+int main() {
+    vector<thread> thread_list;
+
+    for (string dir: dir_list) {
+        for (auto & p : fs::directory_iterator(dir)) {
+            // ifstream ifs(p);
+            thread t1();
+            thread_list.push_back(move(t1));
+        }
+    }
+
+    for (auto& th: thread_list) th.join();
 }
 
 
