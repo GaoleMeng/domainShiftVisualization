@@ -8,6 +8,7 @@
 #include <string>
 #include <thread>
 #include <mutex>
+#include <regex>
 #include <experimental/filesystem>
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
