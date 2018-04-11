@@ -30,7 +30,7 @@ int main() {
         for (auto & p : fs::directory_iterator(dir)) {
             // ifstream ifs(p);
             thread t1();
-            thread_list.push_back(move(t1));
+            thread_list.push_back(t1);
         }
     }
 
