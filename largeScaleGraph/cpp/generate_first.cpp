@@ -29,13 +29,14 @@ ofstream output;
 
 
 void read_and_parse(const char* filename) {
+    // cout << filename << "\n";
     ifstream input(filename);
     string line = "";
-    // output_lock.lock();
-    cout << filename << "\n";
-    // output_lock.unlock();
-    while(getline(input, line)) {
 
+    while(getline(input, line)) {
+        output_lock.lock();
+        cout << "ddd" << "\n";
+        output_lock.unlock();
         Document d;
         d.Parse(line.c_str());
         if (!d.HasMember("id")) continue;
