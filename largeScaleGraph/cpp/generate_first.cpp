@@ -66,7 +66,7 @@ int main() {
             }
         }
     }
-    
+    cout << thread_list.size() << endl;
     for (auto& th: thread_list) th.join();
     output.close();
 }
