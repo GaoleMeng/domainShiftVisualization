@@ -53,8 +53,6 @@ for input_dir in input_dir_list:
             paper_json = yaml.load(json.dumps(json.loads(line)))
             block = {}
 
-            index_count += 1
-            sys.stdout.write("\r" + str(index_count))
             if "id" in paper_json:
                 block["id"] = paper_json["id"]
             else:
