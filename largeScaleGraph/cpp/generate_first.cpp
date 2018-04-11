@@ -29,12 +29,11 @@ void read_and_parse(const char* filename) {
     while(getline(input, line)) {
         Document d;
         d.Parse(line.c_str());
-        Value& s = d["id"];
+        Value& s = d["kkk"];
         cout << s.GetString() << endl;
 
+
         break;
-
-
     }
 }
 
