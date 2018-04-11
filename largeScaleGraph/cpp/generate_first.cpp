@@ -62,7 +62,6 @@ void read_and_parse(int indices) {
         smatch id_extract;
         if (regex_search(line, id_extract, id)){
             smatch venue_extract;
-            cout << "d" << endl;
             if (regex_search(line, venue_extract, venue)) {
                 string reference_string = "";
                 // if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
