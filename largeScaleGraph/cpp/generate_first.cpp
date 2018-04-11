@@ -43,13 +43,12 @@ void read_and_parse(int indices) {
         parselock.lock();
         Document d;
         d.Parse(line.c_str());
-        parselock.unlock();
         if (!d.HasMember("id")) {
-            output_lock.unlock();
+            parselock.unlock();
             continue;
         }
         if (!d.HasMember("venue")) {
-            output_lock.unlock();
+            parselock.unlock();
             continue;
         }
         Value& s = d["venue"];
@@ -61,6 +60,8 @@ void read_and_parse(int indices) {
                 reference_string.append(string(v.GetString()) + " ");
             }
         }
+
+        parselock.unlock();
         output_lock.lock();
         output << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
         output_lock.unlock();
