@@ -17,7 +17,7 @@ string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
 string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 
-void read_and_parse(string filename) {
+void read_and_parse(int filename) {
     cout << filename << endl;
 }
 
@@ -29,11 +29,11 @@ int main() {
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             // ifstream ifs(p);
-            thread_list.push_back(thread(read_and_parse, p));
+            thread_list.push_back(thread(read_and_parse, 1));
         }
     }
 
-    for (auto& th: thread_list) th.join();
+    // for (auto& th: thread_list) th.join();
 }
 
 
