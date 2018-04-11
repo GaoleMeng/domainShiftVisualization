@@ -31,7 +31,7 @@ ofstream output;
 
 void read_and_parse(const char* filename) {
     // cout << filename << "\n";
-    output_lock.lock();
+    // output_lock.lock();
     // cout << filename << "\n";
     ifstream input(filename);
     string line = "";
@@ -62,17 +62,17 @@ void read_and_parse(const char* filename) {
 
         
         // cout << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
-        cout << "ddd" << endl;
+        cout << line << endl;
         break;
     }
-    output_lock.unlock();
+    // output_lock.unlock();
 }
 
 
 int main() {
     vector<thread> thread_list;
     output.open(output_file);
-    cout << "ddd" << endl;
+    // cout << "ddd" << endl;
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
