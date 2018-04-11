@@ -65,8 +65,9 @@ int main() {
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
-                thread_list.push_back(thread(read_and_parse, 
-                    p.path().c_str()));
+                cout << p.path().filename() << endl;
+                // thread_list.push_back(thread(read_and_parse, 
+                //     p.path().c_str()));
             }
         }
     }
