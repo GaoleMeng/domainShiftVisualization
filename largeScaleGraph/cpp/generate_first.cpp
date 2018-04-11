@@ -36,7 +36,6 @@ regex references("\"references\": \\[.*?\\]");
 regex single_id("\".{24}\"");
 
 void read_and_parse(int indices) {
-    // cout << filename << "\n";
     
     string filename = filedir_list[indices];
     
@@ -44,28 +43,12 @@ void read_and_parse(int indices) {
     string line = "";
     
     while(getline(input, line)) {
-        // Document d;
-        // parselock.lock();
-        // if (!d.HasMember("id")) {
-        //     // parselock.unlock();
-        //     parselock.unlock();
-        //     continue;
-        // }
-        // if (!d.HasMember("venue")) {
-        //     parselock.unlock();
-        //     continue;
-        // }
-        // if (d["venue"].GetString() != "SIGIR") {
-        //     parselock.unlock();
-        //     continue;
-        // }
         smatch id_extract;
         if (regex_search(line, id_extract, id)){
             smatch venue_extract;
             if (regex_search(line, venue_extract, venue)) {
                 string reference_string = "";
-                // if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
-
+                if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
 
                 string id_string = string(id_extract[0]).substr(7, 24);
                 string refer_string = "";
@@ -79,15 +62,10 @@ void read_and_parse(int indices) {
                     }
                 }
                 output_lock.lock();
-                cout << id_string + " SIGIR " + refer_string << "\n";
+                output << id_string + " SIGIR " + refer_string << "\n";
                 output_lock.unlock();
-                break;
             }
         }
-        output_lock.lock();
-        cout << line << endl;
-        output_lock.unlock();
-        break;
     }
 }
 
@@ -110,7 +88,6 @@ int main() {
     }
 
     for (auto& th: thread_list) th.join();
-    cout << tmp;
     output.close();
 }
 
