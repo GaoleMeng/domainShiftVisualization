@@ -29,7 +29,9 @@ mutex parselock;
 ofstream output;
 string tmp = "";
 vector<string> filedir_list;
-
+regex id("\"id\": \".*?\"");
+regex venue("\"venue\": \".*?\"");
+regex references("\"references\": \[.*?\]")
 
 void read_and_parse(int indices) {
     // cout << filename << "\n";
@@ -40,39 +42,38 @@ void read_and_parse(int indices) {
     string line = "";
     
     while(getline(input, line)) {
-        Document d;
-        parselock.lock();
-        d.Parse(line.c_str());
-        if (!d.HasMember("id")) {
-            // parselock.unlock();
-            parselock.unlock();
-            continue;
-        }
-        if (!d.HasMember("venue")) {
-            parselock.unlock();
-            continue;
-        }
-        if (d["venue"].GetString() != "SIGIR") {
-            parselock.unlock();
-            continue;
-        }
+        // Document d;
+        // parselock.lock();
+        // if (!d.HasMember("id")) {
+        //     // parselock.unlock();
+        //     parselock.unlock();
+        //     continue;
+        // }
+        // if (!d.HasMember("venue")) {
+        //     parselock.unlock();
+        //     continue;
+        // }
+        // if (d["venue"].GetString() != "SIGIR") {
+        //     parselock.unlock();
+        //     continue;
+        // }
 
-        string reference_string = "";
-        if (d.HasMember("references")) {
-            auto a = d["references"].GetArray();
-            parselock.unlock();
-            for (auto& v : a) {
-                reference_string.append(string(v.GetString()) + " ");
-            }
-        }
-        else {
-            parselock.unlock();
-        }
+        // string reference_string = "";
+        // if (d.HasMember("references")) {
+        //     auto a = d["references"].GetArray();
+        //     parselock.unlock();
+        //     for (auto& v : a) {
+        //         reference_string.append(string(v.GetString()) + " ");
+        //     }
+        // }
+        // else {
+        //     parselock.unlock();
+        // }
 
         // parselock.unlock();
-        output_lock.lock();
-        output << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
-        output_lock.unlock();
+        // output_lock.lock();
+        // output << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
+        // output_lock.unlock();
         break;
     }
 }
