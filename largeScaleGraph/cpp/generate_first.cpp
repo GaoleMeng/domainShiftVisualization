@@ -31,9 +31,11 @@ ofstream output;
 
 void read_and_parse(const char* filename) {
     // cout << filename << "\n";
+    output_lock.lock();
+    cout << filename << "\n";
     ifstream input(filename);
     string line = "";
-    output_lock.lock();
+    
     while(getline(input, line)) {
         
         // Document d;
