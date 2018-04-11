@@ -76,8 +76,6 @@ void read_and_parse(int indices) {
                 output_lock.unlock();
             }
         }
-
-        break;
     }
 }
 
