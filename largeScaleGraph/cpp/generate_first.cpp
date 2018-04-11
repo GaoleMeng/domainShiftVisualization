@@ -66,8 +66,9 @@ int main() {
             }
         }
     }
-    output.close();
+    
     for (auto& th: thread_list) th.join();
+    output.close();
 }
 
 
