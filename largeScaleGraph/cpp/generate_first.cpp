@@ -40,15 +40,15 @@ void read_and_parse(int indices) {
     string line = "";
     
     while(getline(input, line)) {
-        parselock.lock();
+        // parselock.lock();
         Document d;
         d.Parse(line.c_str());
         if (!d.HasMember("id")) {
-            parselock.unlock();
+            // parselock.unlock();
             continue;
         }
         if (!d.HasMember("venue")) {
-            parselock.unlock();
+            // parselock.unlock();
             continue;
         }
         Value& s = d["venue"];
@@ -61,10 +61,10 @@ void read_and_parse(int indices) {
             }
         }
 
-        parselock.unlock();
-        output_lock.lock();
+        // parselock.unlock();
+        // output_lock.lock();
         output << string(d["id"].GetString()) + " SIGIR " + reference_string << "\n";
-        output_lock.unlock();
+        // output_lock.unlock();
         break;
     }
 }
@@ -83,7 +83,8 @@ int main() {
     }
 
     for (int i = 0; i < filedir_list.size(); i++) {
-        thread_list.push_back(thread(read_and_parse, i));
+        // thread_list.push_back(thread(read_and_parse, i));
+        read_and_parse(i);
     }
 
     for (auto& th: thread_list) th.join();
