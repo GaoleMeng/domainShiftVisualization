@@ -55,7 +55,6 @@ void read_and_parse(int indices) {
                 string id_string = string(id_extract[0]).substr(7, 24);
                 string refer_string = "";
                 
-                cout << line << endl;
                 size_t found = line.find(references_start);
                 if (found != std::string::npos) {
                     int start = 16 + found;
@@ -67,7 +66,7 @@ void read_and_parse(int indices) {
                 }
 
                 output_lock.lock();
-                cout << id_string + " SIGIR " + refer_string << "\n";
+                output << id_string + " SIGIR " + refer_string << "\n";
                 output_lock.unlock();
             }
         }
