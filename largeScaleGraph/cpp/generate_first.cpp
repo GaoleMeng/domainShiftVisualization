@@ -72,9 +72,8 @@ void read_and_parse(int indices) {
                     }
 
                     output_lock.lock();
-                    cout << id_string + "\tSIGIR\t" + year_string + "\t" + refer_string << "\n";
+                    output << id_string + "\tSIGIR\t" + year_string + "\t" + refer_string << "\n";
                     output_lock.unlock();
-
                 }
             }
         }
