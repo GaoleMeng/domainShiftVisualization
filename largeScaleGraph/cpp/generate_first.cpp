@@ -45,7 +45,6 @@ void read_and_parse(int indices) {
     string line = "";
     
     while(getline(input, line)) {
-        output_lock.lock();
         smatch id_extract;
         if (regex_search(line, id_extract, id)){
             smatch venue_extract;
@@ -56,6 +55,7 @@ void read_and_parse(int indices) {
                 string id_string = string(id_extract[0]).substr(7, 24);
                 string refer_string = "";
                 
+                cout << line << endl;
                 size_t found = line.find(references_start);
                 if (found != std::string::npos) {
                     int start = 16 + found;
@@ -71,8 +71,6 @@ void read_and_parse(int indices) {
                 output_lock.unlock();
             }
         }
-
-        output_lock.unlock();
     }
 }
 
