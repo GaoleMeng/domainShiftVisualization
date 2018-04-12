@@ -50,16 +50,16 @@ void read_and_parse(int indices) {
                 string reference_string = "";
                 // if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
 
-                output_lock.lock();
+                
                 cout << "ddd" << endl;
                 cout << line << endl;
                 string id_string = string(id_extract[0]).substr(7, 24);
                 cout << "finish" << endl;
                 string refer_string = "";
                 cout << "finish" << endl;
-                output_lock.unlock();
+                
 
-
+                output_lock.lock();
                 smatch references_extract;
                 if (regex_search(line, references_extract, references)) {
                     string whole_string = references_extract[0];
@@ -69,6 +69,8 @@ void read_and_parse(int indices) {
                         start += 28;
                     }
                 }
+                output_lock.unlock();
+                
                 output_lock.lock();
                 cout << id_string + " SIGIR " + refer_string << "\n";
                 output_lock.unlock();
