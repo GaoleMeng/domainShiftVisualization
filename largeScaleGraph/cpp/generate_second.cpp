@@ -56,7 +56,7 @@ void read_and_parse(int indices) {
         smatch id_extract;
         if (regex_search(line, id_extract, id)){
             smatch venue_extract;
-            cout << line << endl
+            cout << line << endl;
             if (regex_search(line, venue_extract, venue)) {
                 string id_string = string(id_extract[0]).substr(7, 24);
                 // if (!string_pool.count(id_string)) continue;
