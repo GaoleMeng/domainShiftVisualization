@@ -54,10 +54,10 @@ void read_and_parse(int indices) {
                 // if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
 
                 
-                cout << "ddd" << endl;
-                // cout << line << endl;
-                // string id_string = string(id_extract[0]).substr(7, 24);
-                // cout << "finish" << endl;
+                // cout << "ddd" << endl;
+                cout << line << endl;
+                string id_string = string(id_extract[0]).substr(7, 24);
+                cout << "finish" << endl;
                 // string refer_string = "";
                 // cout << "finish" << endl;
                 
