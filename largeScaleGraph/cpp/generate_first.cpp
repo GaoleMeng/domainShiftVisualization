@@ -32,8 +32,10 @@ string tmp = "";
 vector<string> filedir_list;
 regex id("\"id\": \".*?\"");
 regex venue("\"venue\": \".*?\"");
-regex references("\\[.*\\]");
+regex references("\"references\": \\[.*\\]");
 regex single_id("\".{24}\"");
+string references_start = "\"references\"";
+
 
 void read_and_parse(int indices) {
     
@@ -42,9 +44,7 @@ void read_and_parse(int indices) {
     ifstream input(filename.c_str());
     string line = "";
     
-
     while(getline(input, line)) {
-
         output_lock.lock();
         smatch id_extract;
         if (regex_search(line, id_extract, id)){
@@ -52,35 +52,23 @@ void read_and_parse(int indices) {
             if (regex_search(line, venue_extract, venue)) {
                 string reference_string = "";
                 // if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
-
                 
-                // cout << "ddd" << endl;
-                cout << line << endl;
                 string id_string = string(id_extract[0]).substr(7, 24);
-                cout << "finish" << endl;
                 string refer_string = "";
-                // cout << "finish" << endl;
                 
-
-
-                smatch references_extract;
-                cout << "finish" << endl;
-                if (regex_search(line, references_extract, references)) {
-                    string whole_string = references_extract[0];
-                    cout << "find " << whole_string << endl;
-                    // int start = 16;
-                    // while (start < whole_string.length()) {
-                    //     refer_string.append(whole_string.substr(start, 24) + " ");
-                    //     start += 28;
-                    // }
+                size_t found = line.find(references_start);
+                if (found != std::string::npos) {
+                    int start = 16 + found;
+                    while (true) {
+                        refer_string.append(line.substr(start, 24) + " ");
+                        if (line[start + 25] == ']') break;
+                        start += 28;
+                    }
                 }
 
-                cout << "finish" << endl;
-                
-
-                // output_lock.lock();
-                // cout << id_string + " SIGIR " + refer_string << "\n";
-                // output_lock.unlock();
+                output_lock.lock();
+                cout << id_string + " SIGIR " + refer_string << "\n";
+                output_lock.unlock();
             }
         }
 
