@@ -62,11 +62,10 @@ void read_and_parse(int indices) {
                 string id_string = string(id_extract[0]).substr(7, 24);
                 if (!string_pool.count(id_string)) continue;
 
-                // cout << "lao de" << endl;
-                cout << string(venue_extract[0]) << endl;
+                cout << "lao de" << endl;
                 
-                // string reference_string = string(venue_extract[0]).substr(10, string(venue_extract[0]).length() - 11);
-                // cout << reference_string << endl;
+                string reference_string = string(venue_extract[0]).substr(10, string(venue_extract[0]).length() - 11);
+                cout << reference_string << endl;
                 // string refer_string = "";
                 // smatch references_extract;
                 // if (regex_search(line, references_extract, references)) {
