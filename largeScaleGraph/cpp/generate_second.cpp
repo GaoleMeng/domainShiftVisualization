@@ -63,7 +63,7 @@ void read_and_parse(int indices) {
                 // if (!string_pool.count(id_string)) continue;
 
                 // cout << "lao de" << endl;
-                cout << venue_extract[0] << endl;
+                cout << string(venue_extract[0]) << endl;
                 
                 // string reference_string = string(venue_extract[0]).substr(10, string(venue_extract[0]).length() - 11);
                 // cout << reference_string << endl;
