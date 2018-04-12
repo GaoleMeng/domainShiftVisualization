@@ -34,6 +34,8 @@ regex id("\"id\": \".*?\"");
 regex venue("\"venue\": \".*?\"");
 regex references("\"references\": \\[.*\\]");
 regex single_id("\".{24}\"");
+regex year("\"year\": .*?,");
+
 string references_start = "\"references\"";
 
 
@@ -49,25 +51,31 @@ void read_and_parse(int indices) {
         if (regex_search(line, id_extract, id)){
             smatch venue_extract;
             if (regex_search(line, venue_extract, venue)) {
-                string reference_string = "";
-                if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
-                
-                string id_string = string(id_extract[0]).substr(7, 24);
-                string refer_string = "";
-                
-                size_t found = line.find(references_start);
-                if (found != std::string::npos) {
-                    int start = 16 + found;
-                    while (true) {
-                        refer_string.append(line.substr(start, 24) + " ");
-                        if (line[start + 25] == ']') break;
-                        start += 28;
-                    }
-                }
+                smatch year_extract;
 
-                output_lock.lock();
-                output << id_string + " SIGIR " + refer_string << "\n";
-                output_lock.unlock();
+                if (regex_search(line, year_extract, year)) {
+                    string reference_string = "";
+                    if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
+                    
+                    string id_string = string(id_extract[0]).substr(7, 24);
+                    string refer_string = "";
+                    string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
+
+                    size_t found = line.find(references_start);
+                    if (found != std::string::npos) {
+                        int start = 16 + found;
+                        while (true) {
+                            refer_string.append(line.substr(start, 24) + " ");
+                            if (line[start + 25] == ']') break;
+                            start += 28;
+                        }
+                    }
+
+                    output_lock.lock();
+                    cout << id_string + "\tSIGIR\t" + year_string + "\t" + refer_string << "\n";
+                    output_lock.unlock();
+
+                }
             }
         }
     }
