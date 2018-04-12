@@ -61,7 +61,10 @@ void read_and_parse(int indices) {
             if (regex_search(line, venue_extract, venue)) {
                 string id_string = string(id_extract[0]).substr(7, 24);
                 // if (!string_pool.count(id_string)) continue;
-                
+                output_lock.lock();
+                cout << reference_string << endl;
+                output_lock.unlock();
+
                 string reference_string = string(venue_extract[0]).substr(10, string(venue_extract[0]).length() - 11);
                 string refer_string = "";
                 smatch references_extract;
