@@ -48,7 +48,7 @@ void read_and_parse(int indices) {
             smatch venue_extract;
             if (regex_search(line, venue_extract, venue)) {
                 string reference_string = "";
-                if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
+                // if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
 
                 string id_string = string(id_extract[0]).substr(7, 24);
                 string refer_string = "";
@@ -62,7 +62,7 @@ void read_and_parse(int indices) {
                     }
                 }
                 output_lock.lock();
-                output << id_string + " SIGIR " + refer_string << "\n";
+                cout << id_string + " SIGIR " + refer_string << "\n";
                 output_lock.unlock();
             }
         }
