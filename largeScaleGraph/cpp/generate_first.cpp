@@ -32,7 +32,7 @@ string tmp = "";
 vector<string> filedir_list;
 regex id("\"id\": \".*?\"");
 regex venue("\"venue\": \".*?\"");
-regex references("\"references\": \\[.*?\\]");
+regex references("\"references\": \\[.*\\]");
 regex single_id("\".{24}\"");
 
 void read_and_parse(int indices) {
