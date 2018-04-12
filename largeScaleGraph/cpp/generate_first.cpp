@@ -50,6 +50,8 @@ void read_and_parse(int indices) {
                 string reference_string = "";
                 // if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
 
+                cout << "ddd" << endl;
+                cout << line << endl;
                 string id_string = string(id_extract[0]).substr(7, 24);
                 string refer_string = "";
                 smatch references_extract;
