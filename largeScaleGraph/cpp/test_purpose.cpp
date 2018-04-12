@@ -4,9 +4,21 @@
 using namespace std;
 vector<string> tmp;
 
-int main() {
+
+
+void test() {
     tmp.emplace_back("0.0.0.0");
+}
+
+
+void test2() {
     cout << tmp.at(0) << endl;
+}
 
 
+
+
+int main() {
+    test();
+    test2();
 }
