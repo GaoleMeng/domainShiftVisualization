@@ -18,11 +18,13 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
 
-string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
-string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
-string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
+// string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
+// string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
+// string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
+string input_dir_1 = "/home/gaole/tmprepo/largeScaleGraph/cpp/first_layer_extraction"
+
 string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
-vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
+vector<string> dir_list = {input_dir_1};
 string lastfix = ".txt";
 
 static mutex output_lock;
@@ -55,7 +57,16 @@ void read_and_parse(int indices) {
 
                 if (regex_search(line, year_extract, year)) {
                     string reference_string = "";
-                    if (venue_extract[0] != "\"venue\": \"SIGIR\"") continue;
+                    if (venue_extract[0] != "\"venue\": \"SIGIR\"") {
+                        cout << line << endl;
+                        cout << "impossible" << endl;
+                        continue;
+                    }
+                    if (venue_extract[0] != "\"venue\": \"SIGIR Forum\"") {
+                        cout << line << endl;
+                        cout << "impossible" << endl;
+                        continue;
+                    }
                     
                     string id_string = string(id_extract[0]).substr(7, 24);
                     string refer_string = "";
