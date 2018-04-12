@@ -32,7 +32,7 @@ string tmp = "";
 vector<string> filedir_list;
 regex id("\"id\": \".*?\"");
 regex venue("\"venue\": \".*?\"");
-regex references("\"references\": \\[.*\\]");
+regex references("\\[.*\\]");
 regex single_id("\".{24}\"");
 
 void read_and_parse(int indices) {
@@ -68,11 +68,11 @@ void read_and_parse(int indices) {
                 if (regex_search(line, references_extract, references)) {
                     string whole_string = references_extract[0];
                     cout << "find " << whole_string << endl;
-                    int start = 16;
-                    while (start < whole_string.length()) {
-                        refer_string.append(whole_string.substr(start, 24) + " ");
-                        start += 28;
-                    }
+                    // int start = 16;
+                    // while (start < whole_string.length()) {
+                    //     refer_string.append(whole_string.substr(start, 24) + " ");
+                    //     start += 28;
+                    // }
                 }
 
                 cout << "finish" << endl;
