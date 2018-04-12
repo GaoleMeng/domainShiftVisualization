@@ -57,12 +57,7 @@ void read_and_parse(int indices) {
 
                 if (regex_search(line, year_extract, year)) {
                     string reference_string = "";
-                    if (venue_extract[0] != "\"venue\": \"SIGIR\"") {
-                        cout << line << endl;
-                        cout << "impossible" << endl;
-                        continue;
-                    }
-                    if (venue_extract[0] != "\"venue\": \"SIGIR Forum\"") {
+                    if (venue_extract[0] != "\"venue\": \"SIGIR\"" && venue_extract[0] != "\"venue\": \"SIGIR Forum\"") {
                         cout << line << endl;
                         cout << "impossible" << endl;
                         continue;
