@@ -67,6 +67,7 @@ void read_and_parse(int indices) {
                 cout << "finish" << endl;
                 if (regex_search(line, references_extract, references)) {
                     string whole_string = references_extract[0];
+                    cout << whole_string << endl;
                     int start = 16;
                     while (start < whole_string.length()) {
                         refer_string.append(whole_string.substr(start, 24) + " ");
