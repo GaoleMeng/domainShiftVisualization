@@ -52,6 +52,7 @@ void read_and_parse(int indices) {
     string line = "";
     
     while(getline(input, line)) {
+        cout << line << endl;
         smatch id_extract;
         if (regex_search(line, id_extract, id)){
             smatch venue_extract;
