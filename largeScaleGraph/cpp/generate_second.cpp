@@ -143,9 +143,9 @@ void create_stringpool() {
     }
     cout << string_pool.size() << endl;
 
-    for (string tmp: string_pool) {
-        cout << tmp << endl;
-    }
+    // for (string tmp: string_pool) {
+    //     cout << tmp << endl;
+    // }
 }
 
 
