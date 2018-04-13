@@ -109,7 +109,7 @@ void dump_file(unordered_map<string, int> mapping_file) {
 void create_stringpool(int i) {
     string line = "";
     unordered_set<string> prev_strings;
-
+    cout << layer_file_list[i] << endl;
     string_pool_stream.open(layer_file_list[i]);
 
     while(getline(string_pool_stream, line)) {
@@ -118,7 +118,7 @@ void create_stringpool(int i) {
         istringstream segment_ss(line);
 
         int counter = 0;
-        cout << line << endl;
+        // cout << line << endl;
         while(getline(segment_ss, segment, '\t')) {
             if (counter == 0) {
                 counter += 1;
@@ -132,7 +132,6 @@ void create_stringpool(int i) {
             }
         }   
     }
-    cout << string_pool.size() << endl;
 }
 
 
