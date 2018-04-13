@@ -133,6 +133,7 @@ void create_stringpool(int i) {
         }   
     }
     cout << string_pool.size() << endl;
+    string_pool_stream.close()
 }
 
 
