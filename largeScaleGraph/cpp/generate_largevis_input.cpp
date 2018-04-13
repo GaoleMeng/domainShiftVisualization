@@ -132,6 +132,7 @@ void create_stringpool(int i) {
             }
         }   
     }
+    string_pool.insert("SIGIR Forum")
     cout << string_pool.size() << endl;
     string_pool_stream.close();
 }
