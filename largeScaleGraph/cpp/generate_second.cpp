@@ -85,7 +85,7 @@ void read_and_parse(int indices) {
                     }
 
                     output_lock.lock();
-                    output << id_string + "\t" + venue_string + "\t" + year_string + "\t" + refer_string << "\n";
+                    cout << id_string + "\t" + venue_string + "\t" + year_string + "\t" + refer_string << "\n";
                     output_lock.unlock();
                 }
             }
