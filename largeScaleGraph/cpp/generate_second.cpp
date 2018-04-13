@@ -128,7 +128,7 @@ void create_stringpool() {
             else {
                 istringstream ref_ss(segment);
                 string tmp = "";
-                while (getline(ref_ss, tmp)) {
+                while (ref_ss >> tmp) {
                     cout << tmp << endl;
                     string_pool.insert(tmp);
                 }
