@@ -106,7 +106,6 @@ void create_stringpool() {
 
         int counter = 0;
         while(getline(segment_ss, segment, '\t')) {
-            cout << segment << endl;
             if (counter == 0) {
                 counter += 1;
                 prev_strings.insert(segment);
@@ -117,6 +116,7 @@ void create_stringpool() {
                 continue;
             }
             else if (counter == 2) {
+                counter += 1
                 continue;
             }
             else {
