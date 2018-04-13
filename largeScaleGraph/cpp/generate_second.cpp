@@ -67,7 +67,6 @@ void read_and_parse(int indices) {
         // cout << line << endl;
         if (found != std::string::npos) {
             id_string = line.substr(found + 7, 24);
-            cout << id_string << endl;
             if (!string_pool.count(id_string)) continue;
 
             smatch venue_extract;
