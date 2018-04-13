@@ -86,6 +86,8 @@ void read_and_parse(int indices) {
                     if (found != std::string::npos) {
                         int start = 16 + found;
                         while (true) {
+
+                            cout << line[start + 25] << endl;
                             refer_string.append(line.substr(start, 24) + " ");
                             if (line[start + 25] == ']') break;
                             start += 28;
