@@ -85,7 +85,7 @@ void read_and_parse(int indices) {
                     }
 
                     output_lock.lock();
-                    output << id_string + "\t" + venue_string + "\t" + year_string + "\t" + refer_string << "\n";
+                    cout << id_string + "\t" + venue_string + "\t" + year_string + "\t" + refer_string << "\n";
                     output_lock.unlock();
                 }
             }
@@ -104,7 +104,7 @@ void create_stringpool() {
         string segment = "";
         istringstream segment_ss(line);
 
-        counter = 0
+        int counter = 0
         while(getline(segment_ss, segment, '\t')) {
             if (counter == 0) {
                 counter += 1;
