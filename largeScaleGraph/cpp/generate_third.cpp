@@ -23,8 +23,8 @@ using namespace rapidjson;
 string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
 string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
 string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
-string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
-string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
+string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
+string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
 
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 unordered_set<string> string_pool;
@@ -60,7 +60,7 @@ void read_and_parse(int indices) {
     string id_string = "";
     string venue_string = "";
     string year_string = "";
-    string refer_string = "";
+    
     
     while(getline(input, line)) {
         // cout << line << endl;
@@ -72,6 +72,7 @@ void read_and_parse(int indices) {
             smatch venue_extract;
             if (regex_search(line, venue_extract, venue)) {
 
+                string refer_string = "";
                 smatch year_extract;
                 if (regex_search(line, year_extract, year)) {
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
