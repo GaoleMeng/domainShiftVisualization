@@ -72,7 +72,7 @@ void read_and_parse(int indices) {
             if (regex_search(line, venue_extract, venue)) {
                 smatch year_extract;
                 if (regex_search(line, year_extract, venue)) {
-                    venue_string = venue_extract[0].substr(10, venue_extract[0].length() - 11);
+                    venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
                     
                     size_t found = line.find(references_start);
                     if (found != std::string::npos) {
@@ -108,7 +108,7 @@ void create_stringpool() {
         while(getline(segment_ss, segment, '\t')) {
             if (counter == 0) {
                 counter += 1;
-                prev_string.insert(segment);
+                prev_strings.insert(segment);
                 continue;
             }
             else if (counter == 1) {
