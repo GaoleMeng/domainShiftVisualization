@@ -126,7 +126,11 @@ void create_stringpool() {
                 continue;
             }
             else {
-                string_pool.insert(segment);
+                istringstream ref_ss(segment);
+                string tmp = "";
+                while (getline(ref_ss, tmp)) {
+                    string_pool.insert(tmp);
+                }
             }
         }   
     }
