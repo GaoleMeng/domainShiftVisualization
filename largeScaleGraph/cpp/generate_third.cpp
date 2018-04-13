@@ -167,7 +167,7 @@ int main() {
         // read_and_parse(i);
     }
 
-    // for (auto& th: thread_list) th.join();
+    for (auto& th: thread_list) th.join();
     output.close();
 }
 
