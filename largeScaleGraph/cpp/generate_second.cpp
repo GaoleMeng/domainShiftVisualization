@@ -69,14 +69,11 @@ void read_and_parse(int indices) {
         if (found != std::string::npos) {
             id_string = line.substr(found + 7, 24);
             if (!string_pool.count(id_string)) continue;
-            cout << "succeed" << endl;
             smatch venue_extract;
             if (regex_search(line, venue_extract, venue)) {
 
-                cout << "succeed!!!" << endl;
                 smatch year_extract;
                 if (regex_search(line, year_extract, year)) {
-                    cout << "succeedxxx" << endl;
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
                     string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
                     
@@ -91,7 +88,7 @@ void read_and_parse(int indices) {
                     }
 
                     output_lock.lock();
-                    cout << id_string + "\t" + venue_string + "\t" + year_string + "\t" + refer_string << "\n";
+                    output << id_string + "\t" + venue_string + "\t" + year_string + "\t" + refer_string << "\n";
                     output_lock.unlock();
                 }
             }
