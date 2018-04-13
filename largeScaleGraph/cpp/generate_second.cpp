@@ -64,7 +64,7 @@ void read_and_parse(int indices) {
     while(getline(input, line)) {
         // cout << line << endl;
         found = line.find(id_start);
-        cout << line << endl;
+        // cout << line << endl;
         if (found != std::string::npos) {
             id_string = line.substr(found + 7, 24);
             // if (!string_pool.count(id_string)) continue;
