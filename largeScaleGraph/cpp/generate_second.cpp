@@ -104,7 +104,7 @@ void create_stringpool() {
         string segment = "";
         istringstream segment_ss(line);
 
-        counter = 0
+        int counter = 0
         while(getline(segment_ss, segment, '\t')) {
             if (counter == 0) {
                 counter += 1;
