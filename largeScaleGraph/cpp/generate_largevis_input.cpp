@@ -118,6 +118,7 @@ void create_stringpool(int i) {
         istringstream segment_ss(line);
 
         int counter = 0;
+        cout << line << endl;
         while(getline(segment_ss, segment, '\t')) {
             if (counter == 0) {
                 counter += 1;
