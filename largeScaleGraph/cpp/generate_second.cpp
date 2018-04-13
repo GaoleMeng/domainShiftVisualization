@@ -43,6 +43,7 @@ regex id("\"id\": \".*?\"");
 regex venue("\"venue\": \".*?\"");
 regex references("\"references\": \\[.*?\\]");
 regex single_id("\".{24}\"");
+regex year("\"year\": .*?,");
 
 string id_start = "\"id\": ";
 string venue_start = "\"venue\": ";
@@ -72,8 +73,9 @@ void read_and_parse(int indices) {
             smatch venue_extract;
             if (regex_search(line, venue_extract, venue)) {
                 smatch year_extract;
-                if (regex_search(line, year_extract, venue)) {
+                if (regex_search(line, year_extract, year)) {
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
+                    string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
                     
                     size_t found = line.find(references_start);
                     if (found != std::string::npos) {
