@@ -23,8 +23,8 @@ using namespace rapidjson;
 string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
 string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
 string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
-string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
-string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
+string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
+string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_fourth.txt";
 
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 unordered_set<string> string_pool;
