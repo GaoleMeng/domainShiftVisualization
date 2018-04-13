@@ -116,7 +116,7 @@ void create_stringpool() {
                 continue;
             }
             else if (counter == 2) {
-                counter += 1
+                counter += 1;
                 continue;
             }
             else {
