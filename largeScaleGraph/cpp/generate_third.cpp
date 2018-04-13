@@ -163,8 +163,8 @@ int main() {
     }
 
     for (int i = 0; i < filedir_list.size(); i++) {
-        // thread_list.push_back(thread(read_and_parse, i));
-        read_and_parse(i);
+        thread_list.push_back(thread(read_and_parse, i));
+        // read_and_parse(i);
     }
 
     // for (auto& th: thread_list) th.join();
