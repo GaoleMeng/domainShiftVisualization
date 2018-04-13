@@ -76,6 +76,9 @@ void read_and_parse(int indices) {
                 string refer_string = "";
                 smatch year_extract;
                 if (regex_search(line, year_extract, year)) {
+                    cout << venue_extract[0] << endl;
+                    cout << year_extract[0] << endl;
+
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
                     string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
                     
@@ -163,11 +166,11 @@ int main() {
     }
 
     for (int i = 0; i < filedir_list.size(); i++) {
-        thread_list.push_back(thread(read_and_parse, i));
-        // read_and_parse(i);
+        // thread_list.push_back(thread(read_and_parse, i));
+        read_and_parse(i);
     }
 
-    for (auto& th: thread_list) th.join();
+    // for (auto& th: thread_list) th.join();
     output.close();
 }
 
