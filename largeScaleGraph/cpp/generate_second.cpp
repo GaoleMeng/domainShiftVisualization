@@ -48,7 +48,7 @@ regex year("\"year\": .*?,");
 string id_start = "\"id\": ";
 string venue_start = "\"venue\": ";
 string year_start = "\"year\": ";
-string references_start = "\"references\"";
+string references_start = "\"references\": ";
 
 void read_and_parse(int indices) {
     

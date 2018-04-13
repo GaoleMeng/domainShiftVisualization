@@ -38,7 +38,7 @@ regex references("\"references\": \\[.*\\]");
 regex single_id("\".{24}\"");
 regex year("\"year\": .*?,");
 
-string references_start = "\"references\"";
+string references_start = "\"references\": ";
 
 
 void read_and_parse(int indices) {

@@ -48,7 +48,7 @@ regex year("\"year\": .*?,");
 string id_start = "\"id\": ";
 string venue_start = "\"venue\": ";
 string year_start = "\"year\": ";
-string references_start = "\"references\"";
+string references_start = "\"references\": ";
 
 void read_and_parse(int indices) {
     
@@ -69,15 +69,12 @@ void read_and_parse(int indices) {
         if (found != std::string::npos) {
             id_string = line.substr(found + 7, 24);
             if (!string_pool.count(id_string)) continue;
-            cout << line << endl;
             smatch venue_extract;
             if (regex_search(line, venue_extract, venue)) {
 
                 string refer_string = "";
                 smatch year_extract;
                 if (regex_search(line, year_extract, year)) {
-                    cout << venue_extract[0] << endl;
-                    cout << year_extract[0] << endl;
 
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
                     string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
