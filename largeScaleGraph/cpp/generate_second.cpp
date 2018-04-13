@@ -60,7 +60,7 @@ void read_and_parse(int indices) {
     string id_string = "";
     string venue_string = "";
     string year_string = "";
-    string refer_string = "";
+    
     
     while(getline(input, line)) {
         // cout << line << endl;
@@ -71,7 +71,7 @@ void read_and_parse(int indices) {
             if (!string_pool.count(id_string)) continue;
             smatch venue_extract;
             if (regex_search(line, venue_extract, venue)) {
-
+                string refer_string = "";
                 smatch year_extract;
                 if (regex_search(line, year_extract, year)) {
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
