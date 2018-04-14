@@ -87,7 +87,7 @@ void read_and_parse(int indices) {
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
                     if (!string_pool.count(venue_string)) continue;
                     output_lock.lock();
-                    output << line;
+                    output << line << "\n";
                     output_lock.unlock();
                 }
             }
