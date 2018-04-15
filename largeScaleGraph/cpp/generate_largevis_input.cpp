@@ -31,7 +31,7 @@ string index_file_output = "/scratch/si699w18_fluxm/gaole/index_file.txt";
 string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf.txt";
 
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
-vector<string> layer_file_list = {first_layer, second_layer, third_layer};
+vector<string> layer_file_list = {first_layer, second_layer};
 unordered_set<string> string_pool;
 unordered_map<string, int> index_map;
 unordered_map<string, string> year_map;
@@ -165,8 +165,4 @@ int main() {
 
     // dump_file(index_map);
 }
-
-
-
-
 
