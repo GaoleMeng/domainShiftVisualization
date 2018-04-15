@@ -150,10 +150,6 @@ int main() {
         create_stringpool(i);
     }
 
-    for (string tmp: string_pool) {
-        cout << tmp << endl;
-    }
-    
 
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
