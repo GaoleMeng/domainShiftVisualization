@@ -135,6 +135,8 @@ void create_stringpool(int i) {
     string_pool.insert("SIGIR Forum");
     cout << string_pool.size() << endl;
     string_pool_stream.close();
+
+
 }
 
 
@@ -143,9 +145,15 @@ int main() {
     vector<thread> thread_list;
     output.open(output_file);
 
+
     for (int i = 0; i < layer_file_list.size(); i++) {
         create_stringpool(i);
     }
+
+    for (string tmp: string_pool) {
+        cout << tmp << endl;
+    }
+    
 
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
