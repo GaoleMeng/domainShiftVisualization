@@ -108,10 +108,10 @@ void read_and_parse(int indices) {
 
 void dump_file(unordered_map<string, int> mapping_file) {
     ofstream oss(output_file);
-    vector<pair<string, int>> tmp;
+    vector<pair<string, int> > tmp;
 
-    for (const auto& tmp: mapping_file) {
-        tmp.push_back({tmp.first, tmp.second});
+    for (const auto& tmpp: mapping_file) {
+        tmp.push_back({tmpp.first, tmpp.second});
     }
 
     sort(tmp.begin(), tmp.end(), pairCompare);
