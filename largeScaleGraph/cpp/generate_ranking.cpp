@@ -11,6 +11,7 @@
 #include <regex>
 #include <unordered_set>
 #include <unordered_map>
+#include <algorithm>
 #include <iostream>
 #include <experimental/filesystem>
 #include "rapidjson/document.h"
@@ -58,6 +59,13 @@ string year_start = "\"year\": ";
 string references_start = "\"references\": ";
 
 
+bool pairCompare(const std::pair<string, int>& firstElem, const std::pair<string, int>& secondElem) {
+  return firstElem.second < secondElem.second;
+
+}
+
+
+
 void read_and_parse(int indices) {
     
     string filename = filedir_list[indices];
@@ -100,9 +108,17 @@ void read_and_parse(int indices) {
 
 void dump_file(unordered_map<string, int> mapping_file) {
     ofstream oss(output_file);
+    vector<pair<string, int>> tmp;
+
     for (const auto& tmp: mapping_file) {
-        oss << tmp.first << " " << tmp.second << "\n";
+        tmp.push_back({tmp.first, tmp.second});
     }
+
+    sort(tmp.begin(), tmp.end(), pairCompare);
+    for (auto& tt: tmp) {
+        oss << tt.first << " " << tt.second << "\n";
+    }
+
     oss.close();
 }
 
@@ -172,7 +188,7 @@ int main() {
 
     for (auto& th: thread_list) th.join();
     // output.close();
-        
+
     dump_file(index_map);
 }
 
