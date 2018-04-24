@@ -22,7 +22,7 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
 
-ratio_thres = 0.1;
+int ratio_thres = 0.1;
 
 
 string lines_belong_toconf = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf.txt";
@@ -153,7 +153,7 @@ int calculate() {
     vector<pair<string, int> > tmp;
 
     for (const auto& tmpp: mapping_file) {
-        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second) {
+        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres) {
             tmp.push_back({tmpp.first, tmpp.second});
         }
     }
