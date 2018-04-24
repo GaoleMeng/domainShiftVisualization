@@ -36,7 +36,7 @@ string output_file = "/scratch/si699w18_fluxm/gaole/partial_ranking.txt";
 
 vector<string> dir_list = {lines_belong_toconf};
 
-// vector<string> layer_file_list = {first_layer, second_layer};
+vector<string> layer_file_list = {first_layer, second_layer, third_layer};
 unordered_set<string> string_pool;
 unordered_map<string, int> index_map;
 unordered_map<string, int> bfs_index_map;
