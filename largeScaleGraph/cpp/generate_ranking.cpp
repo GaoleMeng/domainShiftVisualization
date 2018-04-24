@@ -175,7 +175,9 @@ void dump_file(unordered_map<string, int> mapping_file) {
     vector<pair<string, int> > tmp;
 
     for (const auto& tmpp: mapping_file) {
-        tmp.push_back({tmpp.first, tmpp.second});
+        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres) {
+            tmp.push_back({tmpp.first, tmpp.second});
+        }
     }
 
     sort(tmp.begin(), tmp.end(), pairCompare);
@@ -231,8 +233,6 @@ int main() {
     for (int i = 1; i < layer_file_list.size(); i++) {
         create_stringpool(i);
     }
-
-
 
 
     // for (string dir: dir_list) {
