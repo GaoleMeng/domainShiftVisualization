@@ -148,24 +148,24 @@ void read_and_parse(int indices) {
 //     }
 // }
 
-int calculate() {
-    ofstream oss(output_file);
-    vector<pair<string, int> > tmp;
+// int calculate() {
+//     ofstream oss(output_file);
+//     vector<pair<string, int> > tmp;
 
-    for (const auto& tmpp: mapping_file) {
-        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres) {
-            tmp.push_back({tmpp.first, tmpp.second});
-        }
-    }
+//     for (const auto& tmpp: mapping_file) {
+//         if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres) {
+//             tmp.push_back({tmpp.first, tmpp.second});
+//         }
+//     }
 
-    sort(tmp.begin(), tmp.end(), pairCompare);
-    for (auto& tt: tmp) {
-        oss << tt.first << "\t" << tt.second << "\n";
-    }
+//     sort(tmp.begin(), tmp.end(), pairCompare);
+//     for (auto& tt: tmp) {
+//         oss << tt.first << "\t" << tt.second << "\n";
+//     }
 
-    oss.close();
+//     oss.close();
 
-}
+// }
 
 
 
@@ -257,6 +257,6 @@ int main() {
 
 
 
-    // dump_file(index_map);
+    dump_file(index_map);
 }
 
