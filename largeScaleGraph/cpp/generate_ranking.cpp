@@ -22,7 +22,7 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
 
-ratio_thres = 0.1;
+int ratio_thres = 0.1;
 
 
 string lines_belong_toconf = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf.txt";
@@ -36,7 +36,7 @@ string output_file = "/scratch/si699w18_fluxm/gaole/partial_ranking.txt";
 
 vector<string> dir_list = {lines_belong_toconf};
 
-// vector<string> layer_file_list = {first_layer, second_layer};
+vector<string> layer_file_list = {first_layer, second_layer, third_layer};
 unordered_set<string> string_pool;
 unordered_map<string, int> index_map;
 unordered_map<string, int> bfs_index_map;
@@ -153,7 +153,7 @@ int calculate() {
     vector<pair<string, int> > tmp;
 
     for (const auto& tmpp: mapping_file) {
-        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second) {
+        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres) {
             tmp.push_back({tmpp.first, tmpp.second});
         }
     }
