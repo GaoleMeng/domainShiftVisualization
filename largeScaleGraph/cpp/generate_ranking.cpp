@@ -116,7 +116,7 @@ void dump_file(unordered_map<string, int> mapping_file) {
 
     sort(tmp.begin(), tmp.end(), pairCompare);
     for (auto& tt: tmp) {
-        oss << tt.first << " " << tt.second << "\n";
+        oss << tt.first << "\t" << tt.second << "\n";
     }
 
     oss.close();
