@@ -22,19 +22,25 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
 
-string input_dir_1 = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf.txt";
+ratio_thres = 0.1;
+
+
+string lines_belong_toconf = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf.txt";
 // string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
 // string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
-// string first_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
-// string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
-// string third_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
+string first_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
+string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
+string third_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
 // string index_file_output = "/scratch/si699w18_fluxm/gaole/ranking.txt";
-string output_file = "/scratch/si699w18_fluxm/gaole/ranking.txt";
+string output_file = "/scratch/si699w18_fluxm/gaole/partial_ranking.txt";
 
-vector<string> dir_list = {input_dir_1};
+vector<string> dir_list = {lines_belong_toconf};
+
 // vector<string> layer_file_list = {first_layer, second_layer};
 unordered_set<string> string_pool;
 unordered_map<string, int> index_map;
+unordered_map<string, int> bfs_index_map;
+
 unordered_map<string, string> year_map;
 
 string lastfix = ".txt";
@@ -102,9 +108,67 @@ void read_and_parse(int indices) {
             }
         }
     }
+}
 
+// void count_bfs(int indices) {
+    
+//     string filename = filedir_list[indices];
+    
+//     ifstream input(filename.c_str());
+//     string line = "";
+//     size_t found;
+//     string id_string = "";
+//     string venue_string = "";
+//     string year_string = "";
+    
+    
+//     while(getline(input, line)) {
+//         // cout << line << endl;
+//         found = line.find(id_start);
+//         // cout << line << endl;
+//         if (found != std::string::npos) {
+//             id_string = line.substr(found + 7, 24);
+//             // if (!string_pool.count(id_string)) continue;
+//             smatch venue_extract;
+//             if (regex_search(line, venue_extract, venue)) {
+
+//                 string refer_string = "";
+//                 smatch year_extract;
+//                 if (regex_search(line, year_extract, year)) {
+
+//                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
+//                     index_map[venue_string] += 1;
+//                     // if (!string_pool.count(venue_string)) continue;
+//                     // output_lock.lock();
+//                     // output << line << "\n";
+//                     // output_lock.unlock();
+//                 }
+//             }
+//         }
+//     }
+// }
+
+int calculate() {
+    ofstream oss(output_file);
+    vector<pair<string, int> > tmp;
+
+    for (const auto& tmpp: mapping_file) {
+        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second) {
+            tmp.push_back({tmpp.first, tmpp.second});
+        }
+    }
+
+    sort(tmp.begin(), tmp.end(), pairCompare);
+    for (auto& tt: tmp) {
+        oss << tt.first << "\t" << tt.second << "\n";
+    }
+
+    oss.close();
 
 }
+
+
+
 
 void dump_file(unordered_map<string, int> mapping_file) {
     ofstream oss(output_file);
@@ -125,38 +189,37 @@ void dump_file(unordered_map<string, int> mapping_file) {
 
 // "venue": "Saudi journal of anaesthesia"
 
-// void create_stringpool(int i) {
-//     string line = "";
-//     unordered_set<string> prev_strings;
-//     cout << layer_file_list[i] << endl;
-//     string_pool_stream.open(layer_file_list[i]);
+void create_stringpool(int i) {
+    string line = "";
+    unordered_set<string> prev_strings;
+    cout << layer_file_list[i] << endl;
+    string_pool_stream.open(layer_file_list[i]);
 
-//     while(getline(string_pool_stream, line)) {
+    while(getline(string_pool_stream, line)) {
 
-//         string segment = "";
-//         istringstream segment_ss(line);
+        string segment = "";
+        istringstream segment_ss(line);
 
-//         int counter = 0;
-//         // cout << line << endl;
-//         while(getline(segment_ss, segment, '\t')) {
-//             if (counter == 0) {
-//                 counter += 1;
-//                 prev_strings.insert(segment);
-//                 continue;
-//             }
-//             else if (counter == 1) {
-//                 string_pool.insert(segment);
-//                 counter += 1;
-//                 break;
-//             }
-//         }   
-//     }
-//     string_pool.insert("SIGIR Forum");
-//     cout << string_pool.size() << endl;
-//     string_pool_stream.close();
-
-
-// }
+        int counter = 0;
+        // cout << line << endl;
+        while(getline(segment_ss, segment, '\t')) {
+            if (counter == 0) {
+                counter += 1;
+                prev_strings.insert(segment);
+                continue;
+            }
+            else if (counter == 1) {
+                // string_pool.insert(segment);
+                bfs_index_map[segment] += 1;
+                counter += 1;
+                break;
+            }
+        }   
+    }
+    // string_pool.insert("SIGIR Forum");
+    cout << string_pool.size() << endl;
+    string_pool_stream.close();
+}
 
 
 
@@ -165,9 +228,11 @@ int main() {
     // output.open(output_file);
 
 
-    // for (int i = 0; i < layer_file_list.size(); i++) {
-    //     create_stringpool(i);
-    // }
+    for (int i = 1; i < layer_file_list.size(); i++) {
+        create_stringpool(i);
+    }
+
+
 
 
     // for (string dir: dir_list) {
@@ -179,7 +244,7 @@ int main() {
 
     // }
 
-    filedir_list.push_back(input_dir_1);
+    filedir_list.push_back(lines_belong_toconf);
 
     for (int i = 0; i < filedir_list.size(); i++) {
         thread_list.push_back(thread(read_and_parse, i));
@@ -189,6 +254,9 @@ int main() {
     for (auto& th: thread_list) th.join();
     // output.close();
 
-    dump_file(index_map);
+
+
+
+    // dump_file(index_map);
 }
 
