@@ -33,7 +33,7 @@ string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
 string third_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
 // string index_file_output = "/scratch/si699w18_fluxm/gaole/ranking.txt";
 // string output_file = "/scratch/si699w18_fluxm/gaole/partial_ranking.txt";
-string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_smaller.txt"
+string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_smaller.txt";
 
 
 
