@@ -22,7 +22,7 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
 
-int ratio_thres = 0.1;
+double ratio_thres = 0.1;
 
 
 string lines_belong_toconf = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf.txt";
@@ -175,7 +175,7 @@ void dump_file(unordered_map<string, int> mapping_file) {
     vector<pair<string, int> > tmp;
 
     for (const auto& tmpp: mapping_file) {
-        cout << (double) bfs_index_map[tmpp.first] / (double) tmpp.second << endl;
+        // cout << (double) bfs_index_map[tmpp.first] / (double) tmpp.second << endl;
         if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres) {
             tmp.push_back({tmpp.first, tmpp.second});
         }
