@@ -175,7 +175,7 @@ void dump_file(unordered_map<string, int> mapping_file) {
     vector<pair<string, int> > tmp;
 
     for (const auto& tmpp: mapping_file) {
-        cout << (double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres << endl;
+        cout << (double) bfs_index_map[tmpp.first] / (double) tmpp.second << endl;
         if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres) {
             tmp.push_back({tmpp.first, tmpp.second});
         }
