@@ -73,12 +73,12 @@ void read_and_parse(int indices) {
     
     
     while(getline(input, line)) {
-        cout << line << endl;
+        // cout << line << endl;
         found = line.find(id_start);
         // cout << line << endl;
         if (found != std::string::npos) {
             id_string = line.substr(found + 7, 24);
-            if (!string_pool.count(id_string)) continue;
+            // if (!string_pool.count(id_string)) continue;
             smatch venue_extract;
             if (regex_search(line, venue_extract, venue)) {
                 string refer_string = "";
@@ -87,6 +87,8 @@ void read_and_parse(int indices) {
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
                     string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
 
+
+                    cout << venue_string << endl;
                     id_to_index[id_string] = index_count;
                     conf_pool.insert(venue_string);
 
