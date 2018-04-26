@@ -88,7 +88,7 @@ void read_and_parse(int indices) {
                     string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
 
 
-                    cout << venue_string << endl;
+                    // cout << venue_string << endl;
                     id_to_index[id_string] = index_count;
                     conf_pool.insert(venue_string);
 
@@ -103,7 +103,7 @@ void read_and_parse(int indices) {
                         }
                     }
 
-                    cout << index_count << endl;
+                    // cout << index_count << endl;
 
                     index_count++;
 
