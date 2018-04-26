@@ -228,7 +228,7 @@ void generate_files() {
 
         point_file << tmp.second.size() << "\n";
         for (int index: tmp.second) {
-            point_file << push_back(index_to_loc[index]) << "\n";
+            point_file << index_to_loc[index] << "\n";
             if (sigir_pool.count(index)) {
                 label_file << "10" << "\n";
             }
