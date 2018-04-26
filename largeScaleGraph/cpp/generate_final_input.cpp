@@ -21,7 +21,7 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
 
-string input_dir_1 = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_partial.txt";
+string input_dir_1 = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_smaller.txt";
 // string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
 // string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 // string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
