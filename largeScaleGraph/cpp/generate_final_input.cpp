@@ -11,6 +11,7 @@
 #include <regex>
 #include <unordered_set>
 #include <unordered_map>
+#include <algorithm>
 #include <iostream>
 #include <experimental/filesystem>
 #include "rapidjson/document.h"
@@ -26,17 +27,29 @@ string input_dir_1 = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_smaller.
 // string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 // string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 string output_file = "/scratch/si699w18_fluxm/gaole/non_bias_edges_withauthors.txt";
+string split_location = "/home/gaole/tmprepo/largeScaleGraph/cpp/final_visulization/";
 
+
+bool pairCompare(const std::pair<string, int>& firstElem, const std::pair<string, int>& secondElem) {
+  return firstElem.second < secondElem.second;
+
+}
 
 vector<string> dir_list = {input_dir_1};
 unordered_set<string> string_pool;
 unordered_set<string> conf_pool;
 
 
+unordered_map<int, string> index_to_loc;
+
+unordered_map<string, vector<int>> year_to_indexlist;
+unordered_map<int, vector<int>> layer_list;
 unordered_map<string, int> id_to_index;
 unordered_map<int, unordered_set<string>> id_to_ref;
 unordered_map<int, string> index_to_conf;
 unordered_map<string, int> conf_to_index;
+
+unordered_set<int> sigir_pool;
 
 unordered_map<string, int> year_counter;
 // unordered_map<string,>
@@ -49,6 +62,7 @@ ofstream output;
 ifstream string_pool_stream;
 
 int index_count = 0;
+int total_sigir = 0;
 string tmp = "";
 vector<string> filedir_list;
 regex id("\"id\": \".*?\"");
@@ -106,8 +120,13 @@ void read_and_parse(int indices) {
                     }
 
                     // cout << index_count << endl;
-                    if (venue_string == "SIGIR" || venue_string == "SIGIR Forum")
+                    if (venue_string == "SIGIR" || venue_string == "SIGIR Forum"){
                         year_counter[year_string]++;
+                        sigir_pool.insert(index_count);
+                        total_sigir += 1;
+                    }
+
+                    year_to_indexlist[year_string].push_back(index_count);
                     index_count++;
 
                     // output_lock.lock();
@@ -117,6 +136,26 @@ void read_and_parse(int indices) {
             }
         }
     }
+}
+
+size_t split(const std::string &txt, std::vector<std::string> &strs, char ch)
+{
+    size_t pos = txt.find( ch );
+    size_t initialPos = 0;
+    strs.clear();
+
+    // Decompose statement
+    while( pos != std::string::npos ) {
+        strs.push_back( txt.substr( initialPos, pos - initialPos ) );
+        initialPos = pos + 1;
+
+        pos = txt.find( ch, initialPos );
+    }
+
+    // Add the last one
+    strs.push_back( txt.substr( initialPos, std::min( pos, txt.size() ) - initialPos + 1 ) );
+
+    return strs.size();
 }
 
 
@@ -151,53 +190,95 @@ void generate_edges() {
 }
 
 
+void generate_files() {
+    int threshold = total_sigir / 3;
+    int cur_layer = 1;
+    int cur_count = 0;
+    vector<pair<string, int>> year_extract_list;
+
+    for (const auto& tmp: year_counter) {
+        year_extract_list.push_back({tmp.first, tmp.second});
+    }
+
+
+    sort(year_extract_list.begin(), year_extract_list.end(), pairCompare);
+
+    // ofstream oss();
+    
+    for (const auto& tmp: year_extract_list) {
+        vector<int>& index_list = year_to_indexlist[tmp.first];
+
+        for (int index: index_list) {
+            layer_list[cur_layer].push_back(index);
+        }
+
+        layer_list[cur_layer].push_back(tmp.second);
+
+        cur_count += tmp.second;
+        if (cur_count > threshold) {
+            cur_layer += 1;
+            cur_count = 0;
+        }
+    }
+
+    for (const auto& tmp: layer_list) {
+        
+        ofstream point_file(split_location + to_string(tmp.first) + "_points.txt");
+        ofstream label_file(split_location + to_string(tmp.first) + "_labels.txt");
+
+        point_file << tmp.second.size() << "\n";
+        for (int index: tmp.second) {
+            point_file << push_back(index_to_loc[index]) << "\n";
+            if (sigir_pool.count(index)) {
+                label_file << "10" << "\n";
+            }
+            else {
+                label_file << "0" << "\n";
+            }
+
+        }
+
+
+        point_file.close();
+        label_file.close();
+    }
+
+
+
+
+
+    // oss.close();
+
+}
+
+
+
+
 
 // "venue": "Saudi journal of anaesthesia"
 
-void create_stringpool() {
-    // string line = "";
-    // unordered_set<string> prev_strings;
+void create_index_loc() {
+    string tmp_file = "./citation_qiaozhu.txt";
+    ifstream input(tmp_file.c_str());
+    string line = "";
+    int flag = 0;
 
-    // while(getline(string_pool_stream, line)) {
+    while(getline(input, line)) {
+        if (!flag) {
+            flag = 1;
+            continue;
+        }
 
-    //     string segment = "";
-    //     istringstream segment_ss(line);
+        vector<string> line_list;
+        istringstream iss(line);
+        string s;
+        while ( getline( iss, s, ' ' )) {
+            int index = stoi(s);
+            index_to_loc[index] = line;
+            break;
+        }
 
-    //     int counter = 0;
-    //     while(getline(segment_ss, segment, '\t')) {
-    //         if (counter == 0) {
-    //             counter += 1;
-    //             prev_strings.insert(segment);
-    //             continue;
-    //         }
-    //         else if (counter == 1) {
-    //             counter += 1;
-    //             continue;
-    //         }
-    //         else if (counter == 2) {
-    //             counter += 1;
-    //             continue;
-    //         }
-    //         else {
-    //             istringstream ref_ss(segment);
-    //             string tmp = "";
-    //             while (ref_ss >> tmp) {
-    //                 string_pool.insert(tmp);
-    //             }
-    //         }
-    //     }   
-    // }
-
-    // for (const auto& elem: prev_strings) {
-    //     if (string_pool.count(elem)) {
-    //         string_pool.erase(elem);
-    //     }
-    // }
-    // cout << string_pool.size() << endl;
-
-    // // for (string tmp: string_pool) {
-    // //     cout << tmp << endl;
-    // // }
+    }
 }
 
 
@@ -209,6 +290,7 @@ int main() {
     output.open(output_file);
     // string_pool_stream.open(input_lastlayer);
     // create_stringpool();
+
 
     // for (string dir: dir_list) {
     //     // for (auto & p : fs::directory_iterator(dir)) {
