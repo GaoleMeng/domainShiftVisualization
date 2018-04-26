@@ -73,7 +73,7 @@ void read_and_parse(int indices) {
     
     
     while(getline(input, line)) {
-        // cout << line << endl;
+        cout << line << endl;
         found = line.find(id_start);
         // cout << line << endl;
         if (found != std::string::npos) {
