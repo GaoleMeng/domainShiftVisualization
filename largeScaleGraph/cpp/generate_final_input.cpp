@@ -314,6 +314,8 @@ int main() {
     dump_file(year_counter);
 
 
+    generate_files();
+
     output.close();
 }
 
