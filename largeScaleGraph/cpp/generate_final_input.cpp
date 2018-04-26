@@ -37,6 +37,8 @@ unordered_map<string, int> id_to_index;
 unordered_map<int, unordered_set<string>> id_to_ref;
 unordered_map<int, string> index_to_conf;
 unordered_map<string, int> conf_to_index;
+
+unordered_map<string, int> year_counter;
 // unordered_map<string,>
 
 string lastfix = ".txt";
@@ -104,7 +106,7 @@ void read_and_parse(int indices) {
                     }
 
                     // cout << index_count << endl;
-
+                    year_counter[year_string]++;
                     index_count++;
 
                     // output_lock.lock();
@@ -116,6 +118,12 @@ void read_and_parse(int indices) {
     }
 }
 
+
+void dump_file(unordered_map<string, int> mapping_file) {
+    for (const auto& tmp: mapping_file) {
+        cout << tmp.first << " " << tmp.second << "\n";
+    }
+}
 
 
 
@@ -193,6 +201,8 @@ void create_stringpool() {
 
 
 
+
+
 int main() {
     vector<thread> thread_list;
     output.open(output_file);
@@ -216,6 +226,10 @@ int main() {
 
     generate_conf_index();
     generate_edges();
+
+
+    dump_file(year_counter);
+
 
     output.close();
 }
