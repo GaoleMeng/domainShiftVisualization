@@ -106,7 +106,8 @@ void read_and_parse(int indices) {
                     }
 
                     // cout << index_count << endl;
-                    year_counter[year_string]++;
+                    if (venue_string == "SIGIR" || venue_string == "SIGIR Forum")
+                        year_counter[year_string]++;
                     index_count++;
 
                     // output_lock.lock();
