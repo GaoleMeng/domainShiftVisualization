@@ -202,7 +202,7 @@ int main() {
     //         // }
     //     // }
     // }
-
+    filedir_list.push_back(input_dir_1);
     for (int i = 0; i < filedir_list.size(); i++) {
         thread_list.push_back(thread(read_and_parse, i));
         // read_and_parse(i);
