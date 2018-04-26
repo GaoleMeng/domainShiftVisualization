@@ -195,13 +195,13 @@ int main() {
     // string_pool_stream.open(input_lastlayer);
     // create_stringpool();
 
-    for (string dir: dir_list) {
-        for (auto & p : fs::directory_iterator(dir)) {
-            if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
-                filedir_list.push_back(p.path());                
-            }
-        }
-    }
+    // for (string dir: dir_list) {
+    //     // for (auto & p : fs::directory_iterator(dir)) {
+    //         // if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
+    //     filedir_list.push_back(p.path());                
+    //         // }
+    //     // }
+    // }
 
     for (int i = 0; i < filedir_list.size(); i++) {
         thread_list.push_back(thread(read_and_parse, i));
