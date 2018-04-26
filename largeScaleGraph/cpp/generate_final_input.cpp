@@ -211,6 +211,7 @@ int main() {
     for (auto& th: thread_list) th.join();
 
     generate_conf_index();
+    generate_edges();
 
     output.close();
 }
