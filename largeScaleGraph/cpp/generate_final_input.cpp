@@ -30,7 +30,7 @@ string output_file = "/scratch/si699w18_fluxm/gaole/non_bias_edges_withauthors.t
 
 vector<string> dir_list = {input_dir_1};
 unordered_set<string> string_pool;
-unordered_map<string> conf_pool;
+unordered_set<string> conf_pool;
 
 
 unordered_map<string, int> id_to_index;
