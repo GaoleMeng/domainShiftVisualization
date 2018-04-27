@@ -165,6 +165,12 @@ void dump_file(unordered_map<string, int> mapping_file) {
     }
 }
 
+void dump_file(unordered_map<int, string> mapping_file) {
+    for (const auto& tmp: mapping_file) {
+        cout << tmp.first << " " << tmp.second << "\n";
+    }
+}
+
 
 
 void generate_conf_index() {
@@ -317,7 +323,7 @@ int main() {
 
 
     generate_files();
-    dump_file();
+    dump_file(index_to_loc);
 
     output.close();
 }
