@@ -269,12 +269,14 @@ void create_index_loc() {
             continue;
         }
 
+        string tmp_line = line;
+
         vector<string> line_list;
         istringstream iss(line);
         string s;
         while ( getline( iss, s, ' ' )) {
             int index = stoi(s);
-            index_to_loc[index] = line;
+            index_to_loc[index] = tmp_line;
             break;
         }
 
