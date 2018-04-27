@@ -284,7 +284,7 @@ void create_index_loc() {
         iss >> s;
         int index = stoi(s);
         index_to_loc[index] = line;
-        cout << line << endl;
+        // cout << line << endl;
         // while ( getline( iss, s, ' ' )) {
         //     int index = stoi(s);
         //     index_to_loc[index] = tmp_line;
@@ -320,6 +320,7 @@ int main() {
 
     for (auto& th: thread_list) th.join();
 
+    create_index_loc();
     generate_conf_index();
     generate_edges();
 
