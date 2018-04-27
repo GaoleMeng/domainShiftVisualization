@@ -328,7 +328,7 @@ int main() {
 
 
     generate_files();
-    dump_file(index_to_loc);
+    // dump_file(index_to_loc);
 
     output.close();
 }
