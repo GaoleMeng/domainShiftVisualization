@@ -197,7 +197,7 @@ void generate_edges() {
 
 
 void generate_files() {
-    int threshold = total_sigir / 3;
+    int threshold = 1100;
     int cur_layer = 1;
     int cur_count = 0;
     vector<pair<string, int>> year_extract_list;
@@ -251,10 +251,6 @@ void generate_files() {
         point_file.close();
         label_file.close();
     }
-
-
-
-
 
     // oss.close();
 
