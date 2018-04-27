@@ -212,15 +212,19 @@ void generate_files() {
     // ofstream oss();
     
     for (const auto& tmp: year_extract_list) {
+
         vector<int>& index_list = year_to_indexlist[tmp.first];
 
+        int cc = 0;
         for (int index: index_list) {
+            if (!index_to_loc.count(index)) continue;
+            if (sigir_pool.count(index)) cc++;
             layer_list[cur_layer].push_back(index);
         }
 
-        layer_list[cur_layer].push_back(tmp.second);
+        // layer_list[cur_layer].push_back(tmp.second);
 
-        cur_count += tmp.second;
+        cur_count += cc;
         if (cur_count > threshold) {
             cur_layer += 1;
             cur_count = 0;
@@ -234,6 +238,7 @@ void generate_files() {
 
         point_file << tmp.second.size() << "\n";
         for (int index: tmp.second) {
+
             point_file << index_to_loc[index] << "\n";
             if (sigir_pool.count(index)) {
                 label_file << "10" << "\n";
@@ -243,8 +248,6 @@ void generate_files() {
             }
 
         }
-
-
         point_file.close();
         label_file.close();
     }
