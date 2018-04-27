@@ -281,7 +281,8 @@ void create_index_loc() {
         istringstream iss(line);
         string s;
 
-        int index = stoi(iss >> s);
+        iss >> s;
+        int index = stoi(s);
         index_to_loc[index] = line;
         cout << line << endl;
         // while ( getline( iss, s, ' ' )) {
