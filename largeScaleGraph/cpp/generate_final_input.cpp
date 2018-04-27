@@ -277,9 +277,9 @@ void create_index_loc() {
         while ( getline( iss, s, ' ' )) {
             int index = stoi(s);
             index_to_loc[index] = tmp_line;
+            cout << tmp_line;
             break;
         }
-
     }
 }
 
@@ -317,6 +317,7 @@ int main() {
 
 
     generate_files();
+    dump_file();
 
     output.close();
 }
