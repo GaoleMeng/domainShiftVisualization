@@ -280,12 +280,16 @@ void create_index_loc() {
         vector<string> line_list;
         istringstream iss(line);
         string s;
-        while ( getline( iss, s, ' ' )) {
-            int index = stoi(s);
-            index_to_loc[index] = tmp_line;
-            cout << tmp_line;
-            break;
-        }
+
+        int index = stoi(iss >> s);
+        index_to_loc[index] = line;
+        cout << line << endl;
+        // while ( getline( iss, s, ' ' )) {
+        //     int index = stoi(s);
+        //     index_to_loc[index] = tmp_line;
+        //     cout << tmp_line;
+        //     break;
+        // }
     }
 }
 
