@@ -22,6 +22,8 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
 
+// some hyper parameter
+int minimum_size = 10;
 double ratio_thres = 0.1;
 
 
@@ -181,7 +183,7 @@ void dump_file(unordered_map<string, int> mapping_file) {
 
     for (const auto& tmpp: mapping_file) {
         // cout << (double) bfs_index_map[tmpp.first] / (double) tmpp.second << endl;
-        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres) {
+        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres && tmpp.second > minimum_size) {
             tmp.push_back({tmpp.first, tmpp.second});
         }
     }
