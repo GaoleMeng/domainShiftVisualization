@@ -23,8 +23,13 @@ using namespace rapidjson;
 // string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 
 // all the lines belongs to SIGIR has already in this input dir.
+// no need to change this
 string input_dir_1 = "./first_layer_extraction";
+
+// changable output file
 string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
+
+
 vector<string> dir_list = {input_dir_1};
 string lastfix = ".txt";
 

@@ -35,13 +35,14 @@ cd largeScaleGraph/cpp
 # optional: to support c++17, load module
 module load gcc/7.2.0
 
+# before compiling, revise each cpp file's input and output directory
 # compile each bfs layer generator
 g++ --std=c++17  generate_first.cpp -o generate_first -lstdc++fs -pthread
 g++ --std=c++17  generate_second.cpp -o generate_second -lstdc++fs -pthread
 g++ --std=c++17  generate_third.cpp -o generate_third -lstdc++fs -pthread
 
 
-# run the first layer bfs
+# run the three layer bfs
 ./generate_first
 ./generate_second
 ./generate_third
@@ -50,8 +51,6 @@ g++ --std=c++17  generate_third.cpp -o generate_third -lstdc++fs -pthread
 # paper_id \t conf_name \t year \t citation_id_1 \space citation_id_2 \space ....
 
 ```
-
-
 
 
 
