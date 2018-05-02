@@ -20,10 +20,16 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
 
+
+// Congiguration: input aminer directory
 string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
 string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
 string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
+
+// Configuration: input comes from the output of the second layer
 string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
+
+// Configuration: output the final layer o
 string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
 
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};

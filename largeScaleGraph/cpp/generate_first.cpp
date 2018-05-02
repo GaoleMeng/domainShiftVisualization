@@ -18,15 +18,12 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
 
-// string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
-// string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
-// string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 
 // all the lines belongs to SIGIR has already in this input dir.
 // no need to change this
 string input_dir_1 = "./first_layer_extraction";
 
-// changable output file
+// Configuration: output file of the first layer
 string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 
 
