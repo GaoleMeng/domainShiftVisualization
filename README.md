@@ -24,9 +24,32 @@ The final goal of this algorithm is to compute the 2D embedding of the papers po
 At visualization stage, we only visualize the paper node without the conference node, the purpose of conference node here is to draw the points that belongs to a same conference closer, and get rid of the points that has no edges connecting to it.
 
 
+## Code Structure and Running
+
+Most of the code logic resides in `largeScaleGraph/cpp`, the code logic is split by multiple excutable files so as not to rerun the whole since from beginning.
+
+```
+# enter the code file
+cd largeScaleGraph/cpp
+
+# optional: to support c++17, load module
+module load gcc/7.2.0
+
+# compile each bfs layer generator
+g++ --std=c++17  generate_first.cpp -o generate_first -lstdc++fs -pthread
+g++ --std=c++17  generate_second.cpp -o generate_second -lstdc++fs -pthread
+g++ --std=c++17  generate_third.cpp -o generate_third -lstdc++fs -pthread
+
+
+# run the first layer bfs
+./generate_first
+./generate_second
+./generate_third
 
 
 
+
+```
 
 
 
