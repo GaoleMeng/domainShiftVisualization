@@ -17,5 +17,32 @@ The final goal of this algorithm is to compute the 2D embedding of the papers po
 </div>
 
 
-4. 
+4. Take all the points of paper that belongs to one of the conference in <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;S_{conf,&space;smaller}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;S_{conf,&space;smaller}" title="S_{conf, smaller}" /></a>, which is to say <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;V_{extract}&space;=&space;\{v|v\&space;belongs\&space;to\&space;c\wedge&space;c&space;\in&space;S_{conf,&space;smaller}\}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;V_{extract}&space;=&space;\{v|v\&space;belongs\&space;to\&space;c\wedge&space;c&space;\in&space;S_{conf,&space;smaller}\}" title="V_{extract} = \{v|v\ belongs\ to\ c\wedge c \in S_{conf, smaller}\}" /></a>.
+
+5. Also, treat each conference in <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;S_{conf,&space;smaller}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;S_{conf,&space;smaller}" title="S_{conf, smaller}" /></a> as a node, connect each conf node with each paper belongs to it, denoted all the conf node as <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;V_{conf}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;V_{conf}" title="V_{conf}" /></a>, then we have <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;V&space;=&space;V_{extract}\cup&space;V_{conf}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;V&space;=&space;V_{extract}\cup&space;V_{conf}" title="V = V_{extract}\cup V_{conf}" /></a> 
+
+At visualization stage, we only visualize the paper node without the conference node, the purpose of conference node here is to draw the points that belongs to a same conference closer, and get rid of the points that has no edges connecting to it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
