@@ -26,7 +26,7 @@ At visualization stage, we only visualize the paper node without the conference 
 
 ## Code Structure and Running
 
-Most of the code logic resides in `largeScaleGraph/cpp`, the code logic is split by multiple excutable files so as not to rerun the whole since from beginning.
+Most of the code logic resides in `largeScaleGraph/cpp`, the code logic is split by multiple excutable files so as not to re-run the whole since from beginning.
 
 ```
 # enter the code file
@@ -46,14 +46,10 @@ g++ --std=c++17  generate_third.cpp -o generate_third -lstdc++fs -pthread
 ./generate_second
 ./generate_third
 
-
-
+# each layer will generate an intermediate representation as
+# paper_id \t conf_name \t year \t citation_id_1 \space citation_id_2 \space ....
 
 ```
-
-
-
-
 
 
 
