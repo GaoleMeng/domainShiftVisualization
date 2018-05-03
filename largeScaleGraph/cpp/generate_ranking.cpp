@@ -110,7 +110,13 @@ void create_stringpool(int i) {
         string segment = "";
         istringstream segment_ss(line);
 
+
         int counter = 0;
+
+        if (i == 1) {
+            cout << line;
+        }
+
         // cout << line << endl;
         while(getline(segment_ss, segment, '\t')) {
             if (counter == 0) {
@@ -120,6 +126,7 @@ void create_stringpool(int i) {
             }
             else if (counter == 1) {
                 string_pool.insert(segment);
+
                 counter += 1;
                 break;
             }
