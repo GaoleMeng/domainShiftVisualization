@@ -28,7 +28,7 @@ string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
 string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 
 // Configuration: input file, change to the first layer output file
-string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
+// string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 
 
 string first_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
@@ -150,7 +150,7 @@ void dump_file(unordered_map<string, int> mapping_file) {
 int main() {
     vector<thread> thread_list;
     output.open(output_file);
-    string_pool_stream.open(input_lastlayer);
+    // string_pool_stream.open(input_lastlayer);
 
     for (int i = 1; i < 3; i++) {
         create_stringpool(i);
