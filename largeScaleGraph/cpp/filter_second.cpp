@@ -1,5 +1,5 @@
 // compiler with 
-// g++ -std=c++17  generate_first.cpp -o generate_first -lstdc++fs -pthread
+// g++ -std=c++17  filter_second.cpp -o filter_second -lstdc++fs -pthread
 // the first round of the multithread version of the processing file
 
 #include <iostream>
@@ -27,14 +27,16 @@ int minimum_size = 10;
 double ratio_thres = 0.1;
 
 
+
+// Configuration: the output file of "filter_first"
 string lines_belong_toconf = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf.txt";
-// string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
-// string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
+
+// Configuration: the three layer output of BFS 
 string first_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
 string third_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
-// string index_file_output = "/scratch/si699w18_fluxm/gaole/ranking.txt";
-// string output_file = "/scratch/si699w18_fluxm/gaole/partial_ranking.txt";
+
+// Configuration: the output of this layer of filter
 string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_smaller.txt";
 
 
@@ -46,6 +48,12 @@ unordered_map<string, int> index_map;
 unordered_map<string, int> bfs_index_map;
 unordered_set<string> final_conf;
 unordered_map<string, string> year_map;
+
+
+// string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
+// string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
+// string index_file_output = "/scratch/si699w18_fluxm/gaole/ranking.txt";
+// string output_file = "/scratch/si699w18_fluxm/gaole/partial_ranking.txt";
 
 string lastfix = ".txt";
 
@@ -75,8 +83,9 @@ bool pairCompare(const std::pair<string, int>& firstElem, const std::pair<string
 }
 
 
-
-void read_and_parse(int indices) {
+// count the total number of papers in each conference
+// store result in index_map (conf_name => count)
+void count_papers_in_each_conf(int indices) {
     
     string filename = filedir_list[indices];
     
@@ -104,60 +113,20 @@ void read_and_parse(int indices) {
 
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
                     index_map[venue_string] += 1;
-                    // if (!string_pool.count(venue_string)) continue;
-                    // output_lock.lock();
-                    // output << line << "\n";
-                    // output_lock.unlock();
                 }
             }
         }
     }
 }
 
-// void count_bfs(int indices) {
-    
-//     string filename = filedir_list[indices];
-    
-//     ifstream input(filename.c_str());
-//     string line = "";
-//     size_t found;
-//     string id_string = "";
-//     string venue_string = "";
-//     string year_string = "";
-    
-    
-//     while(getline(input, line)) {
-//         // cout << line << endl;
-//         found = line.find(id_start);
-//         // cout << line << endl;
-//         if (found != std::string::npos) {
-//             id_string = line.substr(found + 7, 24);
-//             // if (!string_pool.count(id_string)) continue;
-//             smatch venue_extract;
-//             if (regex_search(line, venue_extract, venue)) {
 
-//                 string refer_string = "";
-//                 smatch year_extract;
-//                 if (regex_search(line, year_extract, year)) {
-
-//                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
-//                     index_map[venue_string] += 1;
-//                     // if (!string_pool.count(venue_string)) continue;
-//                     // output_lock.lock();
-//                     // output << line << "\n";
-//                     // output_lock.unlock();
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// int calculate() {
+// void dump_file(unordered_map<string, int> mapping_file) {
 //     ofstream oss(output_file);
 //     vector<pair<string, int> > tmp;
 
 //     for (const auto& tmpp: mapping_file) {
-//         if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres) {
+//         // cout << (double) bfs_index_map[tmpp.first] / (double) tmpp.second << endl;
+//         if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres && tmpp.second > minimum_size) {
 //             tmp.push_back({tmpp.first, tmpp.second});
 //         }
 //     }
@@ -168,32 +137,10 @@ void read_and_parse(int indices) {
 //     }
 
 //     oss.close();
-
 // }
 
 
-
-
-void dump_file(unordered_map<string, int> mapping_file) {
-    ofstream oss(output_file);
-    vector<pair<string, int> > tmp;
-
-    for (const auto& tmpp: mapping_file) {
-        // cout << (double) bfs_index_map[tmpp.first] / (double) tmpp.second << endl;
-        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres && tmpp.second > minimum_size) {
-            tmp.push_back({tmpp.first, tmpp.second});
-        }
-    }
-
-    sort(tmp.begin(), tmp.end(), pairCompare);
-    for (auto& tt: tmp) {
-        oss << tt.first << "\t" << tt.second << "\n";
-    }
-
-    oss.close();
-}
-
-
+// filter out the conference that has lower importance factor
 void generate_final_conf(unordered_map<string, int> mapping_file) {
     // ofstream oss(output_file);
     vector<pair<string, int> > tmp;
@@ -205,14 +152,6 @@ void generate_final_conf(unordered_map<string, int> mapping_file) {
             final_conf.insert(tmpp.first);
         }
     }
-
-
-    // sort(tmp.begin(), tmp.end(), pairCompare);
-    // for (auto& tt: tmp) {
-    //     oss << tt.first << "\t" << tt.second << "\n";
-    // }
-
-    // oss.close();
 }
 
 
@@ -312,14 +251,13 @@ int main() {
     //     //         filedir_list.push_back(p.path());                
     //     //     }
     //     // }
-
     // }
 
     filedir_list.push_back(lines_belong_toconf);
 
     for (int i = 0; i < filedir_list.size(); i++) {
-        thread_list.push_back(thread(read_and_parse, i));
-        // read_and_parse(i);
+        thread_list.push_back(thread(count_papers_in_each_conf, i));
+        // count_papers_in_each_conf(i);
     }
 
     for (auto& th: thread_list) th.join();
@@ -333,7 +271,7 @@ int main() {
     output.open(output_file);
     for (int i = 0; i < filedir_list.size(); i++) {
         thread_list.push_back(thread(generate_smaller_file, i));
-        // read_and_parse(i);
+        // count_papers_in_each_conf(i);
     }
 
     for (auto& th: thread_list) th.join();
