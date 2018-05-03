@@ -28,7 +28,8 @@ string first_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
 string third_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
 string index_file_output = "/scratch/si699w18_fluxm/gaole/index_file.txt";
-string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_ss.txt";
+string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_two.txt";
+// string output
 
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 vector<string> layer_file_list = {first_layer, second_layer};
@@ -149,11 +150,13 @@ int main() {
     vector<thread> thread_list;
     output.open(output_file);
 
-
-    for (int i = 0; i < layer_file_list.size(); i++) {
+    int start = 0;
+    for (int i = start; i < layer_file_list.size(); i++) {
         create_stringpool(i);
     }
+
     cout << "filter first layer" << endl;
+    cout << "number of layers " << 3 - start << "\n";
     cout << output_file << "\n";
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
