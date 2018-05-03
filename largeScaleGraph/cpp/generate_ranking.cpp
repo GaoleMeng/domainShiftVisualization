@@ -120,7 +120,6 @@ void create_stringpool(int i) {
             }
             else if (counter == 1) {
                 string_pool.insert(segment);
-                cout << segment;
                 counter += 1;
                 break;
             }
@@ -131,8 +130,6 @@ void create_stringpool(int i) {
     cout << string_pool.size() << endl;
     string_pool_stream.close();
 }
-
-
 
 
 void dump_file(unordered_map<string, int> mapping_file) {
