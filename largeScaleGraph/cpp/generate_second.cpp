@@ -133,9 +133,10 @@ void read_and_parse(int indices) {
                 smatch year_extract;
                 if (regex_search(line, year_extract, year)) {
 
+                    cout << line << "\n";
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
-                    
-                    counter[venue_string] += 1;                 
+                    cout << "finish" << "\n";
+                    // counter[venue_string] += 1;                 
                 }
             }
         }
