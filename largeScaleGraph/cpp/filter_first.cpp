@@ -1,5 +1,5 @@
 // compiler with 
-// g++ -std=c++17  filter_first.cpp -o filter_first -lstdc++fs -pthread
+// g++ -std=c++17  filter_second.cpp -o filter_first -lstdc++fs -pthread
 // the first round of the multithread version of the processing file
 
 #include <iostream>
@@ -58,6 +58,11 @@ string year_start = "\"year\": ";
 string references_start = "\"references\": ";
 
 
+bool issubstr(const string& src, const string& sh) {
+    return src.find(sh) == string::npos;
+}
+
+
 void read_and_parse(int indices) {
     
     string filename = filedir_list[indices];
@@ -85,10 +90,11 @@ void read_and_parse(int indices) {
                 if (regex_search(line, year_extract, year)) {
 
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
-                    if (!string_pool.count(venue_string)) continue;
-                    output_lock.lock();
-                    output << << "\n";
-                    output_lock.unlock();
+                    if (string_pool.count(venue) || issubstr(venue_string, "SIGIR")) {
+                        output_lock.lock();
+                        output << line << "\n";
+                        output_lock.unlock();
+                    }                    
                 }
             }
         }

@@ -324,7 +324,7 @@ int main() {
     generate_edges();
 
 
-    dump_file(year_counter);
+    // dump_file(year_counter);
 
 
     generate_files();
