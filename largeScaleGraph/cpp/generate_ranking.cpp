@@ -113,9 +113,6 @@ void create_stringpool(int i) {
 
         int counter = 0;
 
-        if (i == 1) {
-            cout << line;
-        }
 
         // cout << line << endl;
         while(getline(segment_ss, segment, '\t')) {
