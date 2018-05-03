@@ -222,7 +222,7 @@ int main() {
     }
 
     for (auto& th: thread_list) th.join();
-
+    cout << counter.size() << endl;
     dump_file(counter);
     output.close();
 }
