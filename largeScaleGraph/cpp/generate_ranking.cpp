@@ -1,5 +1,5 @@
 // compiler with 
-// g++ -std=c++17  generate_second.cpp -o generate_second -lstdc++fs -pthread
+// g++ -std=c++17  generate_ranking.cpp -o generate_ranking -lstdc++fs -pthread
 // the second layer bfs generator, take the output of last layer and output the next layer
 
 #include <iostream>
