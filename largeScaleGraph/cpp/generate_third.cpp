@@ -84,6 +84,9 @@ void read_and_parse(int indices) {
 
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
                     string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
+
+                    // this is the way to get rid of the first layer
+                    if (venue_string == "SIGIR" || venue_string == "SIGIR Forum") continue;
                     
                     size_t found = line.find(references_start);
                     if (found != std::string::npos) {
