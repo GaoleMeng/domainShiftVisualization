@@ -147,13 +147,14 @@ void generate_final_conf(unordered_map<string, int> mapping_file) {
 
     for (const auto& tmpp: mapping_file) {
         // cout << (double) bfs_index_map[tmpp.first] / (double) tmpp.second << endl;
-        cout <<"SIF " <<bfs_index_map["SIGIR"] << endl;
-        cout <<"SIG " <<bfs_index_map["SIGIR Forum"] << endl;
         if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres) {
             // tmp.push_back({tmpp.first, tmpp.second});
             final_conf.insert(tmpp.first);
         }
     }
+
+    final_conf.insert("SIGIR");
+    final_conf.insert("SIGIR Forum");
 }
 
 
