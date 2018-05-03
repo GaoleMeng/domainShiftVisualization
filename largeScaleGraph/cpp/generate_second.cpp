@@ -131,7 +131,7 @@ void read_and_parse(int indices) {
                 smatch year_extract;
                 if (regex_search(line, year_extract, year)) {
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
-                    string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
+                    // string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
                     
                     counter[venue_string] += 1;
                 }
