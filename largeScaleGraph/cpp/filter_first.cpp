@@ -138,7 +138,7 @@ void create_stringpool(int i) {
             }
         }   
     }
-    // string_pool.insert("SIGIR Forum");
+    string_pool.insert("SIGIR Forum");
     // cout << string_pool.size() << endl;
     string_pool_stream.close();
 }
@@ -153,8 +153,8 @@ int main() {
     for (int i = 0; i < layer_file_list.size(); i++) {
         create_stringpool(i);
     }
-
-
+    cout << "filter first layer" << endl;
+    cout << output_file << "\n";
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
