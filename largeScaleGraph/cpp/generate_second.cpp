@@ -145,51 +145,51 @@ void read_and_parse(int indices) {
 
 // "venue": "Saudi journal of anaesthesia"
 
-void create_stringpool() {
-    string line = "";
-    unordered_set<string> prev_strings;
+// void create_stringpool() {
+//     string line = "";
+//     unordered_set<string> prev_strings;
 
-    while(getline(string_pool_stream, line)) {
+//     while(getline(string_pool_stream, line)) {
 
-        string segment = "";
-        istringstream segment_ss(line);
+//         string segment = "";
+//         istringstream segment_ss(line);
 
-        int counter = 0;
-        while(getline(segment_ss, segment, '\t')) {
-            if (counter == 0) {
-                counter += 1;
-                prev_strings.insert(segment);
-                continue;
-            }
-            else if (counter == 1) {
-                counter += 1;
-                continue;
-            }
-            else if (counter == 2) {
-                counter += 1;
-                continue;
-            }
-            else {
-                istringstream ref_ss(segment);
-                string tmp = "";
-                while (ref_ss >> tmp) {
-                    string_pool.insert(tmp);
-                }
-            }
-        }   
-    }
+//         int counter = 0;
+//         while(getline(segment_ss, segment, '\t')) {
+//             if (counter == 0) {
+//                 counter += 1;
+//                 prev_strings.insert(segment);
+//                 continue;
+//             }
+//             else if (counter == 1) {
+//                 counter += 1;
+//                 continue;
+//             }
+//             else if (counter == 2) {
+//                 counter += 1;
+//                 continue;
+//             }
+//             else {
+//                 istringstream ref_ss(segment);
+//                 string tmp = "";
+//                 while (ref_ss >> tmp) {
+//                     string_pool.insert(tmp);
+//                 }
+//             }
+//         }   
+//     }
 
-    for (const auto& elem: prev_strings) {
-        if (string_pool.count(elem)) {
-            string_pool.erase(elem);
-        }
-    }
-    cout << string_pool.size() << endl;
+//     for (const auto& elem: prev_strings) {
+//         if (string_pool.count(elem)) {
+//             string_pool.erase(elem);
+//         }
+//     }
+//     cout << string_pool.size() << endl;
 
-    // for (string tmp: string_pool) {
-    //     cout << tmp << endl;
-    // }
-}
+//     // for (string tmp: string_pool) {
+//     //     cout << tmp << endl;
+//     // }
+// }
 
 
 
@@ -206,7 +206,7 @@ int main() {
     vector<thread> thread_list;
     output.open(output_file);
     string_pool_stream.open(input_lastlayer);
-    create_stringpool();
+    // create_stringpool();
 
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
