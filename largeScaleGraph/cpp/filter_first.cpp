@@ -59,7 +59,7 @@ string references_start = "\"references\": ";
 
 
 bool issubstr(const string& src, const string& sh) {
-    return src.find(sh) == string::npos;
+    return src.find(sh) != string::npos;
 }
 
 
