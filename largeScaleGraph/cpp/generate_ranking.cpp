@@ -39,7 +39,7 @@ vector<string> layer_file_list = {first_layer, second_layer, third_layer};
 
 // Configuration: changable second layer output representation file 
 // string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
-string output_file = "/scratch/si699w18_fluxm/gaole/ranking.txt";
+string output_file = "/scratch/si699w18_fluxm/gaole/ranking_new.txt";
 
 unordered_set<string> pool;
 
