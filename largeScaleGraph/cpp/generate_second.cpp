@@ -30,9 +30,18 @@ string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 // Configuration: input file, change to the first layer output file
 string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 
+
+string first_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
+string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
+string third_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
+
+vector<string> layer_file_list = {first_layer, second_layer, third_layer};
+
 // Configuration: changable second layer output representation file 
 // string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
 string output_file = "/scratch/si699w18_fluxm/gaole/ranking.txt";
+
+unordered_set<string> pool;
 
 
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
@@ -123,24 +132,14 @@ void read_and_parse(int indices) {
         // cout << line << endl;
         found = line.find(id_start);
         // cout << line << endl;
-        if (found != std::string::npos) {
-            id_string = line.substr(found + 7, 24);
-            // if (!string_pool.count(id_string)) continue;
-            smatch venue_extract;
-            if (regex_search(line, venue_extract, venue)) {
-
-                string refer_string = "";
-                smatch year_extract;
-                if (regex_search(line, year_extract, year)) {
-
-                    // cout << line << "\n";
-                    venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
-                    // cout << "finish" << "\n";
-                    output_lock.lock();
-                    counter[venue_string] += 1; 
-                    output_lock.unlock();                
-                }
-            }
+        smatch venue_extract;
+        if (regex_search(line, venue_extract, venue)) {
+            venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
+                // cout << "finish" << "\n";
+            if (!string_pool.count(venue_string)) continue;
+            output_lock.lock();
+            counter[venue_string] += 1; 
+            output_lock.unlock(); 
         }
     }
 }
@@ -197,6 +196,40 @@ void read_and_parse(int indices) {
 // }
 
 
+void create_stringpool(int i) {
+    string line = "";
+    unordered_set<string> prev_strings;
+    cout << layer_file_list[i] << endl;
+    string_pool_stream.open(layer_file_list[i]);
+
+    while(getline(string_pool_stream, line)) {
+
+        string segment = "";
+        istringstream segment_ss(line);
+
+        int counter = 0;
+        // cout << line << endl;
+        while(getline(segment_ss, segment, '\t')) {
+            if (counter == 0) {
+                counter += 1;
+                prev_strings.insert(segment);
+                continue;
+            }
+            else if (counter == 1) {
+                string_pool.insert(segment);
+                
+                counter += 1;
+                break;
+            }
+        }   
+    }
+    string_pool.insert("SIGIR Forum");
+    string_pool.insert("SIGIR");
+    cout << string_pool.size() << endl;
+    string_pool_stream.close();
+}
+
+
 
 
 void dump_file(unordered_map<string, int> mapping_file) {
@@ -211,7 +244,10 @@ int main() {
     vector<thread> thread_list;
     output.open(output_file);
     string_pool_stream.open(input_lastlayer);
-    // create_stringpool();
+
+    for (int i = 1; i < 3; i++) {
+        create_stringpool(i);
+    }
 
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
