@@ -155,6 +155,11 @@ void generate_final_conf(unordered_map<string, int> mapping_file) {
 
     final_conf.insert("SIGIR");
     final_conf.insert("SIGIR Forum");
+
+
+    for (const auto&tmp: final_conf) {
+        cout << tmp << "\n";
+    }
 }
 
 
