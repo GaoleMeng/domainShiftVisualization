@@ -53,6 +53,23 @@ g++ --std=c++17  generate_third.cpp -o generate_third -lstdc++fs -pthread
 ```
 
 
+The above instruction will create three bfs layer file, which is used in the later filter part.
+
+```
+# before compiling, revise each cpp file's input and output directory
+# compile the first filter layer, which create a file with only the line that has the same
+# conference as the three (or two) bfs layer file
+g++ -std=c++17  filter_first.cpp -o filter_first -lstdc++fs -pthread
+g++ -std=c++17  filter_second.cpp -o filter_second -lstdc++fs -pthread
+
+# the first filter has a very long running time
+./filter_first
+./filter_second
+
+# to be continue
+
+```
+
 
 
 
