@@ -103,7 +103,7 @@ void create_stringpool(int i) {
     string line = "";
     unordered_set<string> prev_strings;
     cout << layer_file_list[i] << endl;
-    string_pool_stream.open("layer_file_list[i]");
+    string_pool_stream.open(layer_file_list[i]);
 
     while(getline(string_pool_stream, line)) {
 
