@@ -28,7 +28,7 @@ string first_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
 string third_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
 string index_file_output = "/scratch/si699w18_fluxm/gaole/index_file.txt";
-string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf.txt";
+string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_ss.txt";
 
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 vector<string> layer_file_list = {first_layer, second_layer, third_layer};
