@@ -32,7 +32,7 @@ string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 
 
 string first_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
-string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
+string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txtx";
 string third_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
 
 vector<string> layer_file_list = {first_layer, second_layer, third_layer};
