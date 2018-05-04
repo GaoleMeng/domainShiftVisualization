@@ -233,6 +233,8 @@ void generate_files() {
         cur_count += cc;
     }
 
+    cout << cur_count << "\n";
+
     threshold = cur_count / 3;
 
     cur_layer = 1;
