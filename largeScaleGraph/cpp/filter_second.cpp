@@ -29,7 +29,7 @@ double ratio_thres = 0.1;
 
 
 // Configuration: the output file of "filter_first"
-string lines_belong_toconf = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_three.txt";
+string lines_belong_toconf = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_two.txt";
 
 // Configuration: the three layer output of BFS 
 string first_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
