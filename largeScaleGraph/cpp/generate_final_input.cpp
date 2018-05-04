@@ -22,11 +22,18 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
 
+
+// Configuration: the input file of the final filtered lines 
 string input_dir_1 = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_smaller.txt";
-// string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
-// string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
-// string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
+
+// Configuration: output the final input to largeVis
 string output_file = "/scratch/si699w18_fluxm/gaole/non_bias_edges_withauthors.txt";
+
+
+// Configuration: the output file of largeVis (defualt in ./citation_qiaozhu.txt)
+string largeVis_output = "./citation_qiaozhu.txt";
+
+// Configuration: the final split folder (default in ./final_visualziation)
 string split_location = "/home/gaole/tmprepo/largeScaleGraph/cpp/final_visulization/";
 
 
@@ -263,7 +270,7 @@ void generate_files() {
 // "venue": "Saudi journal of anaesthesia"
 
 void create_index_loc() {
-    string tmp_file = "./citation_qiaozhu.txt";
+    string tmp_file = largeVis_output;
     ifstream input(tmp_file.c_str());
     string line = "";
     int flag = 0;
@@ -323,17 +330,20 @@ int main() {
     generate_conf_index();
     generate_edges();
 
-
     // dump_file(year_counter);
 
 
-    generate_files();
+    // generate_files();
     // dump_file(index_to_loc);
 
     output.close();
 }
 
 
+
+// string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
+// string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
+// string input_lastlayer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
 
 
 
