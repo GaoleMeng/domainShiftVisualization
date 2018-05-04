@@ -59,6 +59,7 @@ The above instruction will create three bfs layer file, which is used in the lat
 # before compiling, revise each cpp file's input and output directory
 # compile the first filter layer, which create a file with only the line that has the same
 # conference as the three (or two) bfs layer file
+# the second filter compute the importance score, and keep only the conference with enough score.
 g++ -std=c++17  filter_first.cpp -o filter_first -lstdc++fs -pthread
 g++ -std=c++17  filter_second.cpp -o filter_second -lstdc++fs -pthread
 
@@ -66,7 +67,31 @@ g++ -std=c++17  filter_second.cpp -o filter_second -lstdc++fs -pthread
 ./filter_first
 ./filter_second
 
-# to be continue
+# after this, the final output of filter_second is couple of line that belongs to the conferences
+# that has high important factor
+
+# compile the largeVis input file generator
+g++ -std=c++17  generate_final_input.cpp -o generate_final_input -lstdc++fs -pthread
+
+# generate the final input to largeVis
+./generate_final_input
+
+
+```
+
+
+After this, run largeVis on the output file of the input generator. Each point is associated with a corresponding 2D embedding, then we need to remap the index to the corresponding label and create a split according to the time series.
+To do this, we need to rerun the generate_final_input and find the run time distribution of the index, and find whether it is SIGIR paper to color them.
+
+```
+# remember to set the correct file dir of the input and output, the output of the split is a folder, the default is final_visualization.
+./generate_final_input
+
+# suppose final directory is final_visualization
+cd final_visualization
+sh workflow.sh
+
+# at this point, three images will be generated
 
 ```
 
