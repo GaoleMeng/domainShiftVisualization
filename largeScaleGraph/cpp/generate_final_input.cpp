@@ -1,5 +1,5 @@
 // compiler with 
-// g++ -std=c++17  generate_first.cpp -o generate_first -lstdc++fs -pthread
+// g++ -std=c++17  generate_final_input.cpp -o generate_final_input -lstdc++fs -pthread
 // the first round of the multithread version of the processing file
 
 #include <iostream>
@@ -204,7 +204,7 @@ void generate_edges() {
 
 
 void generate_files() {
-    int threshold = 1100;
+
     int cur_layer = 1;
     int cur_count = 0;
     vector<pair<string, int>> year_extract_list;
@@ -213,8 +213,30 @@ void generate_files() {
         year_extract_list.push_back({tmp.first, tmp.second});
     }
 
-
     sort(year_extract_list.begin(), year_extract_list.end(), pairCompare);
+
+    int threshold = 0;
+
+    for (const auto& tmp: year_extract_list) {
+
+        vector<int>& index_list = year_to_indexlist[tmp.first];
+
+        int cc = 0;
+        for (int index: index_list) {
+            if (!index_to_loc.count(index)) continue;
+            if (sigir_pool.count(index)) cc++;
+            layer_list[cur_layer].push_back(index);
+        }
+
+        // layer_list[cur_layer].push_back(tmp.second);
+
+        cur_count += cc;
+    }
+
+    threshold = cur_count / 3;
+
+    cur_layer = 1;
+    cur_count = 0;
 
     // ofstream oss();
     
@@ -334,7 +356,7 @@ int main() {
 
 
     // generate_files();
-    // dump_file(index_to_loc);
+    dump_file(index_to_loc);
 
     output.close();
 }
