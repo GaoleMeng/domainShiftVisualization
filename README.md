@@ -98,7 +98,7 @@ sh workflow.sh
 
 ## Embedding Visualization Result
 
-This is a set of the visualization result. I haven't put too much efforts into improving the parameters and algorithm itself, so the result seems a little bit simple.
+This is a set of the visualization result. I haven't put too much efforts into improving the parameters and the visualization of the author points and conference points, I think those may be good future work.
 
 <div align="center">
 <img src="1.png" width="500" style="margin-left:auto;margin-right:auto">
