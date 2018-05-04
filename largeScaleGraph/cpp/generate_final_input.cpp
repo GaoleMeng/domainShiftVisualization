@@ -225,7 +225,7 @@ void generate_files() {
         for (int index: index_list) {
             if (!index_to_loc.count(index)) continue;
             if (sigir_pool.count(index)) cc++;
-            layer_list[cur_layer].push_back(index);
+            // layer_list[cur_layer].push_back(index);
         }
 
         // layer_list[cur_layer].push_back(tmp.second);
