@@ -1,4 +1,4 @@
-# Domain Transition Detection
+# Domain Shift Visualization
 
 Detect and visulize the domain changes occur around SIGIR conference
 
