@@ -96,6 +96,21 @@ sh workflow.sh
 ```
 
 
+## Embedding Visualization Result
+
+This is a set of the visualization result. I haven't put too much efforts into improving the parameters and algorithm itself, so the result seems a little bit simple.
+
+<div align="center">
+<img src="1.png" width="500" style="margin-left:auto;margin-right:auto">
+</div>
+
+<div align="center">
+<img src="2.png" width="500" style="margin-left:auto;margin-right:auto">
+</div>
+
+<div align="center">
+<img src="3.png" width="500" style="margin-left:auto;margin-right:auto">
+</div>
 
 
 
