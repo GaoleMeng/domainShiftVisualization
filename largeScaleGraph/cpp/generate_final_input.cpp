@@ -355,8 +355,8 @@ int main() {
     // dump_file(year_counter);
 
 
-    // generate_files();
-    dump_file(index_to_loc);
+    generate_files();
+    // dump_file(index_to_loc);
 
     output.close();
 }
