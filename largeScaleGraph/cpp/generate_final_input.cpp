@@ -1,6 +1,7 @@
 // compiler with 
 // g++ -std=c++17  generate_final_input.cpp -o generate_final_input -lstdc++fs -pthread
 // the first round of the multithread version of the processing file
+// 29380000
 
 #include <iostream>
 #include <fstream>

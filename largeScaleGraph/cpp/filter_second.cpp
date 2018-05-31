@@ -143,7 +143,7 @@ void count_papers_in_each_conf(int indices) {
 // filter out the conference that has lower importance factor
 void generate_final_conf(unordered_map<string, int> mapping_file) {
     // ofstream oss(output_file);
-    vector<pair<string, int> > generate_list;
+    vector<pair<string, double> > generate_list;
 
     for (const auto& tmpp: mapping_file) {
         // cout << (double) bfs_index_map[tmpp.first] / (double) tmpp.second << endl;
