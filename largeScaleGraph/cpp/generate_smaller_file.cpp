@@ -1,6 +1,6 @@
 // compiler with 
-// g++ -std=c++17  filter_first.cpp -o filter_first -lstdc++fs -pthread
-// find only the line that is in the conference of three bfs layer
+// g++ -std=c++17  generate_first.cpp -o generate_first -lstdc++fs -pthread
+// the first round of the multithread version of the processing file
 
 #include <iostream>
 #include <fstream>
@@ -29,9 +29,6 @@ string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
 string third_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
 string index_file_output = "/scratch/si699w18_fluxm/gaole/index_file.txt";
 string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf.txt";
-// string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_tmp.txt";
-// string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_two.txt";
-// string output
 
 vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
 vector<string> layer_file_list = {first_layer, second_layer};
@@ -61,11 +58,6 @@ string year_start = "\"year\": ";
 string references_start = "\"references\": ";
 
 
-bool issubstr(const string& src, const string& sh) {
-    return src.find(sh) != string::npos;
-}
-
-
 void read_and_parse(int indices) {
     
     string filename = filedir_list[indices];
@@ -93,11 +85,10 @@ void read_and_parse(int indices) {
                 if (regex_search(line, year_extract, year)) {
 
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
-                    if (string_pool.count(venue_string)) {
-                        output_lock.lock();
-                        output << line << "\n";
-                        output_lock.unlock();
-                    }                    
+                    if (!string_pool.count(venue_string)) continue;
+                    output_lock.lock();
+                    output << << "\n";
+                    output_lock.unlock();
                 }
             }
         }
@@ -142,8 +133,10 @@ void create_stringpool(int i) {
         }   
     }
     string_pool.insert("SIGIR Forum");
-    // cout << string_pool.size() << endl;
+    cout << string_pool.size() << endl;
     string_pool_stream.close();
+
+
 }
 
 
@@ -152,14 +145,12 @@ int main() {
     vector<thread> thread_list;
     output.open(output_file);
 
-    int start = 0;
-    for (int i = start; i < layer_file_list.size(); i++) {
+
+    for (int i = 0; i < layer_file_list.size(); i++) {
         create_stringpool(i);
     }
 
-    cout << "filter first layer" << endl;
-    cout << "number of layers " << layer_file_list.size() - start << "\n";
-    cout << output_file << "\n";
+
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             if (strstr(p.path().filename().c_str(), lastfix.c_str())) {

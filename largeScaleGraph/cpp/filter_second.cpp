@@ -143,23 +143,25 @@ void count_papers_in_each_conf(int indices) {
 // filter out the conference that has lower importance factor
 void generate_final_conf(unordered_map<string, int> mapping_file) {
     // ofstream oss(output_file);
-    vector<pair<string, int> > tmp;
+    vector<pair<string, int> > generate_list;
 
     for (const auto& tmpp: mapping_file) {
         // cout << (double) bfs_index_map[tmpp.first] / (double) tmpp.second << endl;
         if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres && tmpp.second > minimum_size) {
             // tmp.push_back({tmpp.first, tmpp.second});
             final_conf.insert(tmpp.first);
+            generate_list.push_back({tmpp.first, (double) bfs_index_map[tmpp.first] / (double) tmpp.second});
         }
     }
 
     final_conf.insert("SIGIR");
     final_conf.insert("SIGIR Forum");
 
-
-    for (const auto&tmp: final_conf) {
-        cout << tmp << "\n";
+    for (const auto&ele: generate_list) {
+        cout << ele << "\n";
     }
+    cout << "total elements number is: " << generate_list.size() << endl;
+
 }
 
 
