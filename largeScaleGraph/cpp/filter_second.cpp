@@ -158,7 +158,7 @@ void generate_final_conf(unordered_map<string, int> mapping_file) {
     final_conf.insert("SIGIR Forum");
 
     for (const auto&ele: generate_list) {
-        cout << ele << "\n";
+        cout << ele.first << " " << ele.second << "\n";
     }
     cout << "total elements number is: " << generate_list.size() << endl;
 
