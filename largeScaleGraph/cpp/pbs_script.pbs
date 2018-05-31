@@ -10,6 +10,6 @@
 module load gcc/7.2.0
 PBS_O_WORKDIR=/home/gaole/tmprepo/largeScaleGraph/cpp
 cd $PBS_O_WORKDIR
-./generate_first
+./generate_final_input
 
 

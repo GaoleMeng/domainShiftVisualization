@@ -147,7 +147,7 @@ void generate_final_conf(unordered_map<string, int> mapping_file) {
 
     for (const auto& tmpp: mapping_file) {
         // cout << (double) bfs_index_map[tmpp.first] / (double) tmpp.second << endl;
-        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres && tmpp.second > minimum_size) {
+        if ((double) bfs_index_map[tmpp.first] / (double) tmpp.second > ratio_thres) //&& tmpp.second > minimum_size) {
             // tmp.push_back({tmpp.first, tmpp.second});
             final_conf.insert(tmpp.first);
             generate_list.push_back({tmpp.first, (double) bfs_index_map[tmpp.first] / (double) tmpp.second});
