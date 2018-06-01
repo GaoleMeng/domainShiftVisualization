@@ -32,7 +32,7 @@ string input_lastlayer = "/home/wuzhuofeng/raw_data/cpp_largevis_second.txt";
 // Configuration: output the final layer o
 string output_file = "/home/wuzhuofeng/raw_data/cpp_largevis_third.txt";
 
-vector<string> dir_list = {input_dir_1;
+vector<string> dir_list = {input_dir_1};
 unordered_set<string> string_pool;
 
 string lastfix = ".txt";
