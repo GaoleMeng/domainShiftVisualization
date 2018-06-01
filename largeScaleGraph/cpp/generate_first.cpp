@@ -24,7 +24,7 @@ using namespace rapidjson;
 string input_dir_1 = "./first_layer_extraction";
 
 // Configuration: output file of the first layer
-string output_file = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
+string output_file = "./first_layer_extraction/test.txt";
 
 
 vector<string> dir_list = {input_dir_1};
