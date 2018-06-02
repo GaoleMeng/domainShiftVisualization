@@ -21,19 +21,30 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
 
-string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
-string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
-string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
-string first_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
-string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
-string third_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
-string index_file_output = "/scratch/si699w18_fluxm/gaole/index_file.txt";
-string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf.txt";
+// Configuration: the raw data location
+// string input_dir_1 = "/scratch/si699w18_fluxm/gaole/aminer_papers_0";
+// string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
+// string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
+string input_dir_1 = "/home/wuzhuofeng/raw_data/";
+
+// Configuration: the bfs layer file location
+string first_layer = "/home/wuzhuofeng/intermediate_files/cpp_largevis_first.txt";
+string second_layer = "/home/wuzhuofeng/intermediate_files/cpp_largevis_second.txt";
+string third_layer = "/home/wuzhuofeng/intermediate_files/cpp_largevis_third.txt";
+
+
+string index_file_output = "/home/wuzhuofeng/intermediate_files/index_file.txt";
+string output_file = "/home/wuzhuofeng/intermediate_files/lines_belong_toconf.txt";
+
+
 // string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_tmp.txt";
 // string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_two.txt";
 // string output
 
-vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
+// vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
+vector<string> dir_list = {input_dir_1};
+
+
 vector<string> layer_file_list = {first_layer, second_layer};
 unordered_set<string> string_pool;
 unordered_map<string, int> index_map;
