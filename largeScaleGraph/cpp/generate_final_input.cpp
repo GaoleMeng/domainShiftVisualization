@@ -25,17 +25,17 @@ using namespace rapidjson;
 
 
 // Configuration: the input file of the final filtered lines 
-string input_dir_1 = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_smaller.txt";
+string input_dir_1 = "/home/wuzhuofeng/intermediate_files/lines_belong_toconf_smaller.txt";
 
 // Configuration: output the final input to largeVis
-string output_file = "/scratch/si699w18_fluxm/gaole/non_bias_edges_withauthors.txt";
+string output_file = "/home/wuzhuofeng/intermediate_files/non_bias_edges_withauthors.txt";
 
 
 // Configuration: the output file of largeVis (defualt in ./citation_qiaozhu.txt)
 string largeVis_output = "./citation_qiaozhu.txt";
 
 // Configuration: the final split folder (default in ./final_visualziation)
-string split_location = "/home/gaole/tmprepo/largeScaleGraph/cpp/final_visulization/";
+string split_location = "/home/wuzhuofeng/domainShiftVisualization/largeScaleGraph/cpp/final_visulization/";
 
 
 bool pairCompare(const std::pair<string, int>& firstElem, const std::pair<string, int>& secondElem) {
