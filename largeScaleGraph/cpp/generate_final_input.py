@@ -64,9 +64,9 @@ def read_and_parse():
             id_to_ref[index_count] = []
 
         if venue_string == "SIGIR" or venue_string == "SIGIR Forum":
-            if year_string not in year_count:
-                year_count[year_string] = 0
-            year_count[year_string] += 1
+            if year_string not in year_counter:
+                year_counter[year_string] = 0
+            year_counter[year_string] += 1
 
         if "authors" in tmp_obj:
             author_list = tmp_obj["authors"]
