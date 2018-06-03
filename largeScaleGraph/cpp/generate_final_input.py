@@ -43,7 +43,7 @@ def read_and_parse():
         author_list = tmp_obj["authors"]
         year_string = tmp_obj["year"]
         if year_string not in year_to_indexlist:
-            year_to_indexlis[year_string] = []
+            year_to_indexlist[year_string] = []
 
         id_to_index[id_string] = index_count
 
