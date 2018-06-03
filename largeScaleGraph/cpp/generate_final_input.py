@@ -96,6 +96,7 @@ def generate_edges():
     out_edges_file = open(output_file, "w")
     for k, v in id_to_ref.items():
         for tmp in v:
+            print(tmp)
             out_edges_file.write(str(k) + " " + str(id_to_index[tmp]) + " 1\n")
     for k, v in index_to_conf.items():
         out_edges_file.write(str(k) + " " + str(conf_to_index[v]) + " 2\n");
