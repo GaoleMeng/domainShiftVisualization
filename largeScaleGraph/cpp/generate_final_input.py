@@ -26,7 +26,7 @@ conf_lines_file = open(input_dir_1)
 def read_and_parse():
     for line in conf_lines_file:
         tmp_obj = json.loads(line)
-        print(tmp_obj)
+        print(tmp_obj["id"])
         break
          
 
