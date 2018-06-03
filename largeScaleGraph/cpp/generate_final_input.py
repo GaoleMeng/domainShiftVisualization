@@ -30,6 +30,7 @@ year_to_indexlist = {}
 
 
 def read_and_parse():
+    global index_count
     for line in conf_lines_file:
         tmp_obj = json.loads(line)
         if "id" not in tmp_obj:
