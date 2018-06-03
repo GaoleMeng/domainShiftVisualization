@@ -20,16 +20,43 @@ split_location = "/home/wuzhuofeng/domainShiftVisualization/largeScaleGraph/cpp/
 
 conf_lines_file = open(input_dir_1)
 
+conf_info = {}
 
+index_count = 0
+
+id_to_ref = {}
+id_to_index = {}
+year_to_indexlist = {}
 
 
 def read_and_parse():
     for line in conf_lines_file:
         tmp_obj = json.loads(line)
-        # print(tmp_obj["id"])
-        # break
-         
+        if "id" not in tmp_obj:
+            continue
+        if "venue" not in tmp_obj:
+            continue
+        if "year" not in tmp_obj:
+            continue
+        venue_string = tmp_obj["venue"]
+        id_string = tmp_obj["id"]
+        author_list = tmp_obj["authors"]
+        year_string = tmp_obj["year"]
+        if year_string not in year_to_indexlist:
+            year_to_indexlis[year_string] = []
 
+        id_to_index[id_string] = index_count
+
+        if id_string not in id_to_ref:
+            id_to_ref[id_string] = []
+
+        if "references" in tmp_obj:
+            for ref in tmp_obj["references"]:
+                for tmp in ref:
+                    id_to_index[id_string].append(tmp)
+        
+        year_to_indexlist[year_string].append(index_count)
+        index_count += 1
 
 def main():
     read_and_parse()
