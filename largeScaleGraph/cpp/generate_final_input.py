@@ -28,9 +28,7 @@ def read_and_parse():
         tmp_obj = json.loads(line)
         print(tmp_obj)
         break
-        
-        
-        
+         
 
 
 def main():
@@ -39,7 +37,7 @@ def main():
     
 
 
-def __name__ == "__main__":
+if __name__ == "__main__":
     main()
 
 
