@@ -54,7 +54,7 @@ def read_and_parse():
         if "references" in tmp_obj:
             for ref in tmp_obj["references"]:
                 for tmp in ref:
-                    id_to_index[id_string].append(tmp)
+                    id_to_ref[id_string].append(tmp)
         
         year_to_indexlist[year_string].append(index_count)
         index_count += 1
