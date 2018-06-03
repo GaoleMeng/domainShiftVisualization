@@ -29,15 +29,15 @@ double ratio_thres = 0.1;
 
 
 // Configuration: the output file of "filter_first"
-string lines_belong_toconf = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_two.txt";
+string lines_belong_toconf = "/home/wuzhuofeng/intermediate_files/lines_belong_toconf.txt";
 
-// Configuration: the three layer output of BFS 
-string first_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_first.txt";
-string second_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_second.txt";
-string third_layer = "/scratch/si699w18_fluxm/gaole/cpp_largevis_third.txt";
+// Configuration: the bfs layer file location
+string first_layer = "/home/wuzhuofeng/intermediate_files/cpp_largevis_first.txt";
+string second_layer = "/home/wuzhuofeng/intermediate_files/cpp_largevis_second.txt";
+string third_layer = "/home/wuzhuofeng/intermediate_files/cpp_largevis_third.txt";
 
 // Configuration: the output of this layer of filter
-string output_file = "/scratch/si699w18_fluxm/gaole/lines_belong_toconf_smaller.txt";
+string output_file = "/home/wuzhuofeng/intermediate_files/lines_belong_toconf_smaller.txt";
 
 
 vector<string> dir_list = {lines_belong_toconf};
