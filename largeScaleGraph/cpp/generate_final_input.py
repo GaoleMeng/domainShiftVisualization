@@ -47,7 +47,7 @@ def read_and_parse():
         if "year" not in tmp_obj:
             continue
         venue_string = tmp_obj["venue"]
-        conf_pool.add(venue_list)
+        conf_pool.add(venue_string)
         id_string = tmp_obj["id"]
         year_string = tmp_obj["year"]
         if year_string not in year_to_indexlist:
@@ -86,6 +86,7 @@ def read_and_parse():
 
 
 def generate_conf_index():
+    global index_count
     for conf in conf_pool:
         conf_to_index[conf] = index_count
         index_count += 1
