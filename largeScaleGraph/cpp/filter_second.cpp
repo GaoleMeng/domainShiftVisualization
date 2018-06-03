@@ -46,7 +46,7 @@ vector<string> layer_file_list = {first_layer, second_layer, third_layer};
 unordered_set<string> string_pool;
 unordered_map<string, int> index_map;
 unordered_map<string, int> bfs_index_map;
-unordered_set<string> final_conf;
+// unordered_set<string> final_conf;
 unordered_map<string, string> year_map;
 
 
