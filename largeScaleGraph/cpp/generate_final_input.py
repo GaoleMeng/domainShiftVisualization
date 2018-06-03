@@ -98,7 +98,7 @@ def generate_edges():
         for tmp in v:
             out_edges_file.write(str(k) + " " + str(id_to_index[tmp]) + " 1\n")
     for k, v in index_to_conf.items():
-        out_edges_file.write(str(k) + " " + str(conf_to_index[tmp]) + " 2\n");
+        out_edges_file.write(str(k) + " " + str(conf_to_index[v]) + " 2\n");
 
 
 
