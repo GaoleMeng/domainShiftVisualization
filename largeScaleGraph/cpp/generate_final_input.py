@@ -105,7 +105,7 @@ def generate_edges():
 def main():
     read_and_parse()
     generate_conf_index()
-    gener
+    generate_edges()
     
     
 
