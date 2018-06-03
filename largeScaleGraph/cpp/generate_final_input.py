@@ -28,9 +28,12 @@ index_count = 0
 id_to_ref = {}
 id_to_index = {}
 year_to_indexlist = {}
-year_counter = {}
+year_counter = {}   # count the sigir paper in each year
 author_to_index = {}
 conf_pool = set()
+sigir_pool = set()
+conf_to_index = {}
+index_to_conf = {}
 
 
 def read_and_parse():
@@ -43,18 +46,27 @@ def read_and_parse():
             continue
         if "year" not in tmp_obj:
             continue
-        venue_list = tmp_obj["venue"]
+        venue_string = tmp_obj["venue"]
         conf_pool.add(venue_list)
-
         id_string = tmp_obj["id"]
         year_string = tmp_obj["year"]
         if year_string not in year_to_indexlist:
             year_to_indexlist[year_string] = []
 
         id_to_index[id_string] = index_count
+        index_to_conf[index_count] = venue_string
+
+        # if venue_string not in conf_to_index:
+        #     conf_to_index[venue_string] = []
+        # conf_to_index.append(index_count)
 
         if id_string not in id_to_ref:
-            id_to_ref[id_string] = []
+            id_to_ref[index_count] = []
+
+        if venue_string == "SIGIR" || venue_string == "SIGIR Forum":
+            if year_string not in year_count:
+                year_count[year_string] = 0
+            year_count[year_string] += 1
 
         if "authors" in tmp_obj:
             author_list = tmp_obj["authors"]
@@ -67,13 +79,33 @@ def read_and_parse():
         if "references" in tmp_obj:
             for ref in tmp_obj["references"]:
                 for tmp in ref:
-                    id_to_ref[id_string].append(tmp)
+                    id_to_ref[index_count].append(tmp)
 
         year_to_indexlist[year_string].append(index_count)
         index_count += 1
 
+
+def generate_conf_index():
+    for conf in conf_pool:
+        conf_to_index[conf] = index_count
+        index_count += 1
+
+
+def generate_edges():
+    out_edges_file = open(output_file, "w")
+    for k, v in id_to_ref.items():
+        for tmp in v:
+            out_edges_file.write(k + " " + id_to_index[tmp] + " 1\n")
+    for k, v in index_to_conf.items():
+        for tmp in v:
+            out_edges_file.write(k + " " + conf_to_index[tmp] + " 2\n");
+
+
+
 def main():
     read_and_parse()
+    generate_conf_index()
+    gener
     
     
 
