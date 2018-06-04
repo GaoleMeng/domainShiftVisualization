@@ -128,7 +128,6 @@ def generate_files():
     for k, v in sorted(year_to_indexlist.items(), key=lambda x:x[0]):
         if cur_layer not in layer_list:
             layer_list[cur_layer] = []
-
         for tmp in v:
             if tmp not in index_to_loc:
                 continue
@@ -136,6 +135,7 @@ def generate_files():
         if k in split_points:
             cur_layer += 1
     
+    print(layer_list)
     for k, v in sorted(layer_list.items(), key=lambda x:x[0]):
         point_file = open(split_location + str(k) + "_points.txt", 'w')
         label_file = open(split_location + str(k) + "_labels.txt", 'w')
