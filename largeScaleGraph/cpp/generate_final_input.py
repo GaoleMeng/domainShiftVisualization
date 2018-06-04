@@ -72,6 +72,7 @@ def read_and_parse():
             if year_string not in year_counter:
                 year_counter[year_string] = 0
             year_counter[year_string] += 1
+            sigir_pool.add(index_count)
             tmp_counter += 1
 
         if "authors" in tmp_obj:
@@ -130,7 +131,7 @@ def generate_files():
         if cur_layer not in layer_list:
             layer_list[cur_layer] = []
         for tmp in v:
-            if tmp not in index_to_loc:
+            if str(tmp) not in index_to_loc:
                 continue
             layer_list[cur_layer].append(tmp)
         if k in split_points:
@@ -142,11 +143,11 @@ def generate_files():
         
         point_file.write(str(len(v)) + "\n")
         for tmp in v:
-            if tmp in sigir_pool:
-                point_file.write(index_to_loc[tmp] + "\n")
+            if int(tmp) in sigir_pool:
+                point_file.write(index_to_loc[str(tmp)])
                 label_file.wrtei("10\n")
             else:
-                point_file.write(index_to_loc[tmp] + "\n")
+                point_file.write(index_to_loc[str(tmp)])
                 label_file.wrtei("0\n")
         
         point_file.close()
