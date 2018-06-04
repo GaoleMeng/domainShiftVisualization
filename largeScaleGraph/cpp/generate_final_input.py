@@ -109,7 +109,9 @@ def generate_conf_index():
     global index_count
     for conf in conf_pool:
         conf_to_index[conf] = index_count
+        print(conf)
         index_count += 1
+    print("total conf number: ", len(conf_pool))
 
 
 def generate_edges():
@@ -140,7 +142,7 @@ def generate_files():
         # print(k)
         if str(k) in split_points:
             cur_layer += 1
-    print(len(layer_list))
+    # print(len(layer_list))
     for k, v in sorted(layer_list.items(), key=lambda x:x[0]):
         point_file = open(split_location + str(k) + "_points.txt", 'w')
         label_file = open(split_location + str(k) + "_labels.txt", 'w')
