@@ -35,9 +35,12 @@ sigir_pool = set()
 conf_to_index = {}
 index_to_conf = {}
 
+tmp_counter = 0
+
 
 def read_and_parse():
     global index_count
+    global tmp_counter
     for line in conf_lines_file:
         tmp_obj = json.loads(line)
         if "id" not in tmp_obj:
@@ -67,6 +70,7 @@ def read_and_parse():
             if year_string not in year_counter:
                 year_counter[year_string] = 0
             year_counter[year_string] += 1
+            tmp_counter += 1
 
         if "authors" in tmp_obj:
             author_list = tmp_obj["authors"]
@@ -105,6 +109,7 @@ def generate_edges():
 def generate_files():
     year_counter_list = sorted(year_counter.items(), key=lambda x:x[0])
     print(year_counter_list)
+    print(tmp_counter)
 
 
 
