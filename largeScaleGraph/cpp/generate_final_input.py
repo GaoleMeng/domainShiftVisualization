@@ -125,7 +125,7 @@ def generate_files():
     year_counter_list = sorted(year_counter.items(), key=lambda x:x[0])
     # print(year_counter_list)
     # print(tmp_counter)
-    cur_layer = 0
+    cur_layer = 1
     layer_list = {}
     for k, v in sorted(year_to_indexlist.items(), key=lambda x:x[0]):
         if cur_layer not in layer_list:
