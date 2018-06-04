@@ -176,7 +176,7 @@ def generate_files():
                         elementY += float(vec[2])
                         counter += 1.0
             if counter != 0:
-                tmp_list.append("1 %s %s\n" % (elementX, elementY))
+                tmp_list.append("1 %s %s\n" % (elementX / counter, elementY / counter))
 
         author_file.write(str(len(tmp_list)) + "\n")
         for tmp in tmp_list:
