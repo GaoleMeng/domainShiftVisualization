@@ -116,6 +116,7 @@ def generate_edges():
             out_edges_file.write(str(k) + " " + str(id_to_index[tmp]) + " 1\n")
     for k, v in index_to_conf.items():
         out_edges_file.write(str(k) + " " + str(conf_to_index[v]) + " 2\n");
+    out_edges_file.close()
 
 
 def generate_files():
@@ -132,8 +133,8 @@ def generate_files():
             cur_layer += 1
     
     for k, v in sorted(layer_list.items(), key=lambda x:x[0]):
-        point_file = open(split_location + str(k) + "_points.txt")
-        label_file = open(split_location + str(k) + "_labels.txt")
+        point_file = open(split_location + str(k) + "_points.txt", 'w')
+        label_file = open(split_location + str(k) + "_labels.txt", 'w')
         
         point_file.write(str(len(v)) + "\n")
         for tmp in v:
