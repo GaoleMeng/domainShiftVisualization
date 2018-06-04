@@ -170,7 +170,7 @@ def generate_files():
             for k, v in author_dict.items():
                 if str(k) > split_points[i] and str(k) < split_points[i+1]: 
                     for index in v:
-                        if index not in index_to_loc:
+                        if str(index) not in index_to_loc:
                             continue
                         vec = index_to_loc[index].strip().split()
                         elementX += float(vec[1])
