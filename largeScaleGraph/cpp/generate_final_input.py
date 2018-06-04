@@ -97,6 +97,7 @@ def generate_index_to_loc():
     for line in tmp_file:
         vec = line.split()
         index_to_loc[vec[0]] = line
+    print(index_to_loc)
     tmp_file.close()
 
 
