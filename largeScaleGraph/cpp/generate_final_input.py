@@ -102,11 +102,18 @@ def generate_edges():
         out_edges_file.write(str(k) + " " + str(conf_to_index[v]) + " 2\n");
 
 
+def generate_files():
+    year_counter_list = sorted(year_counter.items(), key=lambda x:x[0])
+    print(year_counter_list)
+
+
 
 def main():
     read_and_parse()
     generate_conf_index()
     generate_edges()
+
+
     
     
 
