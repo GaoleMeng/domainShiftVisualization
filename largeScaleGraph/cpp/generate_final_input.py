@@ -19,8 +19,6 @@ largeVis_output = "./citation_qiaozhu.txt";
 
 split_location = "/home/wuzhuofeng/domainShiftVisualization/largeScaleGraph/cpp/final_visulization/";
 
-conf_lines_file = open(input_dir_1)
-
 conf_info = {}
 
 index_count = 0
@@ -34,13 +32,17 @@ conf_pool = set()
 sigir_pool = set()
 conf_to_index = {}
 index_to_conf = {}
+index_to_loc = {}
 
 tmp_counter = 0
+
+split_points = ['1994', '2007']
 
 
 def read_and_parse():
     global index_count
     global tmp_counter
+    conf_lines_file = open(input_dir_1)
     for line in conf_lines_file:
         tmp_obj = json.loads(line)
         if "id" not in tmp_obj:
@@ -86,6 +88,16 @@ def read_and_parse():
 
         year_to_indexlist[year_string].append(index_count)
         index_count += 1
+    conf_lines_file.close()
+
+
+
+def generate_index_to_loc():
+    tmp_file = open(largeVis_output)
+    for line in tmp_file:
+        vec = line.split()
+        index_to_loc[vec[0]] = line
+    tmp_file.close()
 
 
 def generate_conf_index():
@@ -108,8 +120,32 @@ def generate_edges():
 
 def generate_files():
     year_counter_list = sorted(year_counter.items(), key=lambda x:x[0])
-    print(year_counter_list)
-    print(tmp_counter)
+    # print(year_counter_list)
+    # print(tmp_counter)
+    cur_layer = 0
+    layer_list = {}
+    for k, v in sorted(year_to_indexlist.items(), key=lambda x:x[0]):
+        if cur_layer not in layer_list:
+            layer_list[cur_layer] = []
+        layer_list[cur_layer] = layer_list[cur_layer] + 
+        if k in split_points:
+            cur_layer += 1
+    
+    for k, v in sorted(layer_list.items(), key=lambda x:x[0]):
+        point_file = open(split_location + str(k) + "_points.txt")
+        label_file = open(split_location + str(k) + "_labels.txt")
+        
+        point_file.write(str(len(v)) + "\n")
+        for tmp in v:
+            if tmp in sigir_pool:
+                point_file.write(index_to_loc[tmp] + "\n")
+                label_file.wrtei("10\n")
+            else:
+                point_file.write(index_to_loc[tmp] + "\n")
+                label_file.wrtei("0\n")
+        
+        point_file.close()
+        label_file.close()
 
 
 

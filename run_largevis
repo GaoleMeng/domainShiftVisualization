@@ -1,0 +1,5 @@
+scp -r wuzhuofeng@162.105.87.24:/home/wuzhuofeng/intermediate_files/non_bias_edges_withauthors.txt  ./LargeVis
+cd LargeVis
+python LargeVis_run.py -input ./non_bias_edges_withauthors.txt  -output ./citation_qiaozhu.txt -threads 16 -outdim 2 -fea 0
+mv ./citation_qiaozhu.txt ../largeScaleGraph/cpp/
+rm ./non_bias_edges_withauthors.txt
