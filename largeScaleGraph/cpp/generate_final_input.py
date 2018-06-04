@@ -134,6 +134,7 @@ def generate_files():
             if str(tmp) not in index_to_loc:
                 continue
             layer_list[cur_layer].append(tmp)
+        print(k)
         if k in split_points:
             cur_layer += 1
     print(len(layer_list))
