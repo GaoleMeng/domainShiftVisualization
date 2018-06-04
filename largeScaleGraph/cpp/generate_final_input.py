@@ -159,6 +159,7 @@ def main():
     read_and_parse()
     generate_conf_index()
     generate_edges()
+    generate_index_to_loc()
     generate_files()
 
     
