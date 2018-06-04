@@ -136,6 +136,7 @@ def generate_files():
             cur_layer += 1
     
     print(layer_list)
+    print(year_to_indexlist)
     for k, v in sorted(layer_list.items(), key=lambda x:x[0]):
         point_file = open(split_location + str(k) + "_points.txt", 'w')
         label_file = open(split_location + str(k) + "_labels.txt", 'w')
