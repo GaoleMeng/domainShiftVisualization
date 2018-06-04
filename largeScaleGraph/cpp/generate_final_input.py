@@ -171,7 +171,7 @@ def generate_files():
                     for index in v:
                         if str(index) not in index_to_loc:
                             continue
-                        vec = index_to_loc[index].strip().split()
+                        vec = index_to_loc[str(index)].strip().split()
                         elementX += float(vec[1])
                         elementY += float(vec[2])
                         counter += 1.0
