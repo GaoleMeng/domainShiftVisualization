@@ -161,7 +161,7 @@ def generate_files():
         author_file = open(split_location + str(i) + "_authors.txt", "w")
 
         tmp_list = []
-        for author_dict in author_to_index:
+        for k, author_dict in author_to_index.items():
             elementX = 0.0
             elementY = 0.0
             counter = 0
