@@ -36,7 +36,7 @@ index_to_loc = {}
 
 tmp_counter = 0
 
-split_points = ['0000', '1997', '2009', '3000']
+split_points = ['0000', '1997', '2008', '3000']
 
 
 def read_and_parse():
