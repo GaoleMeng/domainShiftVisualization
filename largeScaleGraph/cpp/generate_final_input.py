@@ -98,7 +98,7 @@ def generate_index_to_loc():
     for line in tmp_file:
         vec = line.split()
         index_to_loc[vec[0]] = line
-    print(index_to_loc)
+    # print(index_to_loc)
     tmp_file.close()
 
 
@@ -145,10 +145,10 @@ def generate_files():
         for tmp in v:
             if int(tmp) in sigir_pool:
                 point_file.write(index_to_loc[str(tmp)])
-                label_file.wrtei("10\n")
+                label_file.write("10\n")
             else:
                 point_file.write(index_to_loc[str(tmp)])
-                label_file.wrtei("0\n")
+                label_file.write("0\n")
         
         point_file.close()
         label_file.close()
