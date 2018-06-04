@@ -127,7 +127,7 @@ def generate_files():
     for k, v in sorted(year_to_indexlist.items(), key=lambda x:x[0]):
         if cur_layer not in layer_list:
             layer_list[cur_layer] = []
-        layer_list[cur_layer] = layer_list[cur_layer] + 
+        layer_list[cur_layer] = layer_list[cur_layer] + v
         if k in split_points:
             cur_layer += 1
     
