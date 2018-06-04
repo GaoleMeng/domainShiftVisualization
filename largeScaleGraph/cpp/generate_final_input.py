@@ -36,7 +36,7 @@ index_to_loc = {}
 
 tmp_counter = 0
 
-split_points = ['1997', '2009']
+split_points = ['0000', '1997', '2009', '3000']
 
 
 def read_and_parse():
@@ -80,8 +80,11 @@ def read_and_parse():
             for tmp in author_list:
                 if "name" in tmp:
                     if tmp["name"] not in author_to_index:
-                        author_to_index[tmp["name"]] = []
-                    author_to_index[tmp["name"]].append(index_count)
+                        author_to_index[tmp["name"]] = {}
+                    if year_string not in author_to_index[tmp["name"]]:
+                        author_to_index[tmp["name"]][year_string] = []
+                    author_to_index[tmp["name"]][year_string].append(index_count)
+                    # author_to_index[tmp["name"]].append(index_count)
 
         if "references" in tmp_obj:
             for ref in tmp_obj["references"]:
@@ -150,9 +153,37 @@ def generate_files():
             else:
                 point_file.write(index_to_loc[str(tmp)])
                 label_file.write("0\n")
-        
+
         point_file.close()
         label_file.close()
+    
+    for i in range(3):
+        author_file = open(split_location + str(i) + "_authors.txt", "w")
+
+        tmp_list = []
+        for author_dict in author_to_index:
+            elementX = 0.0
+            elementY = 0.0
+            counter = 0
+            for k, v in author_dict.items():
+                if str(k) > split_points[i] and str(k) < split_points[i+1]: 
+                    for index in v:
+                        if index not in index_to_loc:
+                            continue
+                        vec = index_to_loc[index].strip().split()
+                        elementX += float(vec[1])
+                        elementY += float(vec[2])
+                        counter += 1.0
+            if counter != 0:
+                tmp_list.append("1 %s %s\n" % (elementX, elementY))
+
+        author_file.write(str(len(tmp_list)) + "\n")
+        for tmp in tmp_list:
+            author_file.write(tmp)
+
+        author_file.close()
+    
+    
 
 
 
