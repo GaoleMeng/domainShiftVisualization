@@ -36,6 +36,7 @@ index_to_loc = {}
 
 tmp_counter = 0
 author_to_self_index = {}
+keywords_pool = {}
 
 split_points = ['0000', '1997', '2008', '3000']
 
@@ -65,6 +66,10 @@ def read_and_parse():
         # if venue_string not in conf_to_index:
         #     conf_to_index[venue_string] = []
         # conf_to_index.append(index_count)
+
+        if "keywords" in tmp_obj:
+            for keyword in tmp_obj["keywords"]:
+                keywords_pool.add(keyword)
 
         if id_string not in id_to_ref:
             id_to_ref[index_count] = []
@@ -164,7 +169,9 @@ def generate_files():
         point_file.close()
         label_file.close()
     
-    print(len(author_to_self_index))
+    # print(len(author_to_self_index))
+    print(keywords_pool)
+    print(len(keywords_pool))
     for i in range(3):
         author_file = open(split_location + str(i) + "_authors.txt", "w")
 
