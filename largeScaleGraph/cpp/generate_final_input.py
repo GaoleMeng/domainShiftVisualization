@@ -37,6 +37,7 @@ index_to_loc = {}
 tmp_counter = 0
 author_to_self_index = {}
 keywords_pool = set()
+conf_count = {}
 
 split_points = ['0000', '1997', '2008', '3000']
 
@@ -55,6 +56,11 @@ def read_and_parse():
             continue
         venue_string = tmp_obj["venue"]
         conf_pool.add(venue_string)
+        if venue_string not in conf_count:
+            conf_count[venue_string] = 0
+        conf_count[venue_string] += 1
+
+
         id_string = tmp_obj["id"]
         year_string = tmp_obj["year"]
         if year_string not in year_to_indexlist:
@@ -180,7 +186,7 @@ def generate_files():
             elementX = 0.0
             elementY = 0.0
             counter = 0
-            print(k, author_dict)
+            # print(k, author_dict)
 
             for k, v in author_dict.items():
                 if str(k) > split_points[i] and str(k) < split_points[i+1]: 
