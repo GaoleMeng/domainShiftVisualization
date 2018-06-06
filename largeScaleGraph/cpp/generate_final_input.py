@@ -36,7 +36,7 @@ index_to_loc = {}
 
 tmp_counter = 0
 author_to_self_index = {}
-keywords_pool = {}
+keywords_pool = set()
 
 split_points = ['0000', '1997', '2008', '3000']
 
