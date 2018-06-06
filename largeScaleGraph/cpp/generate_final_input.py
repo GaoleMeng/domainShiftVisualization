@@ -109,9 +109,9 @@ def generate_conf_index():
     global index_count
     for conf in conf_pool:
         conf_to_index[conf] = index_count
-        print(conf)
+        # print(conf)
         index_count += 1
-    print("total conf number: ", len(conf_pool))
+    # print("total conf number: ", len(conf_pool))
 
 
 def generate_edges():
@@ -167,6 +167,7 @@ def generate_files():
             elementX = 0.0
             elementY = 0.0
             counter = 0
+            print(author_dict)
 
             for k, v in author_dict.items():
                 if str(k) > split_points[i] and str(k) < split_points[i+1]: 
