@@ -126,8 +126,12 @@ def generate_conf_index():
     for conf in conf_pool:
         conf_to_index[conf] = index_count
         # print(conf)
-        print("%s %s" % (conf, conf_count[conf]))
+        
         index_count += 1
+    
+    for k, v in sorted(conf_count.items(), key=lambda x:x[1]):
+        print("%s %s" % (k, v))
+
     print("total conf number: ", len(conf_pool))
 
 
