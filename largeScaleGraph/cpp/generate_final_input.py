@@ -35,6 +35,7 @@ index_to_conf = {}
 index_to_loc = {}
 
 tmp_counter = 0
+author_to_self_index = {}
 
 split_points = ['0000', '1997', '2008', '3000']
 
@@ -84,6 +85,10 @@ def read_and_parse():
                     if year_string not in author_to_index[tmp["name"]]:
                         author_to_index[tmp["name"]][year_string] = []
                     author_to_index[tmp["name"]][year_string].append(index_count)
+                    
+                    if tmp["name"] not in author_to_self_index:
+                        author_to_self_index[tmp["name"]] = len(author_to_self_index)
+
                     # author_to_index[tmp["name"]].append(index_count)
 
         if "references" in tmp_obj:
@@ -159,6 +164,7 @@ def generate_files():
         point_file.close()
         label_file.close()
     
+    print(len(author_to_self_index))
     for i in range(3):
         author_file = open(split_location + str(i) + "_authors.txt", "w")
 
@@ -167,7 +173,7 @@ def generate_files():
             elementX = 0.0
             elementY = 0.0
             counter = 0
-            print(k, author_dict)
+            # print(k, author_dict)
 
             for k, v in author_dict.items():
                 if str(k) > split_points[i] and str(k) < split_points[i+1]: 
