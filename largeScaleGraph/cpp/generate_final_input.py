@@ -167,7 +167,7 @@ def generate_files():
             elementX = 0.0
             elementY = 0.0
             counter = 0
-            print(author_dict)
+            print(k, author_dict)
 
             for k, v in author_dict.items():
                 if str(k) > split_points[i] and str(k) < split_points[i+1]: 
