@@ -170,8 +170,8 @@ def generate_files():
         label_file.close()
     
     # print(len(author_to_self_index))
-    print(keywords_pool)
-    print(len(keywords_pool))
+    # print(keywords_pool)
+    # print(len(keywords_pool))
     for i in range(3):
         author_file = open(split_location + str(i) + "_authors.txt", "w")
 
@@ -180,7 +180,7 @@ def generate_files():
             elementX = 0.0
             elementY = 0.0
             counter = 0
-            # print(k, author_dict)
+            print(k, author_dict)
 
             for k, v in author_dict.items():
                 if str(k) > split_points[i] and str(k) < split_points[i+1]: 
