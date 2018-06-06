@@ -126,8 +126,9 @@ def generate_conf_index():
     for conf in conf_pool:
         conf_to_index[conf] = index_count
         # print(conf)
+        print("%s %s" % (conf, conf_count[conf]))
         index_count += 1
-    # print("total conf number: ", len(conf_pool))
+    print("total conf number: ", len(conf_pool))
 
 
 def generate_edges():
