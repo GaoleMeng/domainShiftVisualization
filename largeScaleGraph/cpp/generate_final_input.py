@@ -323,13 +323,21 @@ def generate_files():
         label_file = open(split_location + str(k) + "_labels.txt", 'w')
         
         point_file.write(str(len(v)) + "\n")
+        point_list = []
+        label_list = []
         for tmp in v:
-            if int(tmp) in sigir_pool:
-                point_file.write(index_to_loc[str(tmp)])
-                label_file.write("10\n")
-            else:
-                point_file.write(index_to_loc[str(tmp)])
-                label_file.write("0\n")
+            conf = index_to_conf[tmp]
+            if conf in color_map:
+                point_list.append(index_to_loc[str(tmp)])
+                label_list.append("%s\n" % color_map[conf])
+                # point_file.write(index_to_loc[str(tmp)])
+                # label_file.write("%s\n" % color_map[conf])
+
+        point_file.write(str(len(point_file)) + "\n")
+        
+        for tmp in range(len(point_file)):
+            point_file.write(point_file[tmp])
+            label_file.write(label_file[tmp])
 
         point_file.close()
         label_file.close()
