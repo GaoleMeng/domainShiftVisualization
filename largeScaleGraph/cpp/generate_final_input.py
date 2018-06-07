@@ -328,13 +328,13 @@ def generate_files():
         for tmp in v:
             conf = index_to_conf[tmp]
 
-            if conf == "SIGIR Forum":
-                point_list.append(index_to_loc[str(tmp)])
-                label_list.append("1\n")
-
-            # if conf in color_map:
+            # if conf == "SIGIR Forum":
             #     point_list.append(index_to_loc[str(tmp)])
-            #     label_list.append("%s\n" % color_map[conf])
+            #     label_list.append("1\n")
+
+            if conf in color_map:
+                point_list.append(index_to_loc[str(tmp)])
+                label_list.append("%s\n" % color_map[conf])
                 # point_file.write(index_to_loc[str(tmp)])
                 # label_file.write("%s\n" % color_map[conf])
 
