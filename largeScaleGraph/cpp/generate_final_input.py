@@ -283,10 +283,10 @@ def generate_conf_index():
         
         index_count += 1
     
-    for k, v in sorted(conf_count.items(), key=lambda x:x[1]):
-        print("%s %s" % (k, v))
+    # for k, v in sorted(conf_count.items(), key=lambda x:x[1]):
+    #     print("%s %s" % (k, v))
 
-    print("total conf number: ", len(conf_pool))
+    # print("total conf number: ", len(conf_pool))
 
 
 def generate_edges():
@@ -322,7 +322,7 @@ def generate_files():
         point_file = open(split_location + str(k) + "_points.txt", 'w')
         label_file = open(split_location + str(k) + "_labels.txt", 'w')
         
-        point_file.write(str(len(v)) + "\n")
+        # point_file.write(str(len(v)) + "\n")
         point_list = []
         label_list = []
         for tmp in v:
