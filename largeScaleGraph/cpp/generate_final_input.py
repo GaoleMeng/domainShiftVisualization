@@ -333,11 +333,11 @@ def generate_files():
                 # point_file.write(index_to_loc[str(tmp)])
                 # label_file.write("%s\n" % color_map[conf])
 
-        point_file.write(str(len(point_file)) + "\n")
+        point_file.write(str(len(point_list)) + "\n")
         
-        for tmp in range(len(point_file)):
-            point_file.write(point_file[tmp])
-            label_file.write(label_file[tmp])
+        for tmp in range(len(point_list)):
+            point_file.write(point_list[tmp])
+            label_file.write(label_list[tmp])
 
         point_file.close()
         label_file.close()
