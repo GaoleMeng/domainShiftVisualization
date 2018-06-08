@@ -79,7 +79,7 @@ color_map = {
     "CLEF": 19,
     "AIRS": 42,
     "SOSP": 43,
-    "Journal of The American Society for Information Science and Technology": 44, # JASIST
+    "Journal of The American Society for Information Science and Technology": 10, # JASIST
     "uncertainty in artificial intelligence": 21, # UAI
     "International Conference on Machine Learning": 46, # ICML
     "World Wide Web Conference Series": 16, # WWW
