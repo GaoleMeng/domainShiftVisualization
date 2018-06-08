@@ -1,45 +1,37 @@
-"""
-the python version of "generate final input"
-which takes the filtered file and output the edges computation
-or it can read the final output of large vis and output the author point split
-and paper embedding split
-"""
+import numpy
+import matplotlib.pyplot as plt
+import argparse
 
-import os
-import sys
-import json
-import sets
+parser = argparse.ArgumentParser()
 
-# the 
-input_dir_1 = "/home/wuzhuofeng/intermediate_files/lines_belong_toconf_smaller.txt";
+parser.add_argument('-input', default = '', help = 'input file')
+parser.add_argument('-label', default = '', help = 'label file')
+parser.add_argument('-output', default = '', help = 'output file')
+parser.add_argument('-range', default = '', help = 'axis range')
 
-output_file = "/home/wuzhuofeng/intermediate_files/non_bias_edges_withauthors.txt";
+args = parser.parse_args()
 
-largeVis_output = "./citation_qiaozhu.txt";
+label = []
+for i in range(53):
+    label.append(str(i + 1))
 
-split_location = "/home/wuzhuofeng/domainShiftVisualization/largeScaleGraph/cpp/final_visulization/";
 
-conf_info = {}
+# if args.label != '':
+#     for line in open(args.label):
+#         label.append(line.strip())
 
-index_count = 0
+N = M = 0
+all_data = {}
+# for i, line in enumerate(open(args.input)):
+#     vec = line.strip().split(' ')
+#     if i == 0:
+#         N = int(vec[0])
+#         M = int(2)
+#     elif i <= N:
+#         if args.label == '':
+#             label.append(0)
+#         all_data.setdefault(label[i-1], []).append((float(vec[-2]), float(vec[-1])))
 
-id_to_ref = {}
-id_to_index = {}
-year_to_indexlist = {}
-year_counter = {}   # count the sigir paper in each year
-author_to_index = {}
-conf_pool = set()
-sigir_pool = set()
-conf_to_index = {}
-index_to_conf = {}
-index_to_loc = {}
-
-tmp_counter = 0
-author_to_self_index = {}
-keywords_pool = set()
-conf_count = {}
-
-split_points = ['0000', '1997', '2008', '3000']
 
 
 color_map = {
@@ -87,7 +79,7 @@ color_map = {
     "CLEF": 19,
     "AIRS": 42,
     "SOSP": 43,
-    "Journal of The American Society for Information Science and Technology": 10, # JASIST
+    "Journal of The American Society for Information Science and Technology": 44, # JASIST
     "uncertainty in artificial intelligence": 21, # UAI
     "International Conference on Machine Learning": 46, # ICML
     "World Wide Web Conference Series": 16, # WWW
@@ -194,206 +186,41 @@ color_map = {
 }
 
 
+def find_corresponding(num):
+    ans = ""
+    for k, v in color_map.items():
+        if ans == "" and v == int(num):
+            ans = k
+        elif v == int(num) and len(ans) > len(k):
+            ans = k
+    return ans
 
 
-def read_and_parse():
-    global index_count
-    global tmp_counter
-    conf_lines_file = open(input_dir_1)
-    for line in conf_lines_file:
-        tmp_obj = json.loads(line)
-        if "id" not in tmp_obj:
-            continue
-        if "venue" not in tmp_obj:
-            continue
-        if "year" not in tmp_obj:
-            continue
-        venue_string = tmp_obj["venue"]
-        conf_pool.add(venue_string)
-        if venue_string not in conf_count:
-            conf_count[venue_string] = 0
-        conf_count[venue_string] += 1
+N = int(53)
+M = int(2)
+for i in range(53):
+    all_data.setdefault(label[i], []).append((float(0), float(23-i)))
+
+print(sorted(all_data.keys()))
+colors = plt.cm.rainbow(numpy.linspace(0, 1, len(all_data)))
+
+for i in range(53):
+    print(find_corresponding(i+1))
 
 
-        id_string = tmp_obj["id"]
-        year_string = tmp_obj["year"]
-        if year_string not in year_to_indexlist:
-            year_to_indexlist[year_string] = []
-
-        id_to_index[id_string] = index_count
-        index_to_conf[index_count] = venue_string
-
-        # if venue_string not in conf_to_index:
-        #     conf_to_index[venue_string] = []
-        # conf_to_index.append(index_count)
-
-        if "keywords" in tmp_obj:
-            for keyword in tmp_obj["keywords"]:
-                keywords_pool.add(keyword)
-
-        if id_string not in id_to_ref:
-            id_to_ref[index_count] = []
-
-        if venue_string == "SIGIR" or venue_string == "SIGIR Forum":
-            if year_string not in year_counter:
-                year_counter[year_string] = 0
-            year_counter[year_string] += 1
-            sigir_pool.add(index_count)
-            tmp_counter += 1
-
-        if "authors" in tmp_obj:
-            author_list = tmp_obj["authors"]
-            for tmp in author_list:
-                if "name" in tmp:
-                    if tmp["name"] not in author_to_index:
-                        author_to_index[tmp["name"]] = {}
-                    if year_string not in author_to_index[tmp["name"]]:
-                        author_to_index[tmp["name"]][year_string] = []
-                    author_to_index[tmp["name"]][year_string].append(index_count)
-                    
-                    if tmp["name"] not in author_to_self_index:
-                        author_to_self_index[tmp["name"]] = len(author_to_self_index)
-
-                    # author_to_index[tmp["name"]].append(index_count)
-
-        if "references" in tmp_obj:
-            for ref in tmp_obj["references"]:
-                id_to_ref[index_count].append(ref)
-
-        year_to_indexlist[year_string].append(index_count)
-        index_count += 1
-    conf_lines_file.close()
-
-
-
-def generate_index_to_loc():
-    tmp_file = open(largeVis_output)
-    for line in tmp_file:
-        vec = line.split()
-        index_to_loc[vec[0]] = line
-    # print(index_to_loc)
-    tmp_file.close()
-
-
-def generate_conf_index():
-    global index_count
-    for conf in conf_pool:
-        conf_to_index[conf] = index_count
-        # print(conf)
-        
-        index_count += 1
-    
-    # for k, v in sorted(conf_count.items(), key=lambda x:x[1]):
-    #     print("%s %s" % (k, v))
-
-    # print("total conf number: ", len(conf_pool))
-
-
-def generate_edges():
-    out_edges_file = open(output_file, "w")
-    for k, v in id_to_ref.items():
-        for tmp in v:
-            if tmp not in id_to_index:
-                continue
-            out_edges_file.write(str(k) + " " + str(id_to_index[tmp]) + " 1\n")
-    for k, v in index_to_conf.items():
-        out_edges_file.write(str(k) + " " + str(conf_to_index[v]) + " 2\n");
-    out_edges_file.close()
-
-
-def generate_files():
-    year_counter_list = sorted(year_counter.items(), key=lambda x:x[0])
-    # print(year_counter_list)
-    # print(tmp_counter)
-    cur_layer = 1
-    layer_list = {}
-    for k, v in sorted(year_to_indexlist.items(), key=lambda x:x[0]):
-        if cur_layer not in layer_list:
-            layer_list[cur_layer] = []
-        for tmp in v:
-            if str(tmp) not in index_to_loc:
-                continue
-            layer_list[cur_layer].append(tmp)
-        # print(k)
-        if str(k) in split_points:
-            cur_layer += 1
-    # print(len(layer_list))
-    for k, v in sorted(layer_list.items(), key=lambda x:x[0]):
-        point_file = open(split_location + str(k) + "_points.txt", 'w')
-        label_file = open(split_location + str(k) + "_labels.txt", 'w')
-        
-        # point_file.write(str(len(v)) + "\n")
-        point_list = []
-        label_list = []
-        for tmp in v:
-            conf = index_to_conf[tmp]
-
-            # if conf == "SIGIR Forum":
-            #     point_list.append(index_to_loc[str(tmp)])
-            #     label_list.append("1\n")
-
-            if conf in color_map:
-                point_list.append(index_to_loc[str(tmp)])
-                label_list.append("%s\n" % color_map[conf])
-                # point_file.write(index_to_loc[str(tmp)])
-                # label_file.write("%s\n" % color_map[conf])
-
-        point_file.write(str(len(point_list)) + "\n")
-        
-        for tmp in range(len(point_list)):
-            point_file.write(point_list[tmp])
-            label_file.write(label_list[tmp])
-
-        point_file.close()
-        label_file.close()
-    
-    # print(len(author_to_self_index))
-    # print(keywords_pool)
-    # print(len(keywords_pool))
-    for i in range(3):
-        author_file = open(split_location + str(i) + "_authors.txt", "w")
-
-        tmp_list = []
-        for k, author_dict in author_to_index.items():
-            elementX = 0.0
-            elementY = 0.0
-            counter = 0
-            # print(k, author_dict)
-
-            for k, v in author_dict.items():
-                if str(k) > split_points[i] and str(k) < split_points[i+1]: 
-                    for index in v:
-                        if str(index) not in index_to_loc:
-                            continue
-                        vec = index_to_loc[str(index)].strip().split()
-                        elementX += float(vec[1])
-                        elementY += float(vec[2])
-                        counter += 1.0
-            if counter != 0:
-                tmp_list.append("1 %s %s\n" % (elementX / counter, elementY / counter))
-
-        author_file.write(str(len(tmp_list)) + "\n")
-        for tmp in tmp_list:
-            author_file.write(tmp)
-
-        author_file.close()
-    
-    
-
-
-
-def main():
-    read_and_parse()
-    generate_conf_index()
-    generate_edges()
-    generate_index_to_loc()
-    generate_files()
-
-    
-    
-
-
-if __name__ == "__main__":
-    main()
-
+#print(all_data)
+# print(colors)
+for color, ll in zip(colors, sorted(all_data.keys())):
+    x = [t[0] for t in all_data[ll]]
+    y = [t[1] for t in all_data[ll]]
+    print(ll)
+    plt.plot(x, y, '.', color = color, markersize = 5)
+if args.range != '':
+    l = abs(float(args.range))
+    plt.xlim(-l, l)
+    plt.ylim(-l, l)
+plt.xlim(-40, 40)
+plt.ylim(-40, 40)
+plt.savefig(args.output, dpi = 500)
+#plt.show()
 
