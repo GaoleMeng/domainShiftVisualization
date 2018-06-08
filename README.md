@@ -70,11 +70,8 @@ g++ -std=c++17  filter_second.cpp -o filter_second -lstdc++fs -pthread
 # after this, the final output of filter_second is couple of line that belongs to the conferences
 # that has high important factor
 
-# compile the largeVis input file generator
-g++ -std=c++17  generate_final_input.cpp -o generate_final_input -lstdc++fs -pthread
-
 # generate the final input to largeVis
-./generate_final_input
+python generate_final_input.py
 
 
 ```
@@ -85,7 +82,7 @@ To do this, we need to rerun the generate_final_input and find the run time dist
 
 ```
 # remember to set the correct file dir of the input and output, the output of the split is a folder, the default is final_visualization.
-./generate_final_input
+python generate_final_input.py
 
 # suppose final directory is final_visualization
 cd final_visualization
