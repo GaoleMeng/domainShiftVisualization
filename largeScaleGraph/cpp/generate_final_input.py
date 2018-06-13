@@ -44,7 +44,7 @@ conf_count = {}
 
 split_points = ['0000', '1997', '2008', '3000']
 
-class_map = {}
+color_map = {}
 eq_name_map = {}
 
 
@@ -400,7 +400,7 @@ def create_class_map():
     
         # print(vec)
     for k, v in all_conf:
-        class_map[k] = eq_name_map[v]
+        color_map[k] = eq_name_map[v]
     class_file.close()
     
 
