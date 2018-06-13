@@ -16,8 +16,16 @@ if args.label != '':
     for line in open(args.label):
         label.append(line.strip())
 
+for i in range(22):
+    label.append(i)
+
+
 N = M = 0
 all_data = {}
+
+for i in range(22):
+    all_data.setdefault(str(i), []).append((100, 100))
+
 for i, line in enumerate(open(args.input)):
     vec = line.strip().split(' ')
     if i == 0:
@@ -43,7 +51,3 @@ if args.range != '':
 plt.xlim(-40, 40)
 plt.ylim(-40, 40)
 plt.savefig(args.output, dpi = 500)
-#plt.show()
-
-
-

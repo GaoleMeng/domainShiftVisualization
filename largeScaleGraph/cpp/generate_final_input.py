@@ -390,6 +390,7 @@ def generate_files():
 def create_class_map():
     class_file = open(class_map_file)
     all_conf = []
+    tmp_conf = ""
     for line in class_file:
         vec = line.split("\t")
         conf_name = vec[2][0: vec[2].rfind(" ")]
@@ -397,8 +398,13 @@ def create_class_map():
         all_conf.append([conf_name, eq_name])
         if eq_name not in eq_name_map: 
             eq_name_map[eq_name] = len(eq_name_map)
+            if eq_name_map[eq_name] == 7:
+                tmp_conf = eq_name
     
-        # print(vec)
+    tmp = eq_name_map["SIGIR"]
+    eq_name_map["SIGIR"] = 7
+    eq_name_map[tmp_conf] = tmp
+
     for k, v in all_conf:
         color_map[k] = eq_name_map[v]
 
