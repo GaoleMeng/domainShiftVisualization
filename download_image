@@ -1,1 +1,1 @@
-echo "wuzhuofeng" | scp -r wuzhuofeng@162.105.87.24:/home/wuzhuofeng/domainShiftVisualization/largeScaleGraph/cpp/final_visulization ./largeScaleGraph/cpp/
+echo "wuzhuofeng" | scp -r wuzhuofeng@162.105.87.24:/home/wuzhuofeng/domainShiftVisualization/largeScaleGraph/cpp/final_visulization/*.txt ./largeScaleGraph/cpp/final_visulization/
