@@ -31,7 +31,7 @@ for i, line in enumerate(open(args.input)):
 colors = plt.cm.rainbow(numpy.linspace(0, 1, len(all_data)))
 
 #print(all_data)
-print(colors)
+print(len(colors))
 for color, ll in zip(colors, sorted(all_data.keys())):
     x = [t[0] for t in all_data[ll]]
     y = [t[1] for t in all_data[ll]]

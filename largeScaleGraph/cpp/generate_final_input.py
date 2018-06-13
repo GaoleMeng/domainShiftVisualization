@@ -402,6 +402,7 @@ def create_class_map():
     for k, v in all_conf:
         color_map[k] = eq_name_map[v]
 
+    print(color_map)
     print("unique conf:" + str(len(eq_name_map)))
     class_file.close()
     
