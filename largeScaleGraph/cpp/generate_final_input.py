@@ -402,8 +402,8 @@ def create_class_map():
                 tmp_conf = eq_name
     
     print(eq_name_map)
-    tmp = eq_name_map["SIGIR"]
-    eq_name_map["SIGIR"] = 7
+    tmp = eq_name_map["SIGIR\n"]
+    eq_name_map["SIGIR\n"] = 7
     eq_name_map[tmp_conf] = tmp
 
     for k, v in all_conf:
