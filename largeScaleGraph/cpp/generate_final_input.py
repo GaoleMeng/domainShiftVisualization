@@ -401,6 +401,7 @@ def create_class_map():
             if eq_name_map[eq_name] == 7:
                 tmp_conf = eq_name
     
+    print(eq_name_map)
     tmp = eq_name_map["SIGIR"]
     eq_name_map["SIGIR"] = 7
     eq_name_map[tmp_conf] = tmp
