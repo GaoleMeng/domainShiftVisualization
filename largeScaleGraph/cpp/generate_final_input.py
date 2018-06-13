@@ -48,7 +48,6 @@ color_map = {}
 eq_name_map = {}
 
 
-
 # color_map = {
 #     "Commun. ACM": 1,
 #     "NIPS": 2,
@@ -402,13 +401,13 @@ def create_class_map():
                 tmp_conf = eq_name
     
     print(eq_name_map)
-    tmp = eq_name_map["SIGIR\n"]
-    eq_name_map["SIGIR\n"] = 7
-    eq_name_map[tmp_conf] = tmp
+    # tmp = eq_name_map["SIGIR\n"]
+    # eq_name_map["SIGIR\n"] = 7
+    # eq_name_map[tmp_conf] = tmp
 
     for k, v in all_conf:
         color_map[k] = eq_name_map[v]
-
+    
     # print(color_map)
     print(eq_name_map)
     print("unique conf:" + str(len(eq_name_map)))
