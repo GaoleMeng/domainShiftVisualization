@@ -38,12 +38,23 @@ for i, line in enumerate(open(args.input)):
 
 colors = plt.cm.rainbow(numpy.linspace(0, 1, len(all_data)))
 
+print(colors)
+
+
 #print(all_data)
 print(len(colors))
 for color, ll in zip(colors, sorted(all_data.keys())):
     x = [t[0] for t in all_data[ll]]
     y = [t[1] for t in all_data[ll]]
-    plt.plot(x, y, 'x', color = color, markersize = 0.1)
+
+    if ll == "2":
+        plt.plot(x, y, 'x', color = "#000000", markersize = 0.5)
+    else:
+        plt.plot(x, y, 'x', color = color, markersize = 0.1)
+    # color[1] = 0.5
+    # color[2] = 0.5
+    # color[3] = 0.5
+    # plt.plot(x, y, '.', color = color, markersize = 0.1)
 if args.range != '':
     l = abs(float(args.range))
     plt.xlim(-l, l)
