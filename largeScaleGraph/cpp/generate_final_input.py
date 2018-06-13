@@ -45,6 +45,7 @@ conf_count = {}
 split_points = ['0000', '1997', '2008', '3000']
 
 class_map = {}
+eq_name_map = {}
 
 
 
@@ -388,11 +389,18 @@ def generate_files():
 
 def create_class_map():
     class_file = open(class_map_file)
+    all_conf = []
     for line in class_file:
         vec = line.split("\t")
-        print(vec)
-
-
+        conf_name = vec[2][0: vec[2].rfind(" ")]
+        eq_name = vec[3]
+        all_conf.append([conf_name, eq_name])
+        if eq_name not in eq_name_map: 
+            eq_name_map[eq_name] = len(eq_name_map)
+    
+        # print(vec)
+    for k, v in all_conf:
+        class_map[k] = eq_name_map[v]
     class_file.close()
     
 
