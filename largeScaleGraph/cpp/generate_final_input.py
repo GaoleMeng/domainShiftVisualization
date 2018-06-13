@@ -393,8 +393,7 @@ def create_class_map():
         print(vec)
 
 
-
-    close(class_file)
+    class_file.close()
     
 
 
