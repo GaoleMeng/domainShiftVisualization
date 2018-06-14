@@ -287,7 +287,7 @@ def generate_conf_index():
     for conf in conf_pool:
         conf_to_index[conf] = index_count
         print(conf)
-        if conf in eq_name_map:
+        if conf + "\n" in eq_name_map:
             eq_name_to_index[conf] = index_count
         index_count += 1
     
