@@ -289,6 +289,8 @@ def generate_conf_index():
         # print(conf)
         if conf + "\n" in eq_name_map:
             eq_name_to_index[conf] = index_count
+        elif conf == "SIGMOD Conference":
+            eq_name_to_index[conf] = index_count
         index_count += 1
     
     # for k, v in sorted(conf_count.items(), key=lambda x:x[1]):
