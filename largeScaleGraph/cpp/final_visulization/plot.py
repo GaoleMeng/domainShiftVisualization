@@ -47,11 +47,11 @@ for color, ll in zip(colors, sorted(all_data.keys())):
     x = [t[0] for t in all_data[ll]]
     y = [t[1] for t in all_data[ll]]
 
-    if ll == "2":
-        plt.plot(x, y, 'x', color = "#000000", markersize = 0.1)
-    elif ll == "10":
-        plt.plot(x, y, 'x', color = "#000000", markersize = 0.1)
-    else:
+    if ll == "22":
+        plt.plot(x, y, 'x', color = "#000000", markersize = 0.5)
+    # elif ll == "10":
+    #     plt.plot(x, y, 'x', color = "#000000", markersize = 0.1)
+    else
         plt.plot(x, y, 'x', color = color, markersize = 0.1)
     # color[1] = 0.5
     # color[2] = 0.5
