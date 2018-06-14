@@ -286,7 +286,7 @@ def generate_conf_index():
     global index_count
     for conf in conf_pool:
         conf_to_index[conf] = index_count
-        # print(conf)
+        print(conf)
         if conf in eq_name_map:
             eq_name_to_index[conf] = index_count
         index_count += 1
