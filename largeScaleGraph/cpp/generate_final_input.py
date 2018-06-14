@@ -46,6 +46,7 @@ split_points = ['0000', '1997', '2008', '3000']
 
 color_map = {}
 eq_name_map = {}
+eq_name_to_index = {}
 
 
 # color_map = {
@@ -286,7 +287,8 @@ def generate_conf_index():
     for conf in conf_pool:
         conf_to_index[conf] = index_count
         # print(conf)
-        
+        if conf in eq_name_map:
+            eq_name_to_index[conf] = index_count
         index_count += 1
     
     # for k, v in sorted(conf_count.items(), key=lambda x:x[1]):
@@ -383,6 +385,12 @@ def generate_files():
             author_file.write(tmp)
 
         author_file.close()
+
+    print("find eq_name: ", len(eq_name_to_index))
+    for conf in eq_name_map.keys():
+        print(index_to_loc[eq_name_to_index[conf]])
+        # eq_name_to_index
+        
     
 
 
