@@ -388,7 +388,7 @@ def generate_files():
 
     print("find eq_name: ", len(eq_name_to_index))
     for conf in eq_name_to_index.keys():
-        print(index_to_loc[eq_name_to_index[conf]])
+        print(index_to_loc[str(eq_name_to_index[conf])])
         # eq_name_to_index
         
     
