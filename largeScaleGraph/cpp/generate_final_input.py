@@ -286,7 +286,7 @@ def generate_conf_index():
     global index_count
     for conf in conf_pool:
         conf_to_index[conf] = index_count
-        print(conf)
+        # print(conf)
         if conf + "\n" in eq_name_map:
             eq_name_to_index[conf] = index_count
         index_count += 1
@@ -387,7 +387,7 @@ def generate_files():
         author_file.close()
 
     print("find eq_name: ", len(eq_name_to_index))
-    for conf in eq_name_map.keys():
+    for conf in eq_name_to_index.keys():
         print(index_to_loc[eq_name_to_index[conf]])
         # eq_name_to_index
         
