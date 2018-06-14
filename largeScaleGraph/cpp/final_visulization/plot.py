@@ -48,7 +48,9 @@ for color, ll in zip(colors, sorted(all_data.keys())):
     y = [t[1] for t in all_data[ll]]
 
     if ll == "2":
-        plt.plot(x, y, 'x', color = "#000000", markersize = 0.5)
+        plt.plot(x, y, 'x', color = "#000000", markersize = 0.1)
+    elif ll == "10":
+        plt.plot(x, y, 'x', color = "#000000", markersize = 0.1)
     else:
         plt.plot(x, y, 'x', color = color, markersize = 0.1)
     # color[1] = 0.5
