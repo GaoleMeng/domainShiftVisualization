@@ -326,8 +326,8 @@ def generate_files():
         if cur_layer not in layer_list:
             layer_list[cur_layer] = []
         for tmp in v:
-            if str(tmp) not in index_to_loc:
-                continue
+            # if str(tmp) not in index_to_loc:
+            #     continue
             layer_list[cur_layer].append(tmp)
         # print(k)
         if str(k) in split_points:
