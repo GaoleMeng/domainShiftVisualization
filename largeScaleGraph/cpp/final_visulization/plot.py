@@ -44,12 +44,15 @@ print(colors)
 #print(all_data)
 print(len(colors))
 print(sorted(all_data.keys()))
+
+tmp_counter = 0
 for color, ll in zip(colors, sorted(all_data.keys())):
     x = [t[0] for t in all_data[ll]]
     y = [t[1] for t in all_data[ll]]
 
     if ll == "12":
         plt.plot(x, y, '.', color = "#000000", markersize = 0.5)
+        tmp_counter += len(all_data[ll])
     # # elif ll == "10":
     # #     plt.plot(x, y, 'x', color = "#000000", markersize = 0.1)
     # else:
@@ -58,6 +61,8 @@ for color, ll in zip(colors, sorted(all_data.keys())):
     # color[2] = 0.5
     # color[3] = 0.5
     # plt.plot(x, y, '.', color = color, markersize = 0.1)
+
+print("sigir this time:", tmp_counter)
 if args.range != '':
     l = abs(float(args.range))
     plt.xlim(-l, l)
