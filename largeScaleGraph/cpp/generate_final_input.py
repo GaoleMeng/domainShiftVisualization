@@ -350,6 +350,7 @@ def generate_files():
             #     label_list.append("1\n")
 
             if conf in color_map:
+                print(conf)
                 if conf == "SIGIR" and conf == "SIGIR Forum":
                     tmp_counter += 1
                 point_list.append(index_to_loc[str(tmp)])
