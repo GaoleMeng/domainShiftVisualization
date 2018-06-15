@@ -306,8 +306,13 @@ def generate_edges():
             if tmp not in id_to_index:
                 continue
             out_edges_file.write(str(k) + " " + str(id_to_index[tmp]) + " 1\n")
+
+    tmp_counter = 0
     for k, v in index_to_conf.items():
         out_edges_file.write(str(k) + " " + str(conf_to_index[v]) + " 2\n");
+        if v == "SIGIR" or v == "SIGIR Forum":
+            tmp_counter += 1
+    print("the paper in sigir:", tmp_counter)
     out_edges_file.close()
 
 
@@ -410,7 +415,7 @@ def create_class_map():
             if eq_name_map[eq_name] == 7:
                 tmp_conf = eq_name
     
-    print(eq_name_map)
+    # print(eq_name_map)
     # tmp = eq_name_map["SIGIR\n"]
     # eq_name_map["SIGIR\n"] = 7
     # eq_name_map[tmp_conf] = tmp
@@ -418,7 +423,7 @@ def create_class_map():
     for k, v in all_conf:
         color_map[k] = eq_name_map[v]
 
-    print(color_map)
+    # print(color_map)
     # print(eq_name_map)
     print("unique conf:" + str(len(eq_name_map)))
     class_file.close()
