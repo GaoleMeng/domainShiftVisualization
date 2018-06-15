@@ -333,6 +333,8 @@ def generate_files():
         if str(k) in split_points:
             cur_layer += 1
     # print(len(layer_list))
+
+    tmp_counter = 0
     for k, v in sorted(layer_list.items(), key=lambda x:x[0]):
         point_file = open(split_location + str(k) + "_points.txt", 'w')
         label_file = open(split_location + str(k) + "_labels.txt", 'w')
@@ -348,6 +350,8 @@ def generate_files():
             #     label_list.append("1\n")
 
             if conf in color_map:
+                if conf == "SIGIR" and conf == "SIGIR Forum":
+                    tmp_counter += 1
                 point_list.append(index_to_loc[str(tmp)])
                 label_list.append("%s\n" % color_map[conf])
                 # point_file.write(index_to_loc[str(tmp)])
@@ -362,6 +366,7 @@ def generate_files():
         point_file.close()
         label_file.close()
     
+    print("sigir input ", tmp_counter)
     # print(len(author_to_self_index))
     # print(keywords_pool)
     # print(len(keywords_pool))
