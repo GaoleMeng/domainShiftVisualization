@@ -11,7 +11,7 @@ parser.add_argument('-output', default = '', help = 'output file')
 parser.add_argument('-range', default = '', help = 'axis range')
 
 args = parser.parse_args()
-density = 0.25
+density = 0.35
 
 
 

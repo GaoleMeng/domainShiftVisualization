@@ -38,6 +38,7 @@ for i, line in enumerate(open(args.input)):
         
 
 
+
 colors = plt.cm.rainbow(numpy.linspace(0, 1, len(all_data)))
 
 print(colors)
@@ -59,7 +60,7 @@ for color, ll in zip(colors, sorted(all_data.keys())):
     x = [t[0] for t in all_data[ll]]
     y = [t[1] for t in all_data[ll]]
 
-    if ll == "12":
+    if ll == "10":
         plt.plot(x, y, '.', color = "#000000", markersize = 0.5)
         tmp_counter += len(all_data[ll])
     # # elif ll == "10":

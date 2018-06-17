@@ -309,7 +309,7 @@ def generate_edges():
 
     tmp_counter = 0
     for k, v in index_to_conf.items():
-        out_edges_file.write(str(k) + " " + str(conf_to_index[v]) + " 2\n");
+        out_edges_file.write(str(k) + " " + str(conf_to_index[v]) + " 1\n");
         if v == "SIGIR" or v == "SIGIR Forum":
             tmp_counter += 1
     print("the paper in sigir:", tmp_counter)
