@@ -16,6 +16,16 @@ for i in range(22):
     label.append(str(i))
 
 
+def de_normalize(vec):
+    ans = "#"
+    
+    for i in range(len(vec)-1):
+        if int(vec[i] * 255) < 16:
+            ans += "0"
+        ans += str(hex(int(vec[i] * 255)))[2:]
+    print(ans)
+    return ans
+
 # if args.label != '':
 #     for line in open(args.label):
 #         label.append(line.strip())
@@ -53,6 +63,17 @@ for i in range(22):
 
 print(sorted(all_data.keys()))
 colors = plt.cm.rainbow(numpy.linspace(0, 1, len(all_data)))
+
+
+
+colors = plt.cm.rainbow(numpy.linspace(0, 1, len(all_data)))
+
+colors_str = []
+for i in range(len(colors)):
+    colors_str.append(de_normalize(colors[i]))
+
+
+colors = colors_str
 
 
 print(len(colors))
