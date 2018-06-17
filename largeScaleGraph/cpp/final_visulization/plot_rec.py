@@ -2,6 +2,7 @@ import numpy
 import matplotlib.pyplot as plt
 import argparse
 import matplotlib.patches as patches
+import copy
 
 parser = argparse.ArgumentParser()
 
@@ -11,7 +12,8 @@ parser.add_argument('-output', default = '', help = 'output file')
 parser.add_argument('-range', default = '', help = 'axis range')
 
 args = parser.parse_args()
-density = 0.35
+density = 0.25
+smooth_threshold = 4
 
 
 
@@ -97,7 +99,8 @@ key_to_color = {}
 for color, ll in zip(colors, sorted(all_data.keys())):
     key_to_color[ll] = color
 
-
+location_str_to_label = {}
+next_location_str_to_label = {}
 for location_str, counter_dict in rec_data.items():
     ru_x = int(location_str.split()[0])
     ru_y = int(location_str.split()[1])
@@ -113,13 +116,60 @@ for location_str, counter_dict in rec_data.items():
             most_count = v
 
     if most_count > 1:
-        if most_label == "2":
-            plt.fill(location_x_list, location_y_list, color=key_to_color[most_label], edgecolor="#000000")
-        else:
-            plt.fill(location_x_list, location_y_list, color=key_to_color[most_label], edgecolor="none")
+        assert(most_label != "")
+        location_str_to_label[location_str] = most_label
+        # if most_label == "0":
+        #     plt.fill(location_x_list, location_y_list, color=key_to_color[most_label], edgecolor="#000000")
+        # else:
+        #     plt.fill(location_x_list, location_y_list, color=key_to_color[most_label], edgecolor="none")
 
+dir_x = [1, 1, 1, 0, -1, -1, -1, 0]
+dir_y = [1, 0, -1, -1, -1, 0, 1, 1]
 
+next_location_str_to_label = copy.deepcopy(location_str_to_label)
 
+for x in range(int(40 / density) * 2):
+    for y in range(int(40 / density) * 2):
+        tmp_x = x - int(40 / density)
+        tmp_y = y - int(40 / density)
+        loc_str = str(tmp_x) + " " + str(tmp_y)
+
+        label_counter = {}
+        most_label = ""
+        most_count = 0
+        for i in range(8):
+            next_x = tmp_x + dir_x[i]
+            next_y = tmp_y + dir_y[i]
+            next_str = str(next_x) + " " + str(next_y)
+            if next_str not in location_str_to_label:
+                continue
+
+            if location_str_to_label[next_str] not in label_counter:
+                label_counter[location_str_to_label[next_str]] = 0
+            label_counter[location_str_to_label[next_str] ] += 1
+        # print(label_counter)
+        for k, v in label_counter.items():
+            if v > most_count:
+                most_label = k
+                most_count = v
+        
+        if most_count > smooth_threshold:
+            assert(most_label != "")
+            next_location_str_to_label[loc_str] = most_label
+
+location_str_to_label = next_location_str_to_label
+
+for location_str, most_label in location_str_to_label.items():
+    ru_x = int(location_str.split()[0])
+    ru_y = int(location_str.split()[1])
+
+    location_x_list = [ru_x * density, (ru_x - 1) * density, (ru_x - 1) * density, ru_x * density]
+    location_y_list = [ru_y * density, ru_y * density, (ru_y - 1) * density, (ru_y - 1) * density]
+
+    if most_label == "0":
+        plt.fill(location_x_list, location_y_list, color="#000000", edgecolor="none")
+    else:
+        plt.fill(location_x_list, location_y_list, color=key_to_color[most_label], edgecolor="none")
 
 
 
