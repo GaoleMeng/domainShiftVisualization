@@ -135,7 +135,9 @@ def generate_index_to_loc():
         for line in tmp_file:
             vec = line.split()
             index_to_loc[vec[0]] = line
-            result.append([index_to_title[vec[0]], vec[0], vec[1]])
+            print(vec[0])
+            if (vec[0] in index_to_title):
+                result.append([index_to_title[vec[0]], vec[0], vec[1]])
         writer.writerows(result)
 
     tmp_file.close()
