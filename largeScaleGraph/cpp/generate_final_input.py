@@ -134,7 +134,7 @@ def generate_index_to_loc():
         vec = line.split()
         index_to_loc[vec[0]] = line
         if vec[0] in index_to_title:      
-            outfile.write(index_to_title[vec[0]] + "\t" + vec[0] + "\t" + vec[1] + "\n")
+            outfile.write(index_to_title[vec[0]] + "\t" + vec[1] + "\t" + vec[2] + "\n")
 
     # print(index_to_loc)
 
