@@ -12,9 +12,9 @@ parser.add_argument('-output', default = '', help = 'output file')
 parser.add_argument('-range', default = '', help = 'axis range')
 
 args = parser.parse_args()
-density = 0.25
-smooth_threshold = 4
-
+density = 0.15
+smooth_threshold = 3
+single_ton = 6
 
 
 label = []
@@ -28,7 +28,7 @@ for i in range(22):
 
 N = M = 0
 all_data = {}
-
+label_to_capital = {}
 
 # map from integer locations to label count
 rec_data = {}
@@ -87,6 +87,7 @@ for i in range(len(colors)):
     colors_str.append(de_normalize(colors[i]))
 
 
+
 colors = colors_str
 
 #print(all_data)
@@ -98,6 +99,19 @@ tmp_counter = 0
 key_to_color = {}
 for color, ll in zip(colors, sorted(all_data.keys())):
     key_to_color[ll] = color
+
+
+for k, point_list in all_data.items():
+    sum_x = 0.0
+    sum_y = 0.0
+    for point in point_list:
+        sum_x += point[0]
+        sum_y += point[1]
+    
+    label_to_capital[k] = (sum_x / len(point_list), sum_y / len(point_list))
+    plt.plot(label_to_capital[k][0], label_to_capital[k][1], 'o', color=key_to_color[k], markersize = 4)
+
+
 
 location_str_to_label = {}
 next_location_str_to_label = {}
@@ -115,7 +129,7 @@ for location_str, counter_dict in rec_data.items():
             most_label = k
             most_count = v
 
-    if most_count > 1:
+    if most_count > 0:
         assert(most_label != "")
         location_str_to_label[location_str] = most_label
         # if most_label == "0":
@@ -126,12 +140,48 @@ for location_str, counter_dict in rec_data.items():
 dir_x = [1, 1, 1, 0, -1, -1, -1, 0]
 dir_y = [1, 0, -1, -1, -1, 0, 1, 1]
 
-next_location_str_to_label = copy.deepcopy(location_str_to_label)
+for _ in range(5):
+    next_location_str_to_label = copy.deepcopy(location_str_to_label)
 
-for x in range(int(40 / density) * 2):
-    for y in range(int(40 / density) * 2):
-        tmp_x = x - int(40 / density)
-        tmp_y = y - int(40 / density)
+    for x in range(int(40 / density) * 2):
+        for y in range(int(40 / density) * 2):
+            tmp_x = x - int(40 / density)
+            tmp_y = y - int(40 / density)
+            loc_str = str(tmp_x) + " " + str(tmp_y)
+
+            label_counter = {}
+            most_label = ""
+            most_count = 0
+            for i in range(8):
+                next_x = tmp_x + dir_x[i]
+                next_y = tmp_y + dir_y[i]
+                next_str = str(next_x) + " " + str(next_y)
+                if next_str not in location_str_to_label:
+                    continue
+
+                if location_str_to_label[next_str] not in label_counter:
+                    label_counter[location_str_to_label[next_str]] = 0
+                label_counter[location_str_to_label[next_str] ] += 1
+            # print(label_counter)
+            for k, v in label_counter.items():
+                if v > most_count:
+                    most_label = k
+                    most_count = v
+            
+            if most_count > smooth_threshold:
+                assert(most_label != "")
+                next_location_str_to_label[loc_str] = most_label
+
+    location_str_to_label = next_location_str_to_label
+
+
+for _ in range(2):
+    next_location_str_to_label = copy.deepcopy(location_str_to_label)
+    for k, v in location_str_to_label.items():
+        x = k.split()[0]
+        y = k.split()[1]
+        tmp_x = int(x)
+        tmp_y = int(y)
         loc_str = str(tmp_x) + " " + str(tmp_y)
 
         label_counter = {}
@@ -141,23 +191,15 @@ for x in range(int(40 / density) * 2):
             next_x = tmp_x + dir_x[i]
             next_y = tmp_y + dir_y[i]
             next_str = str(next_x) + " " + str(next_y)
+            # print(next_str)
             if next_str not in location_str_to_label:
-                continue
-
-            if location_str_to_label[next_str] not in label_counter:
-                label_counter[location_str_to_label[next_str]] = 0
-            label_counter[location_str_to_label[next_str] ] += 1
-        # print(label_counter)
-        for k, v in label_counter.items():
-            if v > most_count:
-                most_label = k
-                most_count = v
+                most_count += 1
         
-        if most_count > smooth_threshold:
-            assert(most_label != "")
-            next_location_str_to_label[loc_str] = most_label
+        if most_count > 7:
+            # print("del")
+            del(next_location_str_to_label[k])
+    location_str_to_label = next_location_str_to_label
 
-location_str_to_label = next_location_str_to_label
 
 for location_str, most_label in location_str_to_label.items():
     ru_x = int(location_str.split()[0])
@@ -166,7 +208,7 @@ for location_str, most_label in location_str_to_label.items():
     location_x_list = [ru_x * density, (ru_x - 1) * density, (ru_x - 1) * density, ru_x * density]
     location_y_list = [ru_y * density, ru_y * density, (ru_y - 1) * density, (ru_y - 1) * density]
 
-    if most_label == "0":
+    if most_label == "2":
         plt.fill(location_x_list, location_y_list, color="#000000", edgecolor="none")
     else:
         plt.fill(location_x_list, location_y_list, color=key_to_color[most_label], edgecolor="none")
