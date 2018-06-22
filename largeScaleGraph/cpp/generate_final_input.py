@@ -126,20 +126,20 @@ def read_and_parse():
 
 def generate_index_to_loc():
     tmp_file = open(largeVis_output)
+    outfile = open("./title_loc.txt", "w")
+    for line in tmp_file:
+        vec = line.split()
+        index_to_loc[vec[0]] = line
+        if vec[0] in index_to_title:      
+            outfile.write(index_to_title[vec[0]] + "\t" + vec[0] + "\t" + vec[1] + "\n")
 
-    with open("./title_location.csv", "w") as outfile:
-        writer = csv.writer(outfile)
-        writer.writerow(["title", "x", "y"])
-        result = []
+    # print(index_to_loc)
 
-        for line in tmp_file:
-            vec = line.split()
-            index_to_loc[vec[0]] = line
-            print(vec[0])
-            if (vec[0] in index_to_title):
-                result.append([index_to_title[vec[0]], vec[0], vec[1]])
-        writer.writerows(result)
+    
+    
+    
 
+    outfile.close()
     tmp_file.close()
 
 
