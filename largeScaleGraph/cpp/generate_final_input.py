@@ -11,6 +11,9 @@ import json
 import sets
 import csv
 
+
+
+
 # the 
 input_dir_1 = "/home/wuzhuofeng/intermediate_files/lines_belong_toconf_smaller.txt";
 
@@ -311,6 +314,10 @@ def main():
 
 
 if __name__ == "__main__":
+    
+    reload(sys)
+
+    sys.setdefaultencoding('utf-8')
     main()
 
 
