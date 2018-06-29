@@ -92,17 +92,22 @@ def read_and_parse():
         if id_string not in id_to_ref:
             id_to_ref[index_count] = []
 
-        if venue_string == "SIGIR" or venue_string == "SIGIR Forum":
-            if year_string not in year_counter:
-                year_counter[year_string] = 0
-            year_counter[year_string] += 1
-            # sigir_pool.add(index_count)
-            tmp_counter += 1
-
-            # print(year_string)
+        if "SIGIR" in venue_string:
             if year_string not in counter_15:
                 counter_15[year_string] = 0
             counter_15[year_string] += 1
+
+        # if venue_string == "SIGIR" or venue_string == "SIGIR Forum":
+        #     if year_string not in year_counter:
+        #         year_counter[year_string] = 0
+        #     year_counter[year_string] += 1
+        #     # sigir_pool.add(index_count)
+        #     tmp_counter += 1
+
+        #     # print(year_string)
+        #     if year_string not in counter_15:
+        #         counter_15[year_string] = 0
+        #     counter_15[year_string] += 1
 
         if "authors" in tmp_obj:
             author_list = tmp_obj["authors"]
