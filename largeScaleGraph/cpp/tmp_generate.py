@@ -99,7 +99,9 @@ def read_and_parse():
             # sigir_pool.add(index_count)
             tmp_counter += 1
 
-            if year_string.strip() == "2015":
+            print(year_string)
+            if year_string == "2015":
+                
                 counter_15 += 1
 
         if "authors" in tmp_obj:
