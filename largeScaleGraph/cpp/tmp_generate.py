@@ -134,7 +134,7 @@ def read_and_parse():
 def create_class_map():
     class_file = open(class_map_file)
     all_conf = []
-    tmp_conf = ""
+    tmp_conf = ""p
     for line in class_file:
         vec = line.split("\t")
         conf_name = vec[2][0: vec[2].rfind(" ")]
@@ -170,7 +170,7 @@ def main():
 
 if __name__ == "__main__":
 
-    reload(sys)
-    sys.setdefaultencoding('utf-8')
+    # reload(sys)
+    # sys.setdefaultencoding('utf-8')
     main()
 
