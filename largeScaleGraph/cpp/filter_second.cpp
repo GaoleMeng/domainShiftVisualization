@@ -37,7 +37,7 @@ string second_layer = "/home/wuzhuofeng/intermediate_files/cpp_largevis_second.t
 string third_layer = "/home/wuzhuofeng/intermediate_files/cpp_largevis_third.txt";
 
 // Configuration: the output of this layer of filter
-string output_file = "/home/wuzhuofeng/intermediate_files/lines_belong_toconf_smaller.txt";
+string output_file = "/home/wuzhuofeng/intermediate_files/lines_belong_toconf_smaller_tmp.txt";
 
 
 vector<string> dir_list = {lines_belong_toconf};
@@ -192,8 +192,10 @@ void generate_smaller_file(int indices) {
 
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
                     // index_map[venue_string] += 1;
+                    
+                    std::size_t found = venue_string.find("SIGIR");
 
-                    if (final_conf.count(venue_string)) {
+                    if (final_conf.count(venue_string) || found == std::string::npos) {
                         output << line << "\n";
                     }
 
