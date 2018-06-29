@@ -92,7 +92,7 @@ def read_and_parse():
         if id_string not in id_to_ref:
             id_to_ref[index_count] = []
 
-        if "SIGIR" in venue_string or "sigir" in venue_string:
+        if "SIGIR" in venue_string or "sigir" in venue_string or "Sigir" in venue_string:
             if year_string not in counter_15:
                 counter_15[year_string] = 0
             counter_15[year_string] += 1
