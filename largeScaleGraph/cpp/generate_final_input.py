@@ -54,10 +54,13 @@ color_map = {}
 eq_name_map = {}
 eq_name_to_index = {}
 
+counter_15 = 0;
+
 
 def read_and_parse():
     global index_count
     global tmp_counter
+    global counter_15
     conf_lines_file = open(input_dir_1)
     for line in conf_lines_file:
         tmp_obj = json.loads(line)
@@ -100,6 +103,9 @@ def read_and_parse():
             sigir_pool.add(index_count)
             tmp_counter += 1
 
+            if year_string == "2015":
+                counter_15 += 1
+
         if "authors" in tmp_obj:
             author_list = tmp_obj["authors"]
             for tmp in author_list:
@@ -137,10 +143,6 @@ def generate_index_to_loc():
             outfile.write(index_to_title[vec[0]] + "\t" + vec[1] + "\t" + vec[2] + "\n")
 
     # print(index_to_loc)
-
-    
-    
-    
 
     outfile.close()
     tmp_file.close()
@@ -316,7 +318,6 @@ def main():
 if __name__ == "__main__":
     
     reload(sys)
-
     sys.setdefaultencoding('utf-8')
     main()
 
