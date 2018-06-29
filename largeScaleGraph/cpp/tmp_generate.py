@@ -14,7 +14,7 @@ import csv
 
 
 # the
-input_dir_1 = "/home/wuzhuofeng/intermediate_files/lines_belong_toconf_smaller.txt";
+input_dir_1 = "/home/wuzhuofeng/intermediate_files/lines_belong_toconf_smaller_tmp.txt";
 
 output_file = "/home/wuzhuofeng/intermediate_files/non_bias_edges_withauthors.txt";
 
