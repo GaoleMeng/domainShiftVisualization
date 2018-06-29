@@ -50,7 +50,7 @@ color_map = {}
 eq_name_map = {}
 eq_name_to_index = {}
 
-counter_15 = 0;
+counter_15 = {};
 
 
 def read_and_parse():
@@ -100,9 +100,9 @@ def read_and_parse():
             tmp_counter += 1
 
             # print(year_string)
-            if str(year_string) == "2016":
-                
-                counter_15 += 1
+            if year_string not in counter_15:
+                counter_15[year_string] = 0
+            counter_15[year_string] += 1
 
         if "authors" in tmp_obj:
             author_list = tmp_obj["authors"]
