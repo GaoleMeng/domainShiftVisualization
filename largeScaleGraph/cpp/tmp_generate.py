@@ -165,6 +165,7 @@ def main():
 
     create_class_map()
     read_and_parse()
+    print(counter_15)
 
 
 
