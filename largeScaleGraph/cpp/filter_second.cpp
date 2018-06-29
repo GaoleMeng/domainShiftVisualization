@@ -195,8 +195,9 @@ void generate_smaller_file(int indices) {
                     
                     std::size_t found = venue_string.find("SIGIR");
                     std::size_t found2 = venue_string.find("sigir");
+                    std::size_t found3 = venue_string.find("Sigir");
 
-                    if (final_conf.count(venue_string) || found == std::string::npos || found2 == std::string::npos) {
+                    if (final_conf.count(venue_string) || found != std::string::npos || found2 != std::string::npos || found3 != std::string::npos) {
                         output << line << "\n";
                     }
 
