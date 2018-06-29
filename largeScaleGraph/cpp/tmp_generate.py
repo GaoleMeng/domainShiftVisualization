@@ -100,7 +100,7 @@ def read_and_parse():
             tmp_counter += 1
 
             # print(year_string)
-            if str(year_string) == "2015":
+            if str(year_string) == "2016":
                 
                 counter_15 += 1
 
