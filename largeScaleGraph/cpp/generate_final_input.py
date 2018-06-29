@@ -14,7 +14,7 @@ import csv
 
 
 
-# the 
+# the
 input_dir_1 = "/home/wuzhuofeng/intermediate_files/lines_belong_toconf_smaller.txt";
 
 output_file = "/home/wuzhuofeng/intermediate_files/non_bias_edges_withauthors.txt";
@@ -115,7 +115,7 @@ def read_and_parse():
                     if year_string not in author_to_index[tmp["name"]]:
                         author_to_index[tmp["name"]][year_string] = []
                     author_to_index[tmp["name"]][year_string].append(index_count)
-                    
+
                     if tmp["name"] not in author_to_self_index:
                         author_to_self_index[tmp["name"]] = len(author_to_self_index)
 
@@ -139,7 +139,7 @@ def generate_index_to_loc():
     for line in tmp_file:
         vec = line.split()
         index_to_loc[vec[0]] = line
-        if vec[0] in index_to_title:      
+        if vec[0] in index_to_title:
             outfile.write(index_to_title[vec[0]] + "\t" + vec[1] + "\t" + vec[2] + "\n")
 
     # print(index_to_loc)
@@ -158,7 +158,7 @@ def generate_conf_index():
         elif conf == "SIGMOD Conference":
             eq_name_to_index[conf] = index_count
         index_count += 1
-    
+
     # for k, v in sorted(conf_count.items(), key=lambda x:x[1]):
     #     print("%s %s" % (k, v))
 
@@ -204,7 +204,7 @@ def generate_files():
     for k, v in sorted(layer_list.items(), key=lambda x:x[0]):
         point_file = open(split_location + str(k) + "_points.txt", 'w')
         label_file = open(split_location + str(k) + "_labels.txt", 'w')
-        
+
         # point_file.write(str(len(v)) + "\n")
         point_list = []
         label_list = []
@@ -224,14 +224,14 @@ def generate_files():
                 # label_file.write("%s\n" % color_map[conf])
 
         point_file.write(str(len(point_list)) + "\n")
-        
+
         for tmp in range(len(point_list)):
             point_file.write(point_list[tmp])
             label_file.write(label_list[tmp])
 
         point_file.close()
         label_file.close()
-    
+
     print("sigir input ", tmp_counter)
     # print(len(author_to_self_index))
     # print(keywords_pool)
@@ -247,7 +247,7 @@ def generate_files():
             # print(k, author_dict)
 
             for k, v in author_dict.items():
-                if str(k) > split_points[i] and str(k) < split_points[i+1]: 
+                if str(k) > split_points[i] and str(k) < split_points[i+1]:
                     for index in v:
                         if str(index) not in index_to_loc:
                             continue
@@ -268,8 +268,8 @@ def generate_files():
     for conf in eq_name_to_index.keys():
         print(conf, index_to_loc[str(eq_name_to_index[conf])].strip())
         # eq_name_to_index
-        
-    
+
+
 
 
 def create_class_map():
@@ -281,11 +281,11 @@ def create_class_map():
         conf_name = vec[2][0: vec[2].rfind(" ")]
         eq_name = vec[3]
         all_conf.append([conf_name, eq_name])
-        if eq_name not in eq_name_map: 
+        if eq_name not in eq_name_map:
             eq_name_map[eq_name] = len(eq_name_map)
             if eq_name_map[eq_name] == 7:
                 tmp_conf = eq_name
-    
+
     print(eq_name_map)
     # tmp = eq_name_map["SIGIR\n"]
     # eq_name_map["SIGIR\n"] = 7
@@ -298,12 +298,12 @@ def create_class_map():
     # print(eq_name_map)
     print("unique conf:" + str(len(eq_name_map)))
     class_file.close()
-    
+
 
 
 
 def main():
-    
+
     create_class_map()
     read_and_parse()
     generate_conf_index()
@@ -311,14 +311,13 @@ def main():
     generate_index_to_loc()
     generate_files()
 
-    
-    
+
+
 
 
 if __name__ == "__main__":
-    
+
     reload(sys)
     sys.setdefaultencoding('utf-8')
     main()
-
 
