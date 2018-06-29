@@ -168,7 +168,7 @@ def main():
     create_class_map()
     read_and_parse()
     print(counter_15)
-    for k, v in sorted(conf_count.items(), key=lambda x:x[0]):
+    for k, v in sorted(counter_15.items(), key=lambda x:x[0]):
         print(k, v)
 
 
