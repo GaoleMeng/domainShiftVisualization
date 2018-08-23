@@ -26,10 +26,10 @@ string input_dir_1 = "/storage6/foreseer/users/zhuofeng/evolution_of_words/exper
 // string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 
 // Configuration: input file, change to the first layer output file
-string input_lastlayer = "/home/wuzhuofeng/cpp_largevis_first.txt";
+string input_lastlayer = "/home/zhuofeng/cpp_largevis_first.txt";
 
 // Configuration: changable second layer output representation file
-string output_file = "/home/wuzhuofeng/cpp_largevis_second.txt";
+string output_file = "/home/zhuofeng/cpp_largevis_second.txt";
 
 
 // vector<string> dir_list = {input_dir_1, input_dir_2, input_dir_3};
