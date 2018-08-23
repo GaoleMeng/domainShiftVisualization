@@ -63,16 +63,20 @@ void read_and_parse(int indices) {
                     // if (venue_extract[0] != "\"venue\": \"SIGIR\"" && venue_extract[0] != "\"venue\": \"SIGIR Forum\"") {
                     //     continue;
                     // }
-                    
+                    cout << line << endl;
                     string id_string = string(id_extract[0]).substr(7, 36);
+                    cout << "pass" << endl;
+
                     string refer_string = "";
                     string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
 
+                    cout << "pass2" << endl;
                     size_t found = line.find(references_start);
                     if (found != std::string::npos) {
                         int start = 16 + found;
                         while (true) {
                             refer_string.append(line.substr(start, 36) + " ");
+                            cout << "357" << endl;
                             if (line[start + 37] == ']') break;
                             start += 40;
                         }
