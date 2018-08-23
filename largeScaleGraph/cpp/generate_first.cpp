@@ -66,7 +66,6 @@ string get_ref_string(string& content) {
         else if (allow) {
             buffer.push_back(content[start]);
         }
-        cout << buffer << endl;
         start++;
     }
     cout << "ans is " << ans << endl;
@@ -115,7 +114,6 @@ void read_and_parse(int indices) {
                         cout << "input string is " << input_string << endl; 
                         refer_string = get_ref_string(input_string);
                     }
-                    cout << "pass3" << endl;
 
                     output_lock.lock();
                     output << id_string + "\tinternational acm sigir conference on research and development in information retrieval\t" + year_string + "\t" + refer_string << "\n";
