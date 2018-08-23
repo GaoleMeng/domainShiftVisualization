@@ -58,6 +58,37 @@ string venue_start = "\"venue\": ";
 string year_start = "\"year\": ";
 string references_start = "\"references\": ";
 
+string extract_id(string org_string) {
+    return org_string.substr(7, org_string.length() - 8);
+}
+
+string get_ref_string(string& content) {
+    if (content == "") return "";
+    string buffer = "";
+    int start = 0;
+    bool allow = false;
+    string ans = "";
+    
+    while (start < content.length()) {
+        if (content[start] == '\"' && !allow) {
+            buffer = "";
+            allow = true;
+        }
+        else if (content[start] == '\"' && allow) {
+            ans.append(buffer + " ");
+            allow = false;
+        }
+        else if (allow) {
+            buffer.push_back(content[start]);
+        }
+        start++;
+    }
+    return ans;
+}
+
+
+
+
 void read_and_parse(int indices) {
 
     string filename = filedir_list[indices];
@@ -87,12 +118,14 @@ void read_and_parse(int indices) {
 
                     size_t found = line.find(references_start);
                     if (found != std::string::npos) {
-                        int start = 16 + found;
-                        while (true) {
-                            refer_string.append(line.substr(start, 24) + " ");
-                            if (line[start + 25] == ']') break;
-                            start += 28;
+                        string input_string = "";
+                        int start = 15 + found;
+                        while (line[start] != ']') {
+                            input_string.push_back(line[start]);
+                            start++;
                         }
+                        // cout << "input string is " << input_string << endl; 
+                        refer_string = get_ref_string(input_string);
                     }
 
                     output_lock.lock();
