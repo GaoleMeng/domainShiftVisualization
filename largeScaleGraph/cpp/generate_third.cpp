@@ -27,10 +27,10 @@ string input_dir_1 = "/home/wuzhuofeng/raw_data/";
 // string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 
 // Configuration: input comes from the output of the second layer
-string input_lastlayer = "/home/wuzhuofeng/raw_data/cpp_largevis_second.txt";
+string input_lastlayer = "/home/zhuofeng/raw_data/cpp_largevis_second.txt";
 
 // Configuration: output the final layer o
-string output_file = "/home/wuzhuofeng/raw_data/cpp_largevis_third.txt";
+string output_file = "/home/zhuofeng/raw_data/cpp_largevis_third.txt";
 
 vector<string> dir_list = {input_dir_1};
 unordered_set<string> string_pool;
@@ -70,37 +70,43 @@ void read_and_parse(int indices) {
     
     while(getline(input, line)) {
         // cout << line << endl;
+        // cout << line << endl;
+        smatch id_extract;
         found = line.find(id_start);
         // cout << line << endl;
-        if (found != std::string::npos) {
-            id_string = line.substr(found + 7, 24);
-            if (!string_pool.count(id_string)) continue;
-            smatch venue_extract;
-            if (regex_search(line, venue_extract, venue)) {
 
-                string refer_string = "";
-                smatch year_extract;
-                if (regex_search(line, year_extract, year)) {
+        if (regex_search(line, id_extract, id)){
+            if (found != std::string::npos) {
+                id_string = extract_id(string(id_extract[0]));
+                if (!string_pool.count(id_string)) continue;
+                smatch venue_extract;
+                if (regex_search(line, venue_extract, venue)) {
 
-                    venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
-                    string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
+                    string refer_string = "";
+                    smatch year_extract;
+                    if (regex_search(line, year_extract, year)) {
 
-                    // this is the way to get rid of the first layer
-                    if (venue_string == "SIGIR" || venue_string == "SIGIR Forum") continue;
-                    
-                    size_t found = line.find(references_start);
-                    if (found != std::string::npos) {
-                        int start = 16 + found;
-                        while (true) {
-                            refer_string.append(line.substr(start, 24) + " ");
-                            if (line[start + 25] == ']') break;
-                            start += 28;
+                        venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
+                        string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
+
+                        // this is the way to get rid of the first layer
+                        if (venue_string == "SIGIR" || venue_string == "SIGIR Forum") continue;
+                        
+                        size_t found = line.find(references_start);
+                        if (found != std::string::npos) {
+                            string input_string = "";
+                            int start = 15 + found;
+                            while (line[start] != ']') {
+                                input_string.push_back(line[start]);
+                                start++;
+                            }
+                            // cout << "input string is " << input_string << endl; 
+                            refer_string = get_ref_string(input_string);
                         }
+                        output_lock.lock();
+                        output << id_string + "\t" + venue_string + "\t" + year_string + "\t" + refer_string << "\n";
+                        output_lock.unlock();
                     }
-
-                    output_lock.lock();
-                    output << id_string + "\t" + venue_string + "\t" + year_string + "\t" + refer_string << "\n";
-                    output_lock.unlock();
                 }
             }
         }
