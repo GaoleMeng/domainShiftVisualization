@@ -38,7 +38,7 @@ vector<string> filedir_list;
 regex id("\"id\": \".*?\"");
 regex venue("\"venue\": \".*?\"");
 regex references("\"references\": \\[.*\\]");
-regex single_id("\".{24}\"");
+regex single_id("\".{36}\"");
 regex year("\"year\": .*?,");
 
 string references_start = "\"references\": ";
@@ -64,7 +64,7 @@ void read_and_parse(int indices) {
                     //     continue;
                     // }
                     
-                    string id_string = string(id_extract[0]).substr(7, 24);
+                    string id_string = string(id_extract[0]).substr(7, 36);
                     string refer_string = "";
                     string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
 
@@ -72,14 +72,14 @@ void read_and_parse(int indices) {
                     if (found != std::string::npos) {
                         int start = 16 + found;
                         while (true) {
-                            refer_string.append(line.substr(start, 24) + " ");
+                            refer_string.append(line.substr(start, 36) + " ");
                             if (line[start + 25] == ']') break;
                             start += 28;
                         }
                     }
 
                     output_lock.lock();
-                    output << id_string + "\tSIGIR\t" + year_string + "\t" + refer_string << "\n";
+                    output << id_string + "\tinternational acm sigir conference on research and development in information retrieval\t" + year_string + "\t" + refer_string << "\n";
                     output_lock.unlock();
                 }
             }
