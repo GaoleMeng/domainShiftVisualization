@@ -54,11 +54,11 @@ string get_ref_string(string& content) {
     bool allow = false;
     string ans = "";
     while (start < content.length()) {
-        if (content[start] == "\"") {
+        if (content[start] == '\"') {
             buffer = "";
             allow = true;
         }
-        if (content[start] == "\"") {
+        if (content[start] == '\"') {
             ans.append(buffer + " ");
             allow = false;
         }
@@ -106,7 +106,7 @@ void read_and_parse(int indices) {
                         
                         cout << "enter" << endl;
                         int start = 15 + found;
-                        while (line[start] != "]") {
+                        while (line[start] != ']') {
                             input_string.push_back(line[start])
                             start++;
                         }
