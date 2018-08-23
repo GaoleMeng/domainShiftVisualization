@@ -82,6 +82,7 @@ void read_and_parse(int indices) {
                             start += 40;
                         }
                     }
+                    cout << "pass3" << endl;
 
                     output_lock.lock();
                     output << id_string + "\tinternational acm sigir conference on research and development in information retrieval\t" + year_string + "\t" + refer_string << "\n";
