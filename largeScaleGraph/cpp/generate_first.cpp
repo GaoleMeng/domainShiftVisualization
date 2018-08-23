@@ -73,6 +73,7 @@ void read_and_parse(int indices) {
                     cout << "pass2" << endl;
                     size_t found = line.find(references_start);
                     if (found != std::string::npos) {
+                        cout << "enter" << endl;
                         int start = 16 + found;
                         while (true) {
                             refer_string.append(line.substr(start, 36) + " ");
