@@ -200,7 +200,7 @@ int main() {
             }
         }
     }
-
+    cout << "filedir length: " << filedir_list.length() << endl;
     for (int i = 0; i < filedir_list.size(); i++) {
         thread_list.push_back(thread(read_and_parse, i));
         // read_and_parse(i);
