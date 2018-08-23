@@ -107,7 +107,7 @@ void read_and_parse(int indices) {
                         cout << "enter" << endl;
                         int start = 15 + found;
                         while (line[start] != ']') {
-                            input_string.push_back(line[start])
+                            input_string.push_back(line[start]);
                             start++;
                         }
                         cout << "input string is " << input_string << endl; 
