@@ -53,12 +53,13 @@ string get_ref_string(string& content) {
     int start = 0;
     bool allow = false;
     string ans = "";
+    
     while (start < content.length()) {
-        if (content[start] == '\"') {
+        if (content[start] == '\"' && !allow) {
             buffer = "";
             allow = true;
         }
-        if (content[start] == '\"') {
+        if (content[start] == '\"' && allow) {
             ans.append(buffer + " ");
             allow = false;
         }
