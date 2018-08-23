@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import argparse
 import matplotlib.patches as patches
 import copy
+import csv
 
 parser = argparse.ArgumentParser()
 
@@ -24,7 +25,7 @@ def de_normalize(vec):
 
 
 
-for tmp_i in [48, 49]:
+for tmp_i in [47]:
     
     args_label = str(tmp_i) + "_labels.txt"
     args_input = str(tmp_i) + "_points.txt"
@@ -76,8 +77,40 @@ for tmp_i in [48, 49]:
                 keywords_point_list.append((float(vec[-2]), float(vec[-1])))
                 continue
 
+            tmp_label = label[i-1]
 
-            all_data.setdefault(label[i-1], []).append((float(vec[-2]), float(vec[-1])))
+            if tmp_label == "19":
+                tmp_label = "10"
+            elif tmp_label == "10":
+                tmp_label = "19"
+            elif tmp_label == "8":
+                tmp_label = "2"
+            elif tmp_label == "2":
+                tmp_label = "8"
+            elif tmp_label == "14":
+                tmp_label = "20"
+            elif tmp_label == "20":
+                tmp_label = "14"
+            elif tmp_label == "17":
+                tmp_label = "21"
+            elif tmp_label == "21":
+                tmp_label = "17"
+            elif tmp_label == "16":
+                tmp_label = "9"
+            elif tmp_label == "9":
+                tmp_label = "16"
+            
+            if tmp_label == "21":
+                tmp_label = "15"
+            elif tmp_label == "15":
+                tmp_label = "21"
+            elif tmp_label == "17":
+                tmp_label = "0"
+            elif tmp_label == "0":
+                tmp_label = "17"
+
+
+            all_data.setdefault(tmp_label, []).append((float(vec[-2]), float(vec[-1])))
 
             right_upper_x = 0
             right_upper_y = 0
@@ -95,9 +128,9 @@ for tmp_i in [48, 49]:
             loc_str = str(right_upper_x) + " " + str(right_upper_y)
             if loc_str not in rec_data:
                 rec_data[loc_str] = {}
-            if label[i-1] not in rec_data[loc_str]:
-                rec_data[loc_str][label[i-1]] = 0
-            rec_data[loc_str][label[i-1]] += 1
+            if tmp_label not in rec_data[loc_str]:
+                rec_data[loc_str][tmp_label] = 0
+            rec_data[loc_str][tmp_label] += 1
             
             
 
@@ -135,8 +168,12 @@ for tmp_i in [48, 49]:
             continue
         
         label_to_capital[k] = ((sum_x-100) / (len(point_list)-1), (sum_y-100) / (len(point_list) - 1))
-        if tmp_i == 47:
-            plt.plot(label_to_capital[k][0], label_to_capital[k][1], 'o', color=key_to_color[k], markersize = 4, zorder=20)
+        if tmp_i == 100:
+            # if int(k) == 8:
+            #     plt.plot(label_to_capital[k][0], label_to_capital[k][1], 'o', color="#000000", markersize = 3.5, zorder=20, mec="#dd2323")
+            # else:
+            plt.plot(label_to_capital[k][0], label_to_capital[k][1], 'o', color=key_to_color[k], markersize = 3.5, zorder=20)
+            
 
 
     for point in keywords_point_list:
@@ -231,7 +268,7 @@ for tmp_i in [48, 49]:
                 del(next_location_str_to_label[k])
         location_str_to_label = next_location_str_to_label
 
-
+    # if tmp_i == 47:
     for location_str, most_label in location_str_to_label.items():
         ru_x = int(location_str.split()[0])
         ru_y = int(location_str.split()[1])
@@ -239,11 +276,12 @@ for tmp_i in [48, 49]:
         location_x_list = [ru_x * density, (ru_x - 1) * density, (ru_x - 1) * density, ru_x * density]
         location_y_list = [ru_y * density, ru_y * density, (ru_y - 1) * density, (ru_y - 1) * density]
 
-        if most_label == "2":
-            plt.fill(location_x_list, location_y_list, color="#000000", edgecolor="none", zorder=10)
-            # plt.patches.Rectangle((location_x_list[1], location_y_list[2]), density, density)
-        else:
-            plt.fill(location_x_list, location_y_list, color=key_to_color[most_label], edgecolor="none", zorder=10)
+        # if most_label == "8":
+        #     plt.fill(location_x_list, location_y_list, color="#000000", edgecolor="none", zorder=10)
+        #     # plt.patches.Rectangle((location_x_list[1], location_y_list[2]), density, density)
+        # else:
+        # plt.fill(location_x_list, location_y_list, color=key_to_color[most_label], edgecolor="none", zorder=10)
+        plt.fill(location_x_list, location_y_list, color="#d6d1d1", edgecolor="none", zorder=10)
 
 
 
@@ -268,18 +306,78 @@ for tmp_i in [48, 49]:
         l = abs(float(args_range))
         plt.xlim(-l, l)
         plt.ylim(-l, l)
-    plt.xlim(-40, 40)
-    plt.ylim(-40, 40)
+    plt.xlim(-25, 25)
+    plt.ylim(-25, 25)
 
-    if tmp_i == 48:
-        plt.title("2011 ~ 2017")
-    elif tmp_i == 49:
-        plt.title("2011 ~ 2018")
-    else:
-        plt.title(str(2016 - 47 + tmp_i - 4) + " ~ " + str(2016 - 47 + tmp_i))
-    plt.savefig(args_output, dpi = 500)
-    plt.clf()
+    # if tmp_i == 48:
+    #     plt.title("2012 ~ 2017")
+    # elif tmp_i == 49:
+    #     plt.title("2012 ~ 2018")
+    # elif tmp_i == 50:
+    #     plt.title("2012 ~ 2016")
+    # elif tmp_i == 47:
+    #     plt.title("2012 ~ 2018")
+    # else:
+    #     plt.title(str(2016 - 47 + tmp_i - 4) + " ~ " + str(2016 - 47 + tmp_i))
+    
+    # if tmp_i == 50:
+        # plt.show()
+    # plt.clf()
 
 
 
+
+# point_file = open("./top-10-points.txt")
+# label_file = open("./top-10-label.txt")
+
+# point_list = point_file.readlines()
+# label_list = label_file.readlines()
+
+# for i in range(len(point_list)):
+#     vec = point_list[i].strip().split()
+#     if int(label_list[i].strip()) in [27, 28, 29, 30]:
+#         plt.plot(float(vec[1]), float(vec[2]), 'x', color = "#2db5e5", markersize = 2, zorder=100)
+
+
+# point_file.close()
+# label_file.close()
+
+
+with open('./SIGIR18_pc.csv', 'rb') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter=',')
+    for row in spamreader:
+        
+        plt.plot(float(row[1]), float(row[2]), 'x', color = "#1379c6", markersize = 2, zorder=90)
+
+
+chair_color = plt.cm.rainbow(numpy.linspace(0, 1, 8))
+
+with open('./SIGIR18_chairs_v2.csv', 'rb') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter=',')
+    for row in spamreader:
+        if int(row[0]) - 1 == 3:
+            plt.plot(float(row[2]), float(row[3]), '-o', color = "#703c43", markersize = 4, zorder=100)
+        elif int(row[0]) - 1 == 0:
+            plt.plot(float(row[2]), float(row[3]), '-o', color = chair_color[7], markersize = 4, zorder=100)
+        elif int(row[0]) - 1 == 7:
+            plt.plot(float(row[2]), float(row[3]), '-o', color = chair_color[0], markersize = 4, zorder=100)
+        else:
+            plt.plot(float(row[2]), float(row[3]), '-o', color = chair_color[int(row[0]) - 1], markersize = 4, zorder=100)
+
+
+
+
+
+# with open('./SIGIR18_authors.csv', 'rb') as csvfile:
+#     spamreader = csv.reader(csvfile, delimiter=',')
+#     for row in spamreader:
+
+#         plt.plot(float(row[1]), float(row[2]), 'x', color = "#db3636", markersize = 2, zorder=100)
+
+
+
+
+plt.title("SIGIR 2018 PC and Chairs")
+
+plt.savefig("2018_PC_chairs", dpi = 500)
 

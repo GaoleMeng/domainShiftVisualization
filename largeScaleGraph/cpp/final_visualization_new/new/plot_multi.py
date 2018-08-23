@@ -34,6 +34,25 @@ for i in range(len(new_list)-4):
     output_label.close()
     tmp = i
 
+output_file = open(str(50) + "_points.txt", "w")
+output_label = open(str(50) + "_labels.txt", "w")
+
+org_i = i
+
+total_length = 0
+for i in range(len(new_list)):
+    total_length += len(new_list[i][1])
+
+output_file.write(str(total_length) + "\n")
+for i in range(len(new_list)):
+    for tuu in new_list[i][1]:
+        output_file.write("1 %s %s\n" % (tuu[0], tuu[1]))
+        output_label.write(str(tuu[2]) + "\n")
+
+output_file.close()
+output_label.close()
+
+i = org_i
 i += 1
 output_file = open("49" + "_points.txt", "w")
 output_label = open("49" + "_labels.txt", "w")
