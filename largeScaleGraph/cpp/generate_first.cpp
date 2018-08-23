@@ -73,8 +73,8 @@ void read_and_parse(int indices) {
                         int start = 16 + found;
                         while (true) {
                             refer_string.append(line.substr(start, 36) + " ");
-                            if (line[start + 25] == ']') break;
-                            start += 28;
+                            if (line[start + 37] == ']') break;
+                            start += 40;
                         }
                     }
 
