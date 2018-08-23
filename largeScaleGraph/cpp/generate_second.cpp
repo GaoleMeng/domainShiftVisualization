@@ -88,7 +88,6 @@ string get_ref_string(string& content) {
 
 
 
-
 void read_and_parse(int indices) {
 
     string filename = filedir_list[indices];
@@ -103,34 +102,39 @@ void read_and_parse(int indices) {
 
     while(getline(input, line)) {
         // cout << line << endl;
+
+        smatch id_extract;
         found = line.find(id_start);
         // cout << line << endl;
-        if (found != std::string::npos) {
-            id_string = line.substr(found + 7, 24);
-            if (!string_pool.count(id_string)) continue;
-            smatch venue_extract;
-            if (regex_search(line, venue_extract, venue)) {
-                string refer_string = "";
-                smatch year_extract;
-                if (regex_search(line, year_extract, year)) {
-                    venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
-                    string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
 
-                    size_t found = line.find(references_start);
-                    if (found != std::string::npos) {
-                        string input_string = "";
-                        int start = 15 + found;
-                        while (line[start] != ']') {
-                            input_string.push_back(line[start]);
-                            start++;
+        if (regex_search(line, id_extract, id)){
+            if (found != std::string::npos) {
+                id_string = extract_id(string(id_extract[0]));
+                if (!string_pool.count(id_string)) continue;
+                smatch venue_extract;
+                if (regex_search(line, venue_extract, venue)) {
+                    string refer_string = "";
+                    smatch year_extract;
+                    if (regex_search(line, year_extract, year)) {
+                        venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
+                        string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
+
+                        size_t found = line.find(references_start);
+                        if (found != std::string::npos) {
+                            string input_string = "";
+                            int start = 15 + found;
+                            while (line[start] != ']') {
+                                input_string.push_back(line[start]);
+                                start++;
+                            }
+                            // cout << "input string is " << input_string << endl; 
+                            refer_string = get_ref_string(input_string);
                         }
-                        // cout << "input string is " << input_string << endl; 
-                        refer_string = get_ref_string(input_string);
-                    }
 
-                    output_lock.lock();
-                    output << id_string + "\t" + venue_string + "\t" + year_string + "\t" + refer_string << "\n";
-                    output_lock.unlock();
+                        output_lock.lock();
+                        output << id_string + "\t" + venue_string + "\t" + year_string + "\t" + refer_string << "\n";
+                        output_lock.unlock();
+                    }
                 }
             }
         }
