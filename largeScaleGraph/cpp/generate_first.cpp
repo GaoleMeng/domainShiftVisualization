@@ -59,7 +59,7 @@ string get_ref_string(string& content) {
             buffer = "";
             allow = true;
         }
-        if (content[start] == '\"' && allow) {
+        else if (content[start] == '\"' && allow) {
             ans.append(buffer + " ");
             allow = false;
         }
