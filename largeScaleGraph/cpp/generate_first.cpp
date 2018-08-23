@@ -43,6 +43,36 @@ regex year("\"year\": .*?,");
 
 string references_start = "\"references\": ";
 
+string extract_id(string org_string) {
+    return org_string.substr(7, org_string.length() - 8);
+}
+
+string get_ref_string(string& content) {
+    if (content == "") return "";
+    string buffer = "";
+    int start = 0;
+    bool allow = false;
+    string ans = "";
+    while (start < content.length()) {
+        if (content[start] == "\"") {
+            buffer = "";
+            allow = true;
+        }
+        if (content[start] == "\"") {
+            ans.append(buffer + " ");
+            allow = false;
+        }
+        else if (allow) {
+            buffer.push_back(content[start]);
+        }
+        start++;
+    }
+    cout << ans << endl;
+    return ans;
+}
+
+
+
 
 void read_and_parse(int indices) {
     
@@ -64,23 +94,24 @@ void read_and_parse(int indices) {
                     //     continue;
                     // }
                     cout << line << endl;
-                    string id_string = string(id_extract[0]).substr(7, 36);
+                    string id_string = extract_id(string(id_extract[0]));
                     cout << "pass" << endl;
 
                     string refer_string = "";
                     string year_string = string(year_extract[0]).substr(8, string(year_extract[0]).length() - 9);
-
                     cout << "pass2" << endl;
                     size_t found = line.find(references_start);
                     if (found != std::string::npos) {
+                        string input_string = "";
+                        
                         cout << "enter" << endl;
-                        int start = 16 + found;
-                        while (true) {
-                            refer_string.append(line.substr(start, 36) + " ");
-                            cout << "357" << endl;
-                            if (line[start + 37] == ']') break;
-                            start += 40;
+                        int start = 15 + found;
+                        while (line[start] != "]") {
+                            input_string.push_back(line[start])
+                            start++;
                         }
+                        cout << "input string is " << input_string << endl; 
+                        refer_string = get_ref_string(input_string);
                     }
                     cout << "pass3" << endl;
 
