@@ -66,9 +66,10 @@ string get_ref_string(string& content) {
         else if (allow) {
             buffer.push_back(content[start]);
         }
+        cout << buffer << endl;
         start++;
     }
-    cout << ans << endl;
+    cout << "ans is " << ans << endl;
     return ans;
 }
 
