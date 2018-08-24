@@ -22,7 +22,7 @@ using namespace rapidjson;
 
 
 // Congiguration: input aminer directory
-string input_dir_1 = "/home/wuzhuofeng/raw_data/";
+string input_dir_1 = "/storage6/foreseer/users/zhuofeng/evolution_of_words/experiment/da/test/dblp-ref/";
 // string input_dir_2 = "/scratch/si699w18_fluxm/gaole/aminer_papers_1";
 // string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 
