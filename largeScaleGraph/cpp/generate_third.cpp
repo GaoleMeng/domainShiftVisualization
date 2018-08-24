@@ -27,10 +27,10 @@ string input_dir_1 = "/storage6/foreseer/users/zhuofeng/evolution_of_words/exper
 // string input_dir_3 = "/scratch/si699w18_fluxm/gaole/aminer_papers_2";
 
 // Configuration: input comes from the output of the second layer
-string input_lastlayer = "/home/zhuofeng/raw_data/cpp_largevis_second.txt";
+string input_lastlayer = "/home/zhuofeng/cpp_largevis_second.txt";
 
 // Configuration: output the final layer o
-string output_file = "/home/zhuofeng/raw_data/cpp_largevis_third.txt";
+string output_file = "/home/zhuofeng/cpp_largevis_third.txt";
 
 vector<string> dir_list = {input_dir_1};
 unordered_set<string> string_pool;
