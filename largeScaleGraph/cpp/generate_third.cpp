@@ -56,6 +56,37 @@ string venue_start = "\"venue\": ";
 string year_start = "\"year\": ";
 string references_start = "\"references\": ";
 
+
+string extract_id(string org_string) {
+    return org_string.substr(7, org_string.length() - 8);
+}
+
+string get_ref_string(string& content) {
+    if (content == "") return "";
+    string buffer = "";
+    int start = 0;
+    bool allow = false;
+    string ans = "";
+    
+    while (start < content.length()) {
+        if (content[start] == '\"' && !allow) {
+            buffer = "";
+            allow = true;
+        }
+        else if (content[start] == '\"' && allow) {
+            ans.append(buffer + " ");
+            allow = false;
+        }
+        else if (allow) {
+            buffer.push_back(content[start]);
+        }
+        start++;
+    }
+    return ans;
+}
+
+
+
 void read_and_parse(int indices) {
     
     string filename = filedir_list[indices];
