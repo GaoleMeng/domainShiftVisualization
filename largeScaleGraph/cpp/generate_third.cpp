@@ -35,7 +35,7 @@ string output_file = "/home/zhuofeng/cpp_largevis_third.txt";
 vector<string> dir_list = {input_dir_1};
 unordered_set<string> string_pool;
 
-string lastfix = ".txt";
+string lastfix = ".json";
 
 static mutex output_lock;
 mutex parselock;
