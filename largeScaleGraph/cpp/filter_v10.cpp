@@ -10,6 +10,7 @@
 #include <mutex>
 #include <regex>
 #include <unordered_set>
+#include <unordered_map>
 #include <iostream>
 #include <experimental/filesystem>
 #include "rapidjson/document.h"
@@ -19,6 +20,7 @@
 namespace fs = std::experimental::filesystem;
 using namespace std;
 using namespace rapidjson;
+
 
 
 // Congiguration: input aminer directory
