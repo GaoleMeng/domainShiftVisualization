@@ -109,6 +109,7 @@ def read_and_parse():
         if "authors" in tmp_obj:
             author_list = tmp_obj["authors"]
             for tmp in author_list:
+                print(tmp)
                 if "name" in tmp:
                     if tmp["name"] not in author_to_index:
                         author_to_index[tmp["name"]] = {}
