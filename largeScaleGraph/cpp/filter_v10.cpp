@@ -163,7 +163,7 @@ int main() {
     output.open(output_file);
     // string_pool_stream.open(input_lastlayer);
     // create_stringpool();
-
+    create_map_name_mapping();
     for (string dir: dir_list) {
         for (auto & p : fs::directory_iterator(dir)) {
             if (strstr(p.path().filename().c_str(), lastfix.c_str())) {
