@@ -46,6 +46,8 @@ ofstream output;
 ifstream string_pool_stream;
 
 
+
+
 string tmp = "";
 vector<string> filedir_list;
 regex id("\"id\": \".*?\"");
@@ -58,6 +60,12 @@ string id_start = "\"id\": ";
 string venue_start = "\"venue\": ";
 string year_start = "\"year\": ";
 string references_start = "\"references\": ";
+
+
+bool pairCompare(const std::pair<string, int>& firstElem, const std::pair<string, int>& secondElem) {
+  return firstElem.second < secondElem.second;
+
+}
 
 
 string extract_id(string org_string) {
@@ -164,7 +172,7 @@ void create_stringpool() {
             string_pool.erase(elem);
         }
     }
-    cout << string_pool.size() << endl;
+    // cout << string_pool.size() << endl;
 }
 
 

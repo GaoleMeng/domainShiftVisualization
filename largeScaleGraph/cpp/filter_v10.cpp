@@ -29,6 +29,7 @@ string input_dir_1 = "/storage6/foreseer/users/zhuofeng/evolution_of_words/exper
 // Configuration: input comes from the output of the second layer
 string input_lastlayer = "/home/zhuofeng/cpp_largevis_second.txt";
 
+
 // Configuration: output the final layer o
 string output_file = "/home/zhuofeng/cpp_largevis_third.txt";
 
@@ -60,6 +61,14 @@ string references_start = "\"references\": ";
 string extract_id(string org_string) {
     return org_string.substr(7, org_string.length() - 8);
 }
+
+
+bool pairCompare(const std::pair<string, int>& firstElem, const std::pair<string, int>& secondElem) {
+  return firstElem.second < secondElem.second;
+
+}
+
+
 
 string get_ref_string(string& content) {
     if (content == "") return "";
