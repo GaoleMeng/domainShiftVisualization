@@ -180,7 +180,7 @@ void print_conf_counter() {
 
     vector<pair<string, int> > tmp;
 
-    for (const auto& tmpp: mapping_file) {
+    for (const auto& tmpp: conf_counter) {
         tmp.push_back({tmpp.first, tmpp.second});
     }
 
