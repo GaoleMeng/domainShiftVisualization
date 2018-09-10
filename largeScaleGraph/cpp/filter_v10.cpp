@@ -33,7 +33,7 @@ string input_lastlayer = "/home/zhuofeng/cpp_largevis_second.txt";
 // Configuration: output the final layer o
 string output_file = "/home/zhuofeng/cpp_largevis_third.txt";
 
-string list_file_name = "./csranking_list.txt"
+string list_file_name = "./csranking_list.txt";
 
 vector<string> dir_list = {input_dir_1};
 unordered_set<string> string_pool;
@@ -82,7 +82,7 @@ void create_map_name_mapping() {
         while(getline(segment_ss, segment, '\t')) {
             if (counter == 0) {
                 counter += 1;
-                conf = segment
+                conf = segment;
                 continue;
             }
             else {
