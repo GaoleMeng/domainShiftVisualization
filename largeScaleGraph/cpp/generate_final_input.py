@@ -110,18 +110,16 @@ def read_and_parse():
             author_list = tmp_obj["authors"]
             for tmp in author_list:
                 tmp = tmp.encode("utf-8")
-                print(tmp)
-                if "name" in tmp:
-                    if tmp["name"] not in author_to_index:
-                        author_to_index[tmp["name"]] = {}
-                    if year_string not in author_to_index[tmp["name"]]:
-                        author_to_index[tmp["name"]][year_string] = []
-                    author_to_index[tmp["name"]][year_string].append(index_count)
+                if tmp not in author_to_index:
+                    author_to_index[tmp] = {}
+                if year_string not in author_to_index[tmp]:
+                    author_to_index[tmp][year_string] = []
+                author_to_index[tmp][year_string].append(index_count)
 
-                    if tmp["name"] not in author_to_self_index:
-                        author_to_self_index[tmp["name"]] = len(author_to_self_index)
+                if tmp not in author_to_self_index:
+                    author_to_self_index[tmp] = len(author_to_self_index)
 
-                    # author_to_index[tmp["name"]].append(index_count)
+                    # author_to_index[tmp].append(index_count)
 
         index_to_title[str(index_count)] = tmp_obj["title"]
 
