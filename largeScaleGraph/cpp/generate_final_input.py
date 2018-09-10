@@ -110,6 +110,7 @@ def read_and_parse():
             author_list = tmp_obj["authors"]
             for tmp in author_list:
                 tmp = tmp.encode("utf-8")
+                print(tmp)
                 if "name" in tmp:
                     if tmp["name"] not in author_to_index:
                         author_to_index[tmp["name"]] = {}
