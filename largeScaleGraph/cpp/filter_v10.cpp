@@ -161,7 +161,7 @@ void read_and_parse(int indices) {
 int main() {
     vector<thread> thread_list;
     output.open(output_file);
-    string_pool_stream.open(input_lastlayer);
+    // string_pool_stream.open(input_lastlayer);
     // create_stringpool();
 
     for (string dir: dir_list) {
