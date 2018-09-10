@@ -33,8 +33,11 @@ string input_lastlayer = "/home/zhuofeng/cpp_largevis_second.txt";
 // Configuration: output the final layer o
 string output_file = "/home/zhuofeng/cpp_largevis_third.txt";
 
+string list_file_name = "./csranking_list.txt"
+
 vector<string> dir_list = {input_dir_1};
 unordered_set<string> string_pool;
+unordered_map<string, string> conf_name_mapping;
 
 string lastfix = ".json";
 
@@ -65,8 +68,30 @@ string extract_id(string org_string) {
 
 bool pairCompare(const std::pair<string, int>& firstElem, const std::pair<string, int>& secondElem) {
   return firstElem.second < secondElem.second;
-
 }
+
+void create_map_name_mapping() {
+    ifstream input(list_file_name.c_str());
+    string line = "";
+    while(getline(input, line)) {
+        string segment = "";
+        istringstream segment_ss(line);
+
+        int counter = 0;
+        string conf = "";
+        while(getline(segment_ss, segment, '\t')) {
+            if (counter == 0) {
+                counter += 1;
+                conf = segment
+                continue;
+            }
+            else {
+                conf_name_mapping[segment] = conf;
+            }
+        }
+    }
+}
+
 
 
 
