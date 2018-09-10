@@ -15,13 +15,13 @@ import csv
 
 
 # the
-input_dir_1 = "/home/wuzhuofeng/lines_belong_toconf_smaller.txt";
+input_dir_1 = "/home/zhuofeng/lines_belong_toconf_smaller.txt";
 
-output_file = "/home/wuzhuofeng/non_bias_edges_withauthors.txt";
+output_file = "/home/zhuofeng/non_bias_edges_withauthors.txt";
 
 largeVis_output = "./citation_qiaozhu.txt";
 
-split_location = "/home/wuzhuofeng/domainShiftVisualization/largeScaleGraph/cpp/final_visulization/";
+split_location = "./final_visulization/";
 
 class_map_file = "./class_map.txt"
 
