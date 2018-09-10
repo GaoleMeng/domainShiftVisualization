@@ -120,7 +120,7 @@ void read_and_parse(int indices) {
         if (regex_search(line, id_extract, id)){
             if (found != std::string::npos) {
                 id_string = extract_id(string(id_extract[0]));
-                if (!string_pool.count(id_string)) continue;
+                // if (!string_pool.count(id_string)) continue;
                 smatch venue_extract;
                 if (regex_search(line, venue_extract, venue)) {
                     venue_string = string(venue_extract[0]).substr(10, venue_extract[0].length() - 11);
@@ -183,7 +183,7 @@ void print_conf_counter() {
     for (const auto& tmpp: conf_counter) {
         tmp.push_back({tmpp.first, tmpp.second});
     }
-
+    cout << "conf count" << "\n";
 
     sort(tmp.begin(), tmp.end(), pairCompare);
     for (auto& tt: tmp) {
