@@ -1,0 +1,13 @@
+AAAI	national conference on artificial intelligence
+IJCAI
+CVPR	computer vision and pattern recognition
+ECCR	european conference on computer vision
+ICCV	international conference on computer vision
+ICML	international conference on machine learning
+KDD	knowledge discovery and data mining
+NIPS	neural information processing systems
+ACL	meeting of the association for computational linguistics
+EMNLP	empirical methods in natural language processing
+NAACL	north american chapter of the association for computational linguistics
+SIGIR	international acm sigir conference on research and development in information retrieval
+WWW	international world wide web conferences

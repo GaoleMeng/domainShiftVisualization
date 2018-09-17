@@ -1,0 +1,97 @@
+Y	5715	NIPS 5715	NIPS
+Y	4986	CHI 4986	CHI
+Y	3621	SIGIR 3621	SIGIR
+Y	3577	CIKM 3577	CIKM
+Y	3508	ACL 3508	ACL
+Y	3369	ICML 3369	ICML
+Y	3360	ACM Multimedia 2001 3360	MM
+Y	3152	SIGMOD Conference 3152	SIGMOD
+Y	2905	JASIST 2905	JASIST
+Y	2576	KDD 2576	KDD
+Y	2435	VLDB 2435	VLDB
+Y	2215	JASIS 2215	JASIST
+Y	2168	WWW 2168	WWW
+Y	1742	TREC 1742	TREC
+Y	1569	CLEF (Working Notes) 1569	CLEF
+Y	1533	JCDL 1533	JCDL
+Y	1511	UAI 1511	UAI
+Y	1496	CSCW 1496	CSCW
+Y	1486	EMNLP 1486	EMNLP
+Y	1104	ECIR 1104	ECIR
+Y	864	ICWSM 864	ICWSM
+Y	675	RecSys 675	RecSys
+Y	646	VLDB J. 646	VLDB
+Y	623	meeting of the association for computational linguistics 623	ACL
+Y	602	WSDM 602	WSDM
+Y	596	CLEF 596	CLEF
+Y	548	Journal of The American Society for Information Science and Technology 548	JASIST
+Y	407	uncertainty in artificial intelligence 407	UAI
+Y	384	International Conference on Machine Learning 384	ICML
+Y	372	World Wide Web Conference Series 372	WWW
+Y	292	Neural Information Processing Systems 292	NIPS
+Y	285	WWW Posters 285	WWW
+Y	270	EMNLP-CoNLL 270	EMNLP
+Y	254	ACL (Short Papers) 254	ACL
+Y	232	International Conference on Information and Knowledge Management 232	CIKM
+Y	222	Meeting of the Association for Computational Linguistics 222	ACL
+Y	191	COLING-ACL 191	ACL
+Y	170	Conference on Computer Supported Cooperative Work 170	CSCW
+Y	170	WWW (Special interest tracks and posters) 170	WWW
+Y	163	Very Large Data Bases 163	VLDB
+Y	149	WWW (Alternate Track Papers & Posters) 149	WWW
+Y	127	Text REtrieval Conference 127	TREC
+Y	125	international world wide web conferences 125	WWW
+Y	117	ACL/IJCNLP 117	ACL
+Y	117	ACM/IEEE Joint Conference on Digital Libraries 117	JCDL
+Y	113	CLEF (Notebook Papers/LABs/Workshops) 113	CLEF
+Y	110	Research and Development in Information Retrieval 110	SIGIR
+Y	109	conference on information and knowledge management 109	CIKM
+Y	107	Digital Libraries 107	JCDL
+Y	103	Uncertainty in Artificial Intelligence 103	UAI
+Y	93	Knowledge Discovery and Data Mining 93	KDD
+Y	91	ACL/IJCNLP (Short Papers) 91	ACL
+Y	87	Cross-Language Evaluation Forum 87	CLEF
+Y	79	conference on computer supported cooperative work 79	CSCW
+Y	72	CHI '82 Proceedings of the 1982 Conference on Human Factors in Computing Systems 72	CHI
+Y	67	Journal of the American Society for Information Science 67	JASIST
+Y	66	CHI '83 Proceedings of the SIGCHI Conference on Human Factors in Computing Systems 66	CHI
+Y	63	knowledge discovery and data mining 63	KDD
+Y	61	ACM Multimedia (2) 61	MM
+Y	57	ACM Multimedia (1) 57	MM
+Y	57	CHI '87 Proceedings of the SIGCHI/GI Conference on Human Factors in Computing Systems and Graphics Interface 57	CHI
+Y	57	Conference on Information and Knowledge Management 57	CIKM
+Y	54	CHI '86 Proceedings of the SIGCHI Conference on Human Factors in Computing Systems 54	CHI
+Y	48	CHI '88 Proceedings of the SIGCHI Conference on Human Factors in Computing Systems 48	CHI
+Y	43	CLEF (1) 43	CLEF
+Y	41	Digital Libraries'99 41	JCDL
+Y	39	TREC Video Retrieval Evaluation 39	TREC
+Y	37	international acm sigir conference on research and development in information retrieval 37	SIGIR
+Y	37	EMNLP '02 Proceedings of the ACL-02 conference on Empirical methods in natural language processing - Volume 10 37	EMNLP
+Y	36	KDD Cup 36	KDD
+Y	36	Empirical Methods in Natural Language Processing 36	EMNLP
+Y	36	KDD Workshop 36	KDD
+Y	35	SIGMOD '12 Proceedings of the 2012 ACM SIGMOD International Conference on Management of Data 35	SIGMOD
+Y	35	CLEF (2) 35	CLEF
+Y	34	ACLdemo '04 Proceedings of the ACL 2004 on Interactive poster and demonstration sessions 34	ACL
+Y	31	SIGMOD Workshop, Vol. 2 31	SIGMOD
+Y	31	empirical methods in natural language processing 31	EMNLP
+Y	30	CHI '85 Proceedings of the SIGCHI Conference on Human Factors in Computing Systems 30	CHI
+Y	29	EMNLP '03 Proceedings of the 2003 conference on Empirical methods in natural language processing 29	EMNLP
+Y	29	MULTIMEDIA '96 Proceedings of the fourth ACM international conference on Multimedia 29	MM
+Y	26	EMNLP '00 Proceedings of the 2000 Joint SIGDAT conference on Empirical methods in natural language processing and very large corpora: held in conjunction with the 38th Annual Meeting of the Association for Computational Linguistics - Volume 13 26	EMNLP
+Y	25	very large data bases 25	VLDB
+Y	24	international conference on weblogs and social media 24	ICWSM
+Y	19	ACM Multimedia EMME Workshop 19	MM
+Y	19	KDD Workshop on Human Computation 19	KDD
+Y	19	european conference on information retrieval 19	ECIR
+Y	18	CIKM-iNEWS 18	CIKM
+Y	16	Proceedings of the 22nd annual international ACM SIGIR conference on Research and development in information retrieval 16	SIGIR
+Y	16	SNA@ICML 16	ICML
+Y	14	Proceedings of the fourth ACM conference on Digital libraries 14	JCDL
+Y	13	ACL/IJCNLP (Student Research Workshop) 13	ACL
+Y	13	Proceedings of the sixth ACM SIGKDD international conference on Knowledge discovery and data mining 13	KDD
+Y	13	KDD Workshop on Data Mining and Audience Intelligence for Advertising 13	KDD
+Y	13	Web Search and Data Mining 13	WSDM
+Y	12	ACL Workshop on Natural Language Processing in the Biomedical Domain 12	ACL
+Y	12	Proceedings of the 1st international CIKM workshop on Topic-sentiment analysis for mass opinion 12	CIKM
+Y	11	SIGMOD '88 Proceedings of the 1988 ACM SIGMOD international conference on Management of data 11	SIGMOD
