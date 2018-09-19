@@ -96,15 +96,15 @@ def read_and_parse():
         if id_string not in id_to_ref:
             id_to_ref[index_count] = []
 
-        if venue_string == "SIGIR" or venue_string == "SIGIR Forum":
-            if year_string not in year_counter:
-                year_counter[year_string] = 0
-            year_counter[year_string] += 1
-            sigir_pool.add(index_count)
-            tmp_counter += 1
+        # if venue_string == "SIGIR" or venue_string == "SIGIR Forum":
+        #     if year_string not in year_counter:
+        #         year_counter[year_string] = 0
+        #     year_counter[year_string] += 1
+        #     sigir_pool.add(index_count)
+        #     tmp_counter += 1
 
-            if year_string == "2015":
-                counter_15 += 1
+        #     if year_string == "2015":
+        #         counter_15 += 1
 
         if "authors" in tmp_obj:
             author_list = tmp_obj["authors"]
@@ -135,7 +135,9 @@ def read_and_parse():
 
 def generate_index_to_loc():
     tmp_file = open(largeVis_output)
-    outfile = open("./title_loc.txt", "w")
+    outfile = open("./cpp/title_2dim_with_index_year_venue.csv", "w")
+
+    
     for line in tmp_file:
         vec = line.split()
         index_to_loc[vec[0]] = line
@@ -146,6 +148,9 @@ def generate_index_to_loc():
 
     outfile.close()
     tmp_file.close()
+
+
+
 
 
 def generate_conf_index():
@@ -309,7 +314,7 @@ def main():
     generate_conf_index()
     generate_edges()
     generate_index_to_loc()
-    generate_files()
+    # generate_files()
 
 
 

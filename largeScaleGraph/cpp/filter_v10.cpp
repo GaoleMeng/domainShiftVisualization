@@ -29,7 +29,7 @@ string input_dir_1 = "/storage6/foreseer/users/zhuofeng/evolution_of_words/exper
 // Configuration: input comes from the output of the second layer
 
 // Configuration: output the final layer o
-string output_file = "/home/zhuofeng/lines_belong_toconf_smaller.txt";
+string output_file = "/storage6/foreseer/users/zhuofeng/visualization_of_conference_evolution/lines_belong_toconf_smaller.txt";
 
 string list_file_name = "./csranking_list.txt";
 
