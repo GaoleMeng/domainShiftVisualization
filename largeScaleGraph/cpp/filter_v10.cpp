@@ -13,13 +13,10 @@
 #include <unordered_map>
 #include <iostream>
 #include <experimental/filesystem>
-#include "rapidjson/document.h"
-#include "rapidjson/writer.h"
-#include "rapidjson/stringbuffer.h"
 // #include <boost/range/iterator_range.hpp>
 namespace fs = std::experimental::filesystem;
 using namespace std;
-using namespace rapidjson;
+
 
 
 // Congiguration: input aminer directory
