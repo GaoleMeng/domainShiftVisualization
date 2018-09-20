@@ -44,7 +44,7 @@ index_to_conf = {}
 index_to_loc = {}
 index_to_title = {}
 index_to_year = {}
-conf_index_pool.add(index_count) = set()
+conf_index_pool = set()
 
 
 tmp_counter = 0
