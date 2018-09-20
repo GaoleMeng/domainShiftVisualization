@@ -145,11 +145,9 @@ def generate_index_to_loc():
         if counter == 0:
             counter = 1
             continue
+        vec = line.split()
         if int(vec[0]) in conf_to_index:
             continue
-
-
-        vec = line.split()
         index_to_loc[vec[0]] = line
         tmp_row = {}
         tmp_row["x"] = vec[1]
