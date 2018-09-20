@@ -136,8 +136,13 @@ def generate_index_to_loc():
     writer = csv.DictWriter(outfile, fieldnames=fieldnames, delimiter=",")
     writer.writeheader()
 
+    counter = 0
+    
     # we need title,x,y,venue,index,label,year
     for line in tmp_file:
+        if counter == 0:
+            counter = 1
+            continue
         vec = line.split()
         index_to_loc[vec[0]] = line
         tmp_row = {}
