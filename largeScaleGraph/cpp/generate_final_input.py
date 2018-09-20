@@ -96,6 +96,7 @@ def read_and_parse():
         id_to_index[id_string] = index_count
         index_to_conf[index_count] = venue_string
         index_to_title[index_count] = title_string
+        index_to_year[index_count] = tmp["year"]
 
         if "keywords" in tmp_obj:
             for keyword in tmp_obj["keywords"]:
