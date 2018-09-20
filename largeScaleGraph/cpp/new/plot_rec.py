@@ -59,8 +59,6 @@ for tmp_i in [47]:
     for i in range(22):
         all_data.setdefault(str(i), []).append((41, 41))
 
-
-
     keywords_point_list = []
 
 
@@ -78,37 +76,6 @@ for tmp_i in [47]:
                 continue
 
             tmp_label = label[i-1]
-
-            if tmp_label == "19":
-                tmp_label = "10"
-            elif tmp_label == "10":
-                tmp_label = "19"
-            elif tmp_label == "8":
-                tmp_label = "2"
-            elif tmp_label == "2":
-                tmp_label = "8"
-            elif tmp_label == "14":
-                tmp_label = "20"
-            elif tmp_label == "20":
-                tmp_label = "14"
-            elif tmp_label == "17":
-                tmp_label = "21"
-            elif tmp_label == "21":
-                tmp_label = "17"
-            elif tmp_label == "16":
-                tmp_label = "9"
-            elif tmp_label == "9":
-                tmp_label = "16"
-            
-            if tmp_label == "21":
-                tmp_label = "15"
-            elif tmp_label == "15":
-                tmp_label = "21"
-            elif tmp_label == "17":
-                tmp_label = "0"
-            elif tmp_label == "0":
-                tmp_label = "17"
-
 
             all_data.setdefault(tmp_label, []).append((float(vec[-2]), float(vec[-1])))
 
@@ -343,26 +310,26 @@ for tmp_i in [47]:
 # label_file.close()
 
 
-with open('./SIGIR18_pc.csv', 'rb') as csvfile:
-    spamreader = csv.reader(csvfile, delimiter=',')
-    for row in spamreader:
+# with open('./SIGIR18_pc.csv', 'rb') as csvfile:
+#     spamreader = csv.reader(csvfile, delimiter=',')
+#     for row in spamreader:
         
-        plt.plot(float(row[1]), float(row[2]), 'x', color = "#1379c6", markersize = 2, zorder=90)
+#         plt.plot(float(row[1]), float(row[2]), 'x', color = "#1379c6", markersize = 2, zorder=90)
 
 
-chair_color = plt.cm.rainbow(numpy.linspace(0, 1, 8))
+# chair_color = plt.cm.rainbow(numpy.linspace(0, 1, 8))
 
-with open('./SIGIR18_chairs_v2.csv', 'rb') as csvfile:
-    spamreader = csv.reader(csvfile, delimiter=',')
-    for row in spamreader:
-        if int(row[0]) - 1 == 3:
-            plt.plot(float(row[2]), float(row[3]), '-o', color = "#703c43", markersize = 4, zorder=100)
-        elif int(row[0]) - 1 == 0:
-            plt.plot(float(row[2]), float(row[3]), '-o', color = chair_color[7], markersize = 4, zorder=100)
-        elif int(row[0]) - 1 == 7:
-            plt.plot(float(row[2]), float(row[3]), '-o', color = chair_color[0], markersize = 4, zorder=100)
-        else:
-            plt.plot(float(row[2]), float(row[3]), '-o', color = chair_color[int(row[0]) - 1], markersize = 4, zorder=100)
+# with open('./SIGIR18_chairs_v2.csv', 'rb') as csvfile:
+#     spamreader = csv.reader(csvfile, delimiter=',')
+#     for row in spamreader:
+#         if int(row[0]) - 1 == 3:
+#             plt.plot(float(row[2]), float(row[3]), '-o', color = "#703c43", markersize = 4, zorder=100)
+#         elif int(row[0]) - 1 == 0:
+#             plt.plot(float(row[2]), float(row[3]), '-o', color = chair_color[7], markersize = 4, zorder=100)
+#         elif int(row[0]) - 1 == 7:
+#             plt.plot(float(row[2]), float(row[3]), '-o', color = chair_color[0], markersize = 4, zorder=100)
+#         else:
+#             plt.plot(float(row[2]), float(row[3]), '-o', color = chair_color[int(row[0]) - 1], markersize = 4, zorder=100)
 
 
 
@@ -377,7 +344,7 @@ with open('./SIGIR18_chairs_v2.csv', 'rb') as csvfile:
 
 
 
-plt.title("SIGIR 2018 PC and Chairs")
+# plt.title("SIGIR 2018 PC and Chairs")
 
-plt.savefig("2018_PC_chairs", dpi = 500)
+# plt.savefig("2018_PC_chairs", dpi = 500)
 
