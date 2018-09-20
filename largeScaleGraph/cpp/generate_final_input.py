@@ -221,9 +221,10 @@ def generate_edges():
 
 def main():
     # create_class_map()
+    
     read_and_parse()
-    generate_conf_index()
     generate_edges()
+    generate_conf_index()
     generate_index_to_loc()
     # generate_files()
 
