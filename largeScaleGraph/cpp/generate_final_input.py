@@ -153,7 +153,7 @@ def generate_index_to_loc():
         tmp_row["title"] = index_to_title[int(vec[0])]
         tmp_row["venue"] = index_to_conf[int(vec[0])]
         tmp_row["year"] = index_to_year[int(vec[0])]
-        tmp_row["label"] = conf_to_index[int(index_to_conf[vec[0]])]
+        tmp_row["label"] = conf_to_index[index_to_conf[int(vec[0])]]
         tmp_row["index"] = vec[0]
         writer.writerow(tmp_row)
 
