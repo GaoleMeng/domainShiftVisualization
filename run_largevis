@@ -3,3 +3,4 @@ cd LargeVis
 python LargeVis_run.py -input ./non_bias_edges_withauthors.txt  -output ./citation_qiaozhu.txt -threads 16 -outdim 2 -fea 0
 mv ./citation_qiaozhu.txt ../largeScaleGraph/cpp/
 rm ./non_bias_edges_withauthors.txt
+sh workflow
