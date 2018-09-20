@@ -1,4 +1,4 @@
-scp -r zhuofeng@riemann.si.umich.edu:/home/zhuofeng/non_bias_edges_withauthors.txt  ./LargeVis
+scp -r zhuofeng@gauss.si.umich.edu:/storage6/foreseer/users/zhuofeng/visualization_of_conference_evolution/tmp_files/non_bias_edges_withauthors.txt  ./LargeVis
 cd LargeVis
 python LargeVis_run.py -input ./non_bias_edges_withauthors.txt  -output ./citation_qiaozhu.txt -threads 16 -outdim 2 -fea 0
 mv ./citation_qiaozhu.txt ../largeScaleGraph/cpp/
