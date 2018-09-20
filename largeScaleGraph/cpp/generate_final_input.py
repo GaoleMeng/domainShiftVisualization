@@ -44,6 +44,7 @@ index_to_conf = {}
 index_to_loc = {}
 index_to_title = {}
 index_to_year = {}
+conf_index_pool.add(index_count) = set()
 
 
 tmp_counter = 0
@@ -146,7 +147,8 @@ def generate_index_to_loc():
             counter = 1
             continue
         vec = line.split()
-        if int(vec[0]) in conf_to_index:
+    
+        if int(vec[0]) in conf_index_pool:
             continue
         index_to_loc[vec[0]] = line
         tmp_row = {}
@@ -168,6 +170,7 @@ def generate_conf_index():
     global index_count
     for conf in conf_pool:
         conf_to_index[conf] = index_count
+        conf_index_pool.add(index_count)
         # print(conf)
         # if conf + "\n" in eq_name_map:
         #     eq_name_to_index[conf] = index_count
