@@ -43,6 +43,7 @@ conf_to_index = {}
 index_to_conf = {}
 index_to_loc = {}
 index_to_title = {}
+index_to_year = {}
 
 
 tmp_counter = 0
