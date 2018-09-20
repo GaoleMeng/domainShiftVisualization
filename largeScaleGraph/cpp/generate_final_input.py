@@ -145,7 +145,7 @@ def generate_index_to_loc():
         if counter == 0:
             counter = 1
             continue
-        if int(vec[0]) is in conf_to_index:
+        if int(vec[0]) in conf_to_index:
             continue
 
 
