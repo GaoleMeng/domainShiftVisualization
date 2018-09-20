@@ -133,7 +133,7 @@ def generate_index_to_loc():
     tmp_file = open(largeVis_output)
     outfile = open("./new/title_2dim_with_index_year_venue.csv", "w")
     fieldnames = ["title", "x", "y", "venue", "index", "label", "year"]
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=",")
+    writer = csv.DictWriter(outfile, fieldnames=fieldnames, delimiter=",")
     writer.writeheader()
 
     # we need title,x,y,venue,index,label,year
