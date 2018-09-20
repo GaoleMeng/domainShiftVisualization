@@ -44,7 +44,7 @@ index_to_conf = {}
 index_to_loc = {}
 index_to_title = {}
 index_to_year = {}
-conf_index_pool = set()
+conf_index_pool = {}
 
 
 tmp_counter = 0
@@ -135,9 +135,15 @@ def read_and_parse():
 def generate_index_to_loc():
     tmp_file = open(largeVis_output)
     outfile = open("./new/title_2dim_with_index_year_venue.csv", "w")
+    conf_info_outfile = open("./new/conf_info.csv", "w")
     fieldnames = ["title", "x", "y", "venue", "index", "label", "year"]
+    conf_fieldnames = ["conf_name", "x", "y", "label"]
+
     writer = csv.DictWriter(outfile, fieldnames=fieldnames, delimiter=",")
     writer.writeheader()
+
+    conf_writer = csv.DictWriter(conf_info_outfile, fieldnames=conf_fieldnames, delimiter=",")
+    conf_writer.writeheader()
 
     counter = 0
     
@@ -149,20 +155,27 @@ def generate_index_to_loc():
         vec = line.split()
     
         if int(vec[0]) in conf_index_pool:
-            continue
-        index_to_loc[vec[0]] = line
-        tmp_row = {}
-        tmp_row["x"] = vec[1]
-        tmp_row["y"] = vec[2]
-        tmp_row["title"] = index_to_title[int(vec[0])]
-        tmp_row["venue"] = index_to_conf[int(vec[0])]
-        tmp_row["year"] = index_to_year[int(vec[0])]
-        tmp_row["label"] = conf_to_index[index_to_conf[int(vec[0])]]
-        tmp_row["index"] = vec[0]
-        writer.writerow(tmp_row)
+            tmp_obj = {}
+            tmp_obj["conf_name"] = conf_index_pool[int(vec[0])]
+            tmp_obj["x"] = vec[1]
+            tmp_obj["y"] = vec[2]
+            tmp_obj["label"] = vec[0]
+            conf_writer.writerow(tmp_obj)
+        else:
+            index_to_loc[vec[0]] = line
+            tmp_row = {}
+            tmp_row["x"] = vec[1]
+            tmp_row["y"] = vec[2]
+            tmp_row["title"] = index_to_title[int(vec[0])]
+            tmp_row["venue"] = index_to_conf[int(vec[0])]
+            tmp_row["year"] = index_to_year[int(vec[0])]
+            tmp_row["label"] = conf_to_index[index_to_conf[int(vec[0])]]
+            tmp_row["index"] = vec[0]
+            writer.writerow(tmp_row)
 
     # print(index_to_loc)
     outfile.close()
+    conf_info_outfile.close()
     tmp_file.close()
 
 
@@ -170,7 +183,7 @@ def generate_conf_index():
     global index_count
     for conf in conf_pool:
         conf_to_index[conf] = index_count
-        conf_index_pool.add(index_count)
+        conf_index_pool[index_count] = conf
         # print(conf)
         # if conf + "\n" in eq_name_map:
         #     eq_name_to_index[conf] = index_count

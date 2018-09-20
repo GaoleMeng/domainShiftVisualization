@@ -1,0 +1,1 @@
+echo "wuzhuofeng" | scp -r zhuofeng@gauss.si.umich.edu:/storage6/foreseer/users/zhuofeng/visualization_of_conference_evolution/domainShiftVisualization/largeScaleGraph/cpp/new/*.csv ./largeScaleGraph/cpp/new/
