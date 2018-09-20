@@ -23,7 +23,7 @@ largeVis_output = "./citation_qiaozhu.txt";
 
 split_location = "./final_visulization/";
 
-class_map_file = "./class_map.txt"
+# class_map_file = "./class_map.txt"
 
 
 conf_info = {}
@@ -125,12 +125,13 @@ def read_and_parse():
         year_to_indexlist[year_string].append(index_count)
         index_count += 1
     conf_lines_file.close()
+    print("number of conferences: ", len(conf_pool))
 
 
 
 def generate_index_to_loc():
     tmp_file = open(largeVis_output)
-    outfile = open("./cpp/title_2dim_with_index_year_venue.csv", "w")
+    outfile = open("./new/title_2dim_with_index_year_venue.csv", "w")
     fieldnames = ["title", "x", "y", "venue", "index", "label", "year"]
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=",")
     writer.writeheader()
@@ -159,10 +160,10 @@ def generate_conf_index():
     for conf in conf_pool:
         conf_to_index[conf] = index_count
         # print(conf)
-        if conf + "\n" in eq_name_map:
-            eq_name_to_index[conf] = index_count
-        elif conf == "SIGMOD Conference":
-            eq_name_to_index[conf] = index_count
+        # if conf + "\n" in eq_name_map:
+        #     eq_name_to_index[conf] = index_count
+        # elif conf == "SIGMOD Conference":
+        #     eq_name_to_index[conf] = index_count
         index_count += 1
 
 
@@ -183,39 +184,38 @@ def generate_edges():
     out_edges_file.close()
 
 
-def create_class_map():
-    class_file = open(class_map_file)
-    all_conf = []
-    tmp_conf = ""
-    for line in class_file:
-        vec = line.split("\t")
-        conf_name = vec[2][0: vec[2].rfind(" ")]
-        eq_name = vec[3]
-        all_conf.append([conf_name, eq_name])
-        if eq_name not in eq_name_map:
-            eq_name_map[eq_name] = len(eq_name_map)
-            if eq_name_map[eq_name] == 7:
-                tmp_conf = eq_name
+# def create_class_map():
+#     class_file = open(class_map_file)
+#     all_conf = []
+#     tmp_conf = ""
+#     for line in class_file:
+#         vec = line.split("\t")
+#         conf_name = vec[2][0: vec[2].rfind(" ")]
+#         eq_name = vec[3]
+#         all_conf.append([conf_name, eq_name])
+#         if eq_name not in eq_name_map:
+#             eq_name_map[eq_name] = len(eq_name_map)
+#             if eq_name_map[eq_name] == 7:
+#                 tmp_conf = eq_name
 
-    print(eq_name_map)
-    # tmp = eq_name_map["SIGIR\n"]
-    # eq_name_map["SIGIR\n"] = 7
-    # eq_name_map[tmp_conf] = tmp
+#     print(eq_name_map)
+#     # tmp = eq_name_map["SIGIR\n"]
+#     # eq_name_map["SIGIR\n"] = 7
+#     # eq_name_map[tmp_conf] = tmp
 
-    for k, v in all_conf:
-        color_map[k] = eq_name_map[v]
+#     for k, v in all_conf:
+#         color_map[k] = eq_name_map[v]
 
-    # print(color_map)
-    # print(eq_name_map)
-    print("unique conf:" + str(len(eq_name_map)))
-    class_file.close()
+#     # print(color_map)
+#     # print(eq_name_map)
+#     print("unique conf:" + str(len(eq_name_map)))
+#     class_file.close()
 
 
 
 
 def main():
-
-    create_class_map()
+    # create_class_map()
     read_and_parse()
     generate_conf_index()
     generate_edges()
