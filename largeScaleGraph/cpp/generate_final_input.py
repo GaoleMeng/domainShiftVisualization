@@ -170,6 +170,7 @@ def generate_conf_index():
         # elif conf == "SIGMOD Conference":
         #     eq_name_to_index[conf] = index_count
         index_count += 1
+    # index_count = 0
 
 
 def generate_edges():
@@ -223,8 +224,8 @@ def main():
     # create_class_map()
     
     read_and_parse()
-    generate_edges()
     generate_conf_index()
+    generate_edges()
     generate_index_to_loc()
     # generate_files()
 
