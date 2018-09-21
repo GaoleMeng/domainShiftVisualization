@@ -1,0 +1,5 @@
+cd largeScaleGraph
+cd cpp
+g++ --std=c++17 filter_v10.cpp -o filter_v10 -lstdc++fs -pthread
+./filter_v10
+python generate_final_input.py
