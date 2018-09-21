@@ -15,7 +15,6 @@ parser.add_argument('-range', default = '', help = 'axis range')
 
 def de_normalize(vec):
     ans = "#"
-    
     for i in range(len(vec)-1):
         if int(vec[i] * 255) < 16:
             ans += "0"
@@ -24,9 +23,19 @@ def de_normalize(vec):
     return ans
 
 
+conf_counter = 0
+min_label = 1000000
 
-for tmp_i in [47]:
-    
+
+
+with open('./conf_info.csv') as f:
+    reader = csv.DictReader(f, delimiter=',')
+    for row in reader:
+        conf_counter += 1
+        min_label = min(min_label, int(row["label"]))
+
+
+for tmp_i in [41]:
     args_label = str(tmp_i) + "_labels.txt"
     args_input = str(tmp_i) + "_points.txt"
     args_output = str(tmp_i) + ".png"
@@ -39,13 +48,18 @@ for tmp_i in [47]:
 
 
     label = []
+    tmp_flag = 0
+    title = ''
     if args_label != '':
         for line in open(args_label):
-            label.append(line.strip())
+            if tmp_flag == 0:
+                title = line.strip()
+                tmp_flag = 1
+                continue
+            label.append(int(line.strip()) - min_label)
 
-    for i in range(22):
+    for i in range(conf_counter):
         label.append(i)
-
 
     N = M = 0
     all_data = {}
@@ -54,11 +68,9 @@ for tmp_i in [47]:
     # map from integer locations to label count
     rec_data = {}
 
-
-
-    for i in range(22):
+    for i in range(conf_counter):
         all_data.setdefault(str(i), []).append((41, 41))
-
+    print(all_data)
     keywords_point_list = []
 
 
@@ -70,14 +82,13 @@ for tmp_i in [47]:
         elif i <= N:
             if args_label == '':
                 label.append(0)
-
-            if label[i-1] == "22":
-                keywords_point_list.append((float(vec[-2]), float(vec[-1])))
-                continue
+            # if label[i-1] == "22":
+            #     keywords_point_list.append((float(vec[-2]), float(vec[-1])))
+            #     continue
 
             tmp_label = label[i-1]
 
-            all_data.setdefault(tmp_label, []).append((float(vec[-2]), float(vec[-1])))
+            all_data.setdefault(str(tmp_label), []).append((float(vec[-2]), float(vec[-1])))
 
             right_upper_x = 0
             right_upper_y = 0
@@ -98,17 +109,12 @@ for tmp_i in [47]:
             if tmp_label not in rec_data[loc_str]:
                 rec_data[loc_str][tmp_label] = 0
             rec_data[loc_str][tmp_label] += 1
-            
-            
 
     colors = plt.cm.rainbow(numpy.linspace(0, 1, len(all_data)))
-
 
     colors_str = []
     for i in range(len(colors)):
         colors_str.append(de_normalize(colors[i]))
-
-
 
     colors = colors_str
 
@@ -121,7 +127,6 @@ for tmp_i in [47]:
     key_to_color = {}
     for color, ll in zip(colors, sorted(all_data.keys())):
         key_to_color[ll] = color
-
 
     for k, point_list in all_data.items():
         sum_x = 0.0
@@ -139,10 +144,8 @@ for tmp_i in [47]:
             # if int(k) == 8:
             #     plt.plot(label_to_capital[k][0], label_to_capital[k][1], 'o', color="#000000", markersize = 3.5, zorder=20, mec="#dd2323")
             # else:
-            plt.plot(label_to_capital[k][0], label_to_capital[k][1], 'o', color=key_to_color[k], markersize = 3.5, zorder=20)
+            plt.plot(label_to_capital[k][0], label_to_capital[k][1], 'o', color=key_to_color[str(k)], markersize = 3.5, zorder=20)
             
-
-
     for point in keywords_point_list:
         plt.plot(point[0], point[1], 'x', color = "#808080", markersize = 0.1, zorder=0)
 
@@ -247,8 +250,8 @@ for tmp_i in [47]:
         #     plt.fill(location_x_list, location_y_list, color="#000000", edgecolor="none", zorder=10)
         #     # plt.patches.Rectangle((location_x_list[1], location_y_list[2]), density, density)
         # else:
-        # plt.fill(location_x_list, location_y_list, color=key_to_color[most_label], edgecolor="none", zorder=10)
-        plt.fill(location_x_list, location_y_list, color="#d6d1d1", edgecolor="none", zorder=10)
+        plt.fill(location_x_list, location_y_list, color=key_to_color[str(most_label)], edgecolor="none", zorder=10)
+        # plt.fill(location_x_list, location_y_list, color="#d6d1d1", edgecolor="none", zorder=10)
 
 
 
@@ -290,6 +293,9 @@ for tmp_i in [47]:
     # if tmp_i == 50:
         # plt.show()
     # plt.clf()
+    plt.title(title)
+    plt.savefig(title + ".png", dpi = 500)
+    plt.clf()
 
 
 

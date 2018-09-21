@@ -12,8 +12,6 @@ import sets
 import csv
 
 
-
-
 # the
 input_dir_1 = "/storage6/foreseer/users/zhuofeng/visualization_of_conference_evolution/tmp_files/lines_belong_toconf_smaller.txt";
 
@@ -160,6 +158,7 @@ def generate_index_to_loc():
             tmp_obj["x"] = vec[1]
             tmp_obj["y"] = vec[2]
             tmp_obj["label"] = vec[0]
+            
             conf_writer.writerow(tmp_obj)
         else:
             index_to_loc[vec[0]] = line

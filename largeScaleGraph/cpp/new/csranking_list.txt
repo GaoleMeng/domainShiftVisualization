@@ -1,5 +1,5 @@
 AAAI	national conference on artificial intelligence
-IJCAI	international joint conference on artificial intelligence
+IJCAI   
 CVPR	computer vision and pattern recognition
 ECCR	european conference on computer vision
 ICCV	international conference on computer vision
