@@ -71,7 +71,6 @@ void create_map_name_mapping() {
     while(getline(input, line)) {
         string segment = "";
         istringstream segment_ss(line);
-
         int counter = 0;
         string conf = "";
         while(getline(segment_ss, segment, '\t')) {
